@@ -1,0 +1,162 @@
+{{ javascript_include("templates/boot/js/form/posts-add-edit.js") }}
+
+{{ stylesheet_link("plugins/upload/css/webuploader.css") }}
+{{ javascript_include("plugins/upload/dist/webuploader.js") }}
+{{ stylesheet_link("plugins/upload/css/multi-file-upload.css") }}
+{{ javascript_include("plugins/upload/multi-file-upload.js") }}
+
+{{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
+{{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
+{{ javascript_include("templates/boot/js/form/form-links.js") }}
+{{ javascript_include("templates/boot/js/messages_zh.js") }}
+{{ javascript_include("templates/boot/js/cancel.js") }}
+
+
+ <script>
+    $(function(){
+        FormLinksValidation.init();
+    });
+</script>
+
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box light-grey">
+            <div class="portlet-body">
+
+                <form class="form-horizontal" method="POST" action="#" id="form-links" novalidate>
+                    <fieldset>
+                        <div class="alert alert-error hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证失败，请检查.
+                        </div>
+                        <div class="alert alert-success hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证成功！
+                        </div>
+
+
+                        <div class="control-group">
+                            <label for="type" class="control-label">网站类型</label>
+                            <div class="controls" >
+                                {% for key,name in tagConfig['linksType'] %}
+                                    <label class="radio">
+                                        <div class="radio"><span class=""><input type="radio" value="{{key}}" name="type" {% if key==data.type%} checked{% endif %}></span></div>
+                                        {{name}}
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Text input-->
+                            <label class="control-label" for="name">网站名称</label>
+                            <div class="controls">
+                                <input class="input-xlarge span5 m-wrap" placeholder="网站名称" name="name" type="text" value="{{data.name}}" required>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Text input-->
+                            <label class="control-label" for="siteurl">网站链接</label>
+                            <div class="controls">
+                                <input class="input-xlarge span5 m-wrap" placeholder="网站链接" name="siteurl" type="text" value="{{data.siteurl}}" required>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Text input-->
+                            <label class="control-label" for="listorder">网站排序</label>
+                            <div class="controls">
+                                <input class="input-xlarge span5 m-wrap" placeholder="网站排序(从大到小),默认0" name="listorder" value="{{data.listorder}}" type="text">
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Textarea -->
+                            <label for="siteinfo" class="control-label">网站描述</label>
+                            <div class="controls">
+                                <div class="text">
+                                    <textarea class="span5 m-wrap" rows="3" name="siteinfo"> {{data.siteinfo}} </textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="control-group">
+                            <label for="logo" class="control-label">网站Logo
+                            </label>
+                            <!-- File Upload -->
+                            <div class="controls">
+                                <div id="wrapper" style="width: 595px;">
+                                    <div id="container">
+                                        <!--头部，相册选择和格式选择-->
+                                        <div id="uploader">
+                                            <div class="queueList">
+                                                {% if data.logo %}
+                                                <ul class='filelist' style='border-bottom: 1px solid #ccc; margin-bottom: 5px;'>
+                                                    <li class="state-complete">
+                                                        <p class="imgWrap"><img src="{{data.logo}}"></p>
+                                                        <p class="progress"><span style="display: none; width: 0px;"></span></p>
+                                                        <span class="success"></span>
+                                                        <div class="file-panel" style="height: 0px;">
+                                                            <span class="cancel" data-rel="{{data.logo}}" title="删除">删除</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                {% endif %}
+
+                                                <div id="dndArea">
+                                                    <div id="files-uploads"></div>
+                                                </div>
+                                            </div>
+                                            <div class="statusBar" style="display:block;">
+                                                <div class="progress">
+                                                    <span class="text">0%</span>
+                                                    <span class="percentage"></span>
+                                                </div>
+                                                <div class="info"></div>
+                                                <div class="btns">
+                                                    <div id="files-uploads-continue"></div><div class="uploadBtn">开始上传</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="multi-thumb" name="logo" value="{{data.logo}}">
+                                    </div>
+                                </div>
+                                <span style="color: #b94a48;" >附件格式【jpg,jpeg,png,gif】</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="status" class="control-label">状态</label>
+                            <div class="controls">
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="0" name="status" {% if data.status==0%} checked{% endif %}></span></div>
+                                    禁用
+                                </label>
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="1" name="status" {% if data.status==1%} checked{% endif %}></span></div>
+                                    启用
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn green" type="submit"><i class="icon-ok"></i> 保存</button>
+                            <button class="btn" type="button" onclick="mycancel()">取消</button>
+                            <input type="hidden" id="actions" value="edit" >
+                            <input type="hidden" name="code" value="{{data.code}}" >
+                            <span for="digits" class="message alert-error"></span>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>

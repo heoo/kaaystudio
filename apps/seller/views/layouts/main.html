@@ -1,0 +1,47 @@
+
+<!-- BEGIN HEADER -->
+{{ partial("common/header") }}
+<!-- END HEADER -->
+
+<div class="page-container">
+    <!-- BEGIN MENUS -->
+    {{ partial("common/menus") }}
+    <!-- END MENUS -->
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <!-- BEGIN Navigation -->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <h3 class="page-title">
+                        {{tagConfig['adminName']}} <small><a href="{{tagConfig['domain']}}" target="_blank">{{tagConfig['domain']}}</a></small>
+                    </h3>
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home"></i>
+                            <a href="/{{ModuleName}}">后台首页</a>
+                        </li> 
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!-- END PAGE HEADER-->
+        </div>
+        <!-- END PAGE Navigation -->
+        <!-- BEGIN CONTAINER -->
+        {{ content() }}
+        <!-- END CONTAINER -->
+    </div>
+    <!-- END PAGE -->
+
+
+
+
+</div>
+
+
+<!-- BEGIN FOOTER -->
+{{ partial("common/footer") }}
+<!-- END FOOTER -->

@@ -1,0 +1,94 @@
+
+<!-- 表单验证 -->
+{{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
+{{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
+{{ javascript_include("templates/boot/js/messages_zh.js") }}
+ {{ javascript_include("templates/boot/js/form/form-admins.js") }}
+        <script>
+            $(function(){
+                FormAdminsValidation.init();
+            });
+        </script>
+
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box light-grey">
+            <div class="portlet-body">
+
+                <form class="form-horizontal" method="POST" action="#" id="form-admins" novalidate>
+                    <fieldset>
+                        <div class="alert alert-error hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证失败，请检查.
+                        </div>
+                        <div class="alert alert-success hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证成功！
+                        </div>
+
+                        <div class="control-group">
+                            <label for="username" class="control-label"><span class="required">*</span>管理员帐号</label>
+                            <div class="controls">
+                                <input class="input-xlarge span6 m-wrap" name="username" value="{{data.username}}"  type="text" required>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="name" class="control-label"><span class="required">*</span>真实姓名</label>
+                            <div class="controls">
+                                <input class="input-xlarge span6 m-wrap" name="name" value="{{data.name}}"  type="text" required>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="qq" class="control-label">QQ</label>
+                            <div class="controls">
+                                <input class="input-xlarge span6 m-wrap" name="qq" value="{{data.qq}}"  type="text">
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="email" class="control-label"><span class="required">*</span>邮箱</label>
+                            <div class="controls">
+                                <input class="input-xlarge span6 m-wrap" name="email" value="{{data.email}}" type="text" required>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="status" class="control-label">状态</label>
+                            <div class="controls">
+                                <label class="radio">
+                                    <div class="radio"><span class="checked"><input type="radio" value="0" name="status" {% if data.status==0 %}checked="checked"{% endif %}></span></div>
+                                    启用
+                                </label>
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="1" name="status" {% if data.status==1 %}checked="checked"{% endif %}></span></div>
+                                    停用
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="form-actions">
+                            <button class="btn green" type="submit"><i class="icon-ok"></i> 保存</button>
+                            <button class="btn" type="button" onclick="window.location.href=BASE_URL+'list';">取消</button>
+                            <input type="hidden" id="actions" value="edit" >
+                            <input type="hidden" name="code" value="{{data.code}}" >
+                            <span for="digits" class="message alert-error"></span>
+                        </div>
+
+
+                    </fieldset>
+                </form>
+
+
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>

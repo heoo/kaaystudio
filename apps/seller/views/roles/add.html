@@ -1,0 +1,53 @@
+
+
+<!-- 表单验证 -->
+{{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
+{{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
+{{ javascript_include("templates/boot/js/messages_zh.js") }}
+{{ javascript_include("templates/boot/js/form/form-roles.js") }}
+        <script>
+            $(function(){
+                FormRolesValidation.init();
+            });
+        </script>
+
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box light-grey">
+            <div class="portlet-body">
+                <form class="form-horizontal" method="POST" id="form-roles" action="#" novalidate>
+                    <fieldset>
+                        <div class="alert alert-error hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证失败，请检查.
+                        </div>
+                        <div class="alert alert-success hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证成功！
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Text input-->
+                            <label class="control-label" for="name"><span class="required">*</span>角色名称</label>
+                            <div class="controls">
+                                <input class="input-xlarge span6 m-wrap" name="name" type="text" required>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn green" type="submit"><i class="icon-ok"></i> 保存</button>
+                            <button class="btn" type="button" onclick="window.location.href=BASE_URL+'list';">取消</button>
+                            <input type="hidden" id="actions" value="add" >
+                        </div>
+
+                    </fieldset>
+                </form>
+
+
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<table id="datatables" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th></th>
+        <th>ID</th>
+        <th>角色名称</th>
+        <th>权限编号</th>
+        <th>权限列表</th>      
+        <th>状态</th>
+        <th>创建时间</th>
+        <th>最后修改时间</th>
+        <th>最后修改人</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if data['rows'] %}
+    {% for acls in data['rows']%}
+    <tr>
+        <td><input type="checkbox" name="checkbox" data-options='{"code":"{{acls['code']}}"}'></td>
+        <td>{{acls['id']}}</td>
+        <td>{{acls['role_name']}}</td>
+        <td>{{acls['code']}}</td>
+        <td style="width:500px;">{{acls['rule']}}</td>
+        <td>{{acls['cstatus']}}</td>
+        <td>{{date('Y-m-d H:i:s',acls['created'])}}</td>
+        <td>{{date('Y-m-d H:i:s',acls['updated'])}}</td>
+        <td>{{acls['updatedby']}}</td>  
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr><td colspan="9">暂无数据</td></tr>
+    {% endif %}
+
+    </tbody>
+</table>
+<div class="pagination pagination-right">
+    <ul>
+        {{pageStr}}
+    </ul>
+</div>

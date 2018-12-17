@@ -1,0 +1,82 @@
+
+
+    <!-- 列表操作 -->
+    {{javascript_include("templates/boot/js/operation.js")}}
+    <script>
+        $(function(){
+            $('.list-search').click(function(){
+                var where = '';
+                var name = $("input[name='name']").val();
+                if(name){
+
+                    where +='name='+name+'&';
+                }
+                var status = $("select[name='status']").val();
+                if(status){
+
+                    where +='status='+status+'&';
+                }
+                var type = $("select[name='type']").val();
+                if(type){
+
+                    where +='type='+type+'&';
+                }
+                window.location.href = BASE_URL+'list?'+where;
+
+            });
+        })
+    </script>
+
+<div class="row-fluid">
+<div class="span12">
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
+<div class="portlet box light-grey">
+<div class="portlet-body">
+
+
+        <div class="clearfix">
+            <div class="btn-group">
+                <button id="add" class="btn green">
+                    添加 <i class="icon-plus"></i>
+                </button>
+            </div>
+            <div class="btn-group">
+                <button id="edit" class="btn green">编辑 <i class="icon-edit"></i>
+                </button>
+            </div>
+            <div class="btn-group">
+                <button id="delete" class="btn red">删除 <i class="icon-remove"></i>
+                </button>
+            </div>
+            <!--- 隐藏传值 -->
+            <input type="hidden" name="page" value="{{getData['page']}}">
+            <!--- 搜索表单 -->
+            <div class="btn-group">
+
+                <div class="btn-group">
+                    <input type="text" name="name" value="{{getData['name']}}" style='margin-right:3px;' class='span6' placeholder="请输入网站名称"/>
+                    <select name="type" style='margin-right:3px;' class='span4'>
+                        <option value="">网站类型</option>
+                        {% for key,name in tagConfig['linksType'] %}
+                        <option {% if getData['type']==key %} selected {% endif %} value="{{key}}">{{name}}</option>
+                        {% endfor %}
+                    </select>
+                    <select name="status" style='margin-right:3px;' class='span4'>
+                        <option value="">状态</option>
+                        <option {% if getData['status']=='0' %} selected {% endif %} value="0">删除</option>
+                        <option {% if getData['status']==1 %} selected {% endif %} value="1">启用</option>
+                    </select>
+                    <button type="submit" class="btn yellow list-search" style="margin-left:5px;">搜索<i class="icon-search"/></i></button>
+                </div>
+            </div>
+        </div>
+
+        {{ partial("links/data") }}
+</div>
+</div>
+<!-- END EXAMPLE TABLE PORTLET-->
+</div>
+</div>
+
+
+

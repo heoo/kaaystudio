@@ -1,0 +1,146 @@
+
+
+ <div id="loadings"></div>
+
+ <a href="javascript:;" class="indexlink" style="background-image:url('{{data[0]['thumb']}}')"></a>
+
+ {{ partial("layouts/logo") }}
+
+ <div class="navbox">
+     {% if navigation %}
+        {% for nav in navigation %}
+            <a href="{{nav['url']}}">{{nav['name']}}</a>
+        {% endfor %}
+     {% endif %}
+ </div>
+
+
+ <!--<div id="content">-->
+     <div class="menu-list" style="display: none;">
+         <ul class="big cfix">
+             {% if data %}
+                {% for key,content in data %}
+             <li data-img="{{content['thumb']}}" data-src="/{{ModuleName}}/posts/details?id={{content['id']}}" >
+                 <a href="/{{ModuleName}}/posts/details?id={{content['id']}}">
+                     {{content['name']}}
+                 </a>
+             </li>
+                 {% endfor %}
+             {% endif %}
+         </ul>
+     </div>
+
+ <!--</div>-->
+
+ <script>
+     $(function () {
+
+         if ($(window).width() < 767){
+             window.location.href = ModuleName+'/posts/details?id={{next}}';
+         }
+
+         var len = $(".cfix li").length;
+         var iWidth = len * 50;
+         var iHeight=500; //弹出窗口的高度;
+         $('.menu-list').width(iWidth);
+
+         var iLeft = ($(window).width() - iWidth)/2; //获得窗口的水平位置;
+
+         var cLeft = (iWidth / 2);
+         if(iLeft > cLeft){
+             iLeft = iLeft - cLeft;
+         }
+
+         var iTop =  ($(window).height() - iHeight )/2 - (iHeight / 2 ); //获得窗口的垂直位置;
+         $(".menu-list").width(iWidth).css('position','absolute').css("top",50).css("left",iLeft);
+
+         window.lastMove = new Date().getTime();
+         $("body").mousemove(function(){
+//             $('.menu-list').css({'opacity':1});
+             $('.menu-list').show(500);
+             window.lastMove = new Date().getTime();
+         });
+         window.setInterval(function(){//每1秒钟检查一次。
+             var now = new Date().getTime();
+             if( now - lastMove > 2000){
+                 console.log('cancel')
+//                 $('.menu-list').css({'opacity':0});
+                 $('.menu-list').hide(500);
+             }
+         }, 1000);
+
+
+
+         if (window.location.host === 'en.duo-i.com') {
+             $(".cfix").css({"left": "-250px"})
+             $(".cfix li").css({"display": "inline"})
+             $(".cfix li a").css({"width": "500", "transform": "rotate(90deg)", "display": "block"})
+             $(".menu-list").css({"top": "200px"})
+         }
+
+
+         //鼠标的移入移出
+         $(".big li").mouseover(function () {
+             var img = $(this).attr("data-img")
+             console.log(img)
+             $(".indexlink").css({"background-image": "url(" + img +")","transition":"background-image 0.5s"});
+             $(".indexlink").attr('href',$(this).attr("data-src"));
+
+             $(".big li a").css("opacity","0.2")
+             $(this).find("a").css({"font-size":20,"color":"#333333","opacity":1})
+             $(this).next().find("a").css({"font-size":16,"opacity":"0.5","transition":"font-size 0.5s"})
+             $(this).next().next().find("a").css({"font-size":6,"opacity":"0.2"})
+             $(this).prev().find("a").css({"font-size":16,"opacity":"0.5","transition":"font-size 0.5s"})
+             $(this).prev().prev().find("a").css({"font-size":6,"opacity":"0.2"})
+//             $(this).find("a").css()
+         }).mouseout(function () {
+             $(this).find("a").css("font-size", 16);
+             $(".cfix li a").css("font-size", 6);
+         });
+
+//         $(".cfix").css("width", liLength);
+//         if(len < 10){
+////             $('#content').width('250px');
+//             $('.menu-list').css('left','35%');
+//         }else{
+//             $('.menu-list').css('left','20%');
+//         }
+
+//         if (iWidth > 9) {
+//             $(".next").css("display", "block")
+//         }
+         // 加载目录
+         var auzo = 0
+         $(".next").click(function () {
+             $(".pre").css("display","block")
+             auzo = auzo-46
+             $('.cfix').css("left", auzo);
+//            $.ajax({
+//                type: "POST",  //提交方式
+//                url: "a.php",//路径
+//                data: {
+//                    "page": "1"
+//                },//数据，这里使用的是Json格式进行传输
+//                success: function (result) {//返回数据根据结果进行相应的处理
+//                    if (result.success) {
+//                    } else {
+//                    }
+//                }
+//            });
+         })
+//        var pre = 0
+         $(".pre").click(function () {
+             auzo = auzo+46
+             $('.cfix').css("left", auzo);
+         })
+     });
+ </script>
+
+
+ <input type="hidden" value="{{next}}" id="next">
+ <input type="hidden" value="0" id="previous">
+
+
+ <!--<script src="/templates/duo-i/js/jquery.sly.js"></script>-->
+ <!--<script src="/templates/duo-i/js/index/plugins.js"></script>-->
+ <!--<script src="/templates/duo-i/js/index/main.js"></script>-->

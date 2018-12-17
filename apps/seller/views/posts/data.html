@@ -1,0 +1,46 @@
+<table id="datatables" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th></th>
+        <th>ID</th>
+        <th>项目名称</th>
+        <th>项目关键字</th>
+        <th>设计者</th>
+        <th>项目版型</th>
+        <th>状态</th>
+        <th>点击量</th>
+        <th>发布人</th>
+        <th>发布时间</th>
+        <th>修改时间</th>
+        <th>修改人</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if data['rows'] %}
+    {% for posts in data['rows']%}
+    <tr>
+        <td><input type="checkbox" name="checkbox" data-options='{"code":"{{posts['code']}}"}'></td>
+        <td>{{posts['id']}}</td>
+        <td>{{posts['name']}}</td>
+        <td>{{posts['keyword']}}</td>
+        <td>{{posts['designer']}}</td>
+        <td>{% if posts['language']=='en' %}英文{%else%}中文{% endif %}</td>
+        <td>{% if posts['status']==1 %}启用{%else%}<span style="color:red;">删除</span>{% endif %}</td>
+        <td>{{posts['hits']}}</td>
+        <td>{{posts['createdby']}}</td>
+        <td>{{date('Y-m-d H:i' ,posts['created'])}}</td>
+        <td>{{posts['updatedby']}}</td>
+        <td>{{date('Y-m-d H:i' ,posts['updated'])}}</td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr><td colspan="12">暂无数据</td></tr>
+    {% endif %}
+
+    </tbody>
+</table>
+<div class="pagination pagination-right">
+    <ul>
+        {{pageStr}}
+    </ul>
+</div>

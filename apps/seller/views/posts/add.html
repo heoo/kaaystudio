@@ -1,0 +1,176 @@
+{{ stylesheet_link("plugins/upload/css/webuploader.css") }}
+{{ javascript_include("plugins/upload/dist/webuploader.js") }}
+{{ stylesheet_link("plugins/upload/css/multi-file-upload.css") }}
+{{ javascript_include("plugins/upload/multi-file-upload.js") }}
+
+{{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
+{{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
+{{ javascript_include("templates/boot/js/form/form-posts.js") }}
+{{ javascript_include("templates/boot/js/messages_zh.js") }}
+{{ javascript_include("templates/boot/js/cancel.js") }}
+
+<script>
+    $(function(){
+        FormPostsValidation.init();
+    });
+</script>
+
+
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box light-grey">
+            <div class="portlet-body">
+                <form class="form-horizontal" method="POST" action="#" id="form-posts" novalidate>
+                    <fieldset>
+
+                        <div class="alert alert-error hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证失败，请检查.
+                        </div>
+                        <div class="alert alert-success hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证成功！
+                        </div>
+
+                        <div class="control-group">
+                            <label for="name" class="control-label">项目名称</label>
+                            <div class="controls">
+                                <input type="text" placeholder="项目名称" class="m-wrap span5" name="name">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="keyword" class="control-label">项目关键字</label>
+                            <div class="controls">
+                                <input type="text" placeholder="项目关键字" class="m-wrap span5" name="keyword">
+                                <span style="color: #b94a48;" >多个以英文逗号【,】隔开</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Textarea -->
+                            <label for="digest" class="control-label">项目摘要</label>
+                            <div class="controls">
+                                <div class="text">
+                                    <textarea class="span5 m-wrap" rows="3" name="digest"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="class" class="control-label">图片排版</label>
+                            <div class="controls">
+                                <label class="radio type" data-val="2">
+                                    <div class="radio"><span class=""><input type="radio" value="default" name="class" checked="checked"></span></div>
+                                    默认(700*453)
+                                </label>
+                                <label class="radio type" data-val="1">
+                                    <div class="radio"><span class=""><input type="radio" value="horizontal" name="class"></span></div>
+                                    水平(1200*389)
+                                </label>
+                                <label class="radio type" data-val="1">
+                                    <div class="radio"><span class=""><input type="radio" value="vertical" name="class"></span></div>
+                                    垂直(700*907)
+                                </label>
+                                <label class="radio type" data-val="1">
+                                    <div class="radio"><span class=""><input type="radio" value="large" name="class"></span></div>
+                                    放大(1200*777)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="attachment" class="control-label">项目图片
+                            </label>
+                            <!-- File Upload -->
+                            <div class="controls">
+                                <div id="wrapper" style="width: 595px;">
+                                   <div id="container">
+                                       <!--头部，相册选择和格式选择-->
+                                       <div id="uploader">
+                                           <div class="queueList">
+                                               <div id="dndArea">
+                                                   <div id="files-uploads"></div>
+                                                   <p>上传图片第一张作为产品缩略图</p>
+                                               </div>
+                                           </div>
+                                           <div class="statusBar" style="display:block;">
+                                               <div class="progress">
+                                                   <span class="text">0%</span>
+                                                   <span class="percentage"></span>
+                                               </div>
+                                               <div class="info"></div>
+                                               <div class="btns">
+                                                   <div id="files-uploads-continue"></div><div class="uploadBtn">开始上传</div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <input type="hidden" id="multi-thumb" name="attachment">
+                                   </div>
+                                </div>
+                                <span style="color: #b94a48;" >附件格式【jpg,jpeg,png,gif,flv】</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Textarea -->
+                            <label for="text" class="control-label">项目简介</label>
+                            <div class="controls">
+                                <div class="text">
+                                    <textarea class="span5 m-wrap" rows="3" name="text"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label for="designer" class="control-label" >项目设计者</label>
+                            <div class="controls">
+                                <input type="text" placeholder="项目设计者" class="m-wrap span5" name="designer">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="language" class="control-label">项目版型</label>
+                            <div class="controls">
+                                <label class="radio type" data-val="2">
+                                    <div class="radio"><span class=""><input type="radio" value="en" name="language"></span></div>
+                                    英文版
+                                </label>
+                                <label class="radio type" data-val="1">
+                                    <div class="radio"><span class=""><input type="radio" value="zh" name="language"></span></div>
+                                    中文版
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="status" class="control-label">状态</label>
+                            <div class="controls">
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="0" name="status"></span></div>
+                                    禁用
+                                </label>
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="1" name="status" checked="checked"></span></div>
+                                    启用
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn green" type="submit"><i class="icon-ok"></i> 保存</button>
+                            <button class="btn" type="button" onclick="mycancel()">取消</button>
+                            <input type="hidden" id="actions" value="add" >
+                            <input type="hidden" name="ctype" value="{{ctype}}" >
+                            <input type="hidden" id="thumb" name="thumb" value="" >
+                            <span for="digits" class="message alert-error"></span>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>

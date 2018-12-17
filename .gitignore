@@ -1,0 +1,8 @@
+.DS_Store
+.htrouter.php
+.user.ini
+.idea
+.idea/*
+cache/api/*
+cache/seller/*
+cache/web/*

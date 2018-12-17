@@ -1,0 +1,117 @@
+
+<!-- 表单验证 -->
+{{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
+{{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
+{{ javascript_include("templates/boot/js/messages_zh.js") }}
+{{ javascript_include("templates/boot/js/form/form-category.js") }}
+{{ javascript_include("templates/boot/js/cancel.js") }}
+<script>
+    $(function(){
+        FormCategoryValidation.init();
+    });
+</script>
+
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box light-grey">
+            <div class="portlet-body">
+
+                <form class="form-horizontal" method="POST" action="#" id="form-category" novalidate>
+                    <fieldset>
+                        <div class="alert alert-error hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证失败，请检查.
+                        </div>
+                        <div class="alert alert-success hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证成功！
+                        </div>
+
+                        <div class="control-group">
+                            <label for="type" class="control-label">数据模型</label>
+                            <div class="controls" >
+                                {% for key,name in tagConfig['categoryType'] %}
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="{{key}}" name="type" {% if key==data.type%} checked{% endif %}></span></div>
+                                    {{name}}
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+
+                            <!-- Text input-->
+                            <label class="control-label" for="name">分类名称</label>
+                            <div class="controls">
+                                <input class="input-xlarge span3 m-wrap" name="name" value="{{data.name}}" type="text" required>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div class="control-group url" {% if data.type != 'url'%}style="display: none;"{% endif %}>
+                            <!-- Text input-->
+                            <label class="control-label" for="val">链接地址</label>
+                            <div class="controls">
+                                <input class="input-xlarge span3 m-wrap" name="val" type="text" value="{{data.val}}">
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                    <div class="control-group">
+                        <label for="language" class="control-label">栏目版型</label>
+                        <div class="controls">
+                            <label class="radio type" data-val="2">
+                                <div class="radio"><span class=""><input type="radio" value="en" name="language"{% if data.language=='en'%} checked="checked"{% endif %}></span></div>
+                                英文版
+                            </label>
+                            <label class="radio type" data-val="1">
+                                <div class="radio"><span class=""><input type="radio" value="zh" name="language"{% if data.language=='zh'%} checked="checked"{% endif %}></span></div>
+                                中文版
+                            </label>
+                        </div>
+                    </div>
+
+                        <div class="control-group">
+                            <label for="status" class="control-label">是否显示导航</label>
+                            <div class="controls">
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="0" name="isnav" {% if data.isnav == 0%} checked="checked"{% endif %}></span></div>
+                                    否
+                                </label>
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="1" name="isnav" {% if data.isnav == 1%} checked="checked"{% endif %}></span></div>
+                                    是
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="status" class="control-label">状态</label>
+                            <div class="controls">
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="0" name="status"{% if data.status==0%} checked="checked"{% endif %}></span></div>
+                                    禁用
+                                </label>
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="1" name="status"{% if data.status==1%} checked="checked"{% endif %}></span></div>
+                                    启用
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn green" type="submit"><i class="icon-ok"></i> 保存</button>
+                            <button class="btn" type="button" onclick="mycancel()">取消</button>
+                            <input type="hidden" name="code" value="{{data.code}}" >
+                            <input type="hidden" id="actions" value="edit" >
+                            <span for="digits" class="message alert-error"></span>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>

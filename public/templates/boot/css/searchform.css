@@ -1,0 +1,32 @@
+/* *
+* 后台seller列表头上的更多搜索条件的样式
+* 2016/09/21
+* */
+li{list-style: none;}
+
+.new_search{ padding: 15px 0; font-family: "微软雅黑"; font-size: 14px; width: 99%; height: 140px; background: #EEEEEE;}
+.new_search li{ float: left; height: 40px; line-height: 40px; margin-bottom: 6px; width: 346px;}
+.new_search_txt{margin-top: -3px;
+    width: 90px;
+    display: inline-block;
+    text-align: right;}
+.new_search_ntn{ display: inline-block; padding: 1px 15px; background: #28b779; color: #FFFFFF; height: 35px; line-height: 35px; border-radius: 3px;}
+.ntn_new{ background: #FFFFFF; color: #333333; margin-left: 50px; }
+.span_01,.span_02{ display: inline-block !important;
+    width: 105px !important;
+    text-align: center;}
+.search_input{ font-family: "微软雅黑";margin: 5px 0;}
+input.search_btn_s {
+    height: 31px;
+    margin: -3px 10px 8px -8px;
+    background: #28b779;
+    color: #fff;
+    border: none !important;
+}
+.search_input.btn-group {
+    margin-top: 11px !important;
+}
+.portlet.box.light-grey {
+    border: 0 !important;
+    border-top: 0;
+}

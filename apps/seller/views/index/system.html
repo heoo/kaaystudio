@@ -1,0 +1,35 @@
+<div class="span5">
+    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+    <div class="portlet box light-grey">
+        <div class="portlet-body">
+            <div class="clearfix">
+
+                <div class="btn-group">
+                    <button  class="btn green"> 网站信息 </button>
+                </div>
+
+            </div>
+            <table class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <td>运行环境</td>
+                        <td>{{env['sapiName']}}</td>
+                    </tr>
+                    <tr>
+                        <td>PHP版本</td>
+                        <td>{{env['phpversion']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Phalcon版本</td>
+                        <td>{{env['phalcon']}}</td>
+                    </tr>
+                    <tr>
+                        <td>上传附件限制</td>
+                        <td>{{env['max']}}</td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+</div>

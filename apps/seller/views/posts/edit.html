@@ -1,0 +1,222 @@
+{{ javascript_include("templates/boot/js/form/posts-add-edit.js") }}
+
+{{ stylesheet_link("plugins/upload/css/webuploader.css") }}
+{{ javascript_include("plugins/upload/dist/webuploader.js") }}
+{{ stylesheet_link("plugins/upload/css/multi-file-upload.css") }}
+{{ javascript_include("plugins/upload/multi-file-upload.js") }}
+
+{{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
+{{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
+{{ javascript_include("templates/boot/js/form/form-posts.js") }}
+{{ javascript_include("templates/boot/js/messages_zh.js") }}
+{{ javascript_include("templates/boot/js/cancel.js") }}
+
+<script>
+    $(function(){
+        FormPostsValidation.init();
+    });
+</script>
+
+
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box light-grey">
+            <div class="portlet-body">
+                <form class="form-horizontal" method="POST" action="#" id="form-posts" novalidate>
+                    <fieldset>
+
+                        <div class="alert alert-error hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证失败，请检查.
+                        </div>
+                        <div class="alert alert-success hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证成功！
+                        </div>
+
+                        {% if Category %}
+                        <div class="control-group">
+                            <label for="cid" class="control-label">栏目</label>
+                            <div class="controls">
+                                {% for category in Category %}
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="{{category.id}}|{{category.type}}" name="cid"{% if data.cid==category.id%} checked="checked"{% endif %}></span></div>
+                                    {{category.name}}
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="control-group">
+                            <label for="name" class="control-label">项目名称</label>
+                            <div class="controls">
+                                <input type="text" placeholder="项目名称" class="m-wrap span5" name="name" value="{{data.name}}">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="keyword" class="control-label">项目关键字</label>
+                            <div class="controls">
+                                <input type="text" placeholder="项目关键字" class="m-wrap span5" name="keyword" value="{{data.keyword}}">
+                                <span style="color: #b94a48;" >多个以英文逗号【,】隔开</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Textarea -->
+                            <label for="digest" class="control-label">项目摘要</label>
+                            <div class="controls">
+                                <div class="text">
+                                    <textarea class="span5 m-wrap" rows="3" name="digest">{{data.digest}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label for="class" class="control-label">图片排版</label>
+                            <div class="controls">
+                                <label class="radio type" data-val="2">
+                                    <div class="radio"><span class=""><input type="radio" value="default" name="class" {% if data.class=='default'%} checked="checked"{% endif %}></span></div>
+                                    默认(700*453)
+                                </label>
+                                <label class="radio type" data-val="1">
+                                    <div class="radio"><span class=""><input type="radio" value="horizontal" name="class"{% if data.class=='horizontal'%} checked="checked"{% endif %}></span></div>
+                                    水平(1200*389)
+                                </label>
+                                <label class="radio type" data-val="1">
+                                    <div class="radio"><span class=""><input type="radio" value="vertical" name="class"{% if data.class=='vertical'%} checked="checked"{% endif %}></span></div>
+                                    垂直(700*907)
+                                </label>
+                                <label class="radio type" data-val="1">
+                                    <div class="radio"><span class=""><input type="radio" value="large" name="class"{% if data.class=='large'%} checked="checked"{% endif %}></span></div>
+                                    放大(1200*777)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="attachment" class="control-label">项目图片
+                            </label>
+                            <!-- File Upload -->
+                            <div class="controls">
+                                <div id="wrapper" style="width: 595px;">
+                                   <div id="container">
+                                       <!--头部，相册选择和格式选择-->
+                                       <div id="uploader">
+                                           <div class="queueList">
+
+                                               {% if images %}
+                                               <ul class='filelist' style='border-bottom: 1px solid #ccc; margin-bottom: 5px;'>
+                                                   {% if data.thumb %}
+                                                   <li class="state-complete">
+                                                       <p class="imgWrap"><img src="{{data.thumb}}" onerror="javascript:this.src='/templates/duo-i/ckplayer/flash.jpg'"></p>
+                                                       <p class="progress"><span style="display: none; width: 0px;"></span></p>
+                                                       <span class="success"></span>
+                                                       <div class="file-panel" style="height: 0px;">
+                                                           <span class="cancel" data-rel="{{data.thumb}}" title="删除" data-type="flash">删除</span>
+                                                       </div>
+                                                   </li>
+                                                   {% endif %}
+                                                   {% for val in images %}
+                                                   <li class="state-complete">
+                                                       <p class="imgWrap"><img src="{{val}}"></p>
+                                                       <p class="progress"><span style="display: none; width: 0px;"></span></p>
+                                                       <span class="success"></span>
+                                                       <div class="file-panel" style="height: 0px;">
+                                                           <span class="cancel" data-rel="{{val}}" title="删除" data-type="images">删除</span>
+                                                       </div>
+                                                   </li>
+                                                   {% endfor %}
+                                               </ul>
+                                               {% endif %}
+
+                                               <div id="dndArea">
+                                                   <div id="files-uploads"></div>
+                                                   <p>上传图片第一张作为产品缩略图</p>
+                                               </div>
+                                           </div>
+                                           <div class="statusBar" style="display:block;">
+                                               <div class="progress">
+                                                   <span class="text">0%</span>
+                                                   <span class="percentage"></span>
+                                               </div>
+                                               <div class="info"></div>
+                                               <div class="btns">
+                                                   <div id="files-uploads-continue"></div><div class="uploadBtn">开始上传</div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <input type="hidden" id="multi-thumb" name="attachment" value="{{data.attachment}}">
+                                   </div>
+                                </div>
+                                <span style="color: #b94a48;" >附件格式【jpg,jpeg,png,gif,flv】</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Textarea -->
+                            <label for="text" class="control-label">项目简介</label>
+                            <div class="controls">
+                                <div class="text">
+                                    <textarea class="span5 m-wrap" rows="3" name="text">{{data.text}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label for="designer" class="control-label" >项目设计者</label>
+                            <div class="controls">
+                                <input type="text" placeholder="项目设计者" class="m-wrap span5" name="designer" value="{{data.designer}}">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="language" class="control-label">项目版型</label>
+                            <div class="controls">
+                                <label class="radio type" data-val="2">
+                                    <div class="radio"><span class=""><input type="radio" value="en" name="language"{% if data.language=='en'%} checked="checked"{% endif %}></span></div>
+                                    英文版
+                                </label>
+                                <label class="radio type" data-val="1">
+                                    <div class="radio"><span class=""><input type="radio" value="zh" name="language"{% if data.language=='zh'%} checked="checked"{% endif %}></span></div>
+                                    中文版
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="status" class="control-label">状态</label>
+                            <div class="controls">
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="0" name="status"{% if data.status==0%} checked="checked"{% endif %}></span></div>
+                                    禁用
+                                </label>
+                                <label class="radio">
+                                    <div class="radio"><span class=""><input type="radio" value="1" name="status"{% if data.status==1%} checked="checked"{% endif %}></span></div>
+                                    启用
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn green" type="submit"><i class="icon-ok"></i> 保存</button>
+                            <button class="btn" type="button" onclick="mycancel()">取消</button>
+                            <input type="hidden" id="actions" value="edit" >
+                            <input type="hidden" name="code" value="{{data.code}}" >
+                            <input type="hidden" name="id" value="{{data.id}}" >
+                            <input type="hidden" name="ctype" value="{{ctype}}">
+                            <input type="hidden" name="page" value="{{page}}">
+                            <input type="hidden" id="thumb" name="thumb" value="{{data.thumb}}" >
+                            <span for="digits" class="message alert-error"></span>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>

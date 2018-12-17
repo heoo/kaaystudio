@@ -1,0 +1,65 @@
+
+
+<div id="dowebok">
+{% for key,image in attachment %}
+    <div class="section" data-key="{{key}}" data-val="{{image}}" style="background: url({{image}}) center; background-size: cover;"> </div>
+{% endfor %}
+</div>
+
+
+
+<input type="hidden" value="{{next}}" id="next">
+<input type="hidden" value="{{previous}}" id="previous">
+<div class="shadow-img"></div>
+        <img src="{{src}}" style="display: none;" class="btn">
+
+
+<!--<script type="text/javascript" src="/templates/duo-i/js/touchjs/touch.min.js"></script>-->
+<!--<script type="text/javascript" src="/templates/duo-i/js/touchjs/cat.touchjs.js"></script>-->
+<script>
+    $(function () {
+        $(".section").click(function () {
+            var oDiv1 = $(this).attr('data-val');
+            $(".btn").attr("src",oDiv1).show();
+            $(".shadow-img").css("display","block")
+        });
+        $(".shadow-img").click(function () {
+            $(".shadow-img").css("display","none");
+            $(".btn").attr("src","{{src}}").hide();
+        });
+
+
+
+//        var $targetObj = $('.btn');
+//        //初始化设置
+//        cat.touchjs.init($targetObj, function (left, top, scale, rotate) {
+//            $('#left').text(left);
+//            $('#top').text(top);
+//            $('#scale').text(scale);
+//            $('#rotate').text(rotate);
+//            $targetObj.css({
+//                left: left,
+//                top: top,
+//                'transform': 'scale(' + scale + ') rotate(' + rotate + 'deg)',
+//                '-webkit-transform': 'scale(' + scale + ') rotate(' + rotate + 'deg)'
+//            });
+//        });
+//        //初始化拖动手势（不需要就注释掉）
+//        cat.touchjs.drag($targetObj, function (left, top) {
+//            $('#left').text(left);
+//            $('#top').text(top);
+//        });
+//        //初始化缩放手势（不需要就注释掉）
+//        cat.touchjs.scale($targetObj, function (scale) {
+//            $('#scale').text(scale);
+//        });
+//        //初始化旋转手势（不需要就注释掉）
+//        cat.touchjs.rotate($targetObj, function (rotate) {
+//            $('#rotate').text(rotate);
+//        });
+    });
+
+
+
+
+</script>

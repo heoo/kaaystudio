@@ -1,0 +1,83 @@
+<div id="loadings"></div>
+
+{{ partial("layouts/logo") }}
+<link rel="stylesheet" href="/templates/duo-i/css/simplefoucs.css" />
+
+<script src="/templates/duo-i/js/jquery.mousewheel.js"></script>
+<script src="/templates/duo-i/js/simplefoucs.js"></script>
+
+        <input type="hidden" id="count" value="{{count}}" />
+<div class="bannerbox">
+    <div id="dowebok">
+        <ul>
+            {% for key,image in attachment %}
+                <li style=" background-image: url({{image}});"> </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+
+{% if data.thumb %}
+<script src="/templates/duo-i/ckplayer/ckplayer.js"></script>
+
+<!--视频弹出按钮-->
+<div class="vidio-alert"><a href="javascript:alertWin('vedio1');"><img src="/templates/duo-i/images/play.png"/></a></div>
+<!--视频播放盒子-->
+<div class="mydiv2" style="display:none; " id="vedio1">
+    <div class="tc_x">
+        <span id="vedio1Title"><a id="vedio1Close" style="float:right;margin-right:-35px"><img src="/templates/duo-i/images/close.png" border=0/></a></span>
+        <div class="fmv">
+            <div id="fmv"></div>
+        </div>
+
+    </div>
+    <div class="bg" id="jiajbg"></div>
+</div>
+<script language="javascript" type="text/javascript">
+    // 弹出视频方法
+    function alertWin(n) {
+        var flashvars = {
+            f: '{{data.thumb}}', // 视频url
+            c: 1,
+            b: 1
+        };
+        var params = {bgcolor: '#FFF', allowFullScreen: true, allowScriptAccess: 'always'};
+        CKobject.embedSWF('/templates/duo-i/ckplayer/ckplayer.swf', 'fmv', 'ckplayer_a1', '640', '480', flashvars, params);
+        var DDiv = document.getElementById(n)
+        DDiv.style.display = "block";
+        titleBar = document.getElementById(n + "Title"); // 视频标题等 （暂时无用）
+        titleBar = document.getElementById(n + "bg");
+        closeBtn = document.getElementById(n + "Close");
+        closeBtn.onclick = function () {
+            DDiv.style.display = "none";
+            CKobject.embedSWF('/templates/duo-i/ckplayer/ckplayer.swf', 'fmv', 'ckplayer_a1', '640', '480', flashvars, params);
+        }
+    }
+</script>
+{% endif %}
+
+   <script>
+       $(function(){
+
+           window.lastMove = new Date().getTime();
+           $("body").mousemove(function(){
+               $('.logodiv').find('img').attr('src','{{src}}').css('opacity',1);
+               $('.cpre').css('opacity',1);
+               $('.cnext').css('opacity',1);
+               $('.vidio-alert').find('img').css('opacity',1);
+               window.lastMove = new Date().getTime();
+           });
+           window.setInterval(function(){//每1秒钟检查一次。
+               var now = new Date().getTime();
+               if( now - lastMove > 2000){
+                   $('.logodiv').find('img').attr('src','{{src}}').css('opacity',0.3);
+                   $('.cpre').css('opacity',0.3);
+                   $('.cnext').css('opacity',0.3);
+                   $('.vidio-alert').find('img').css('opacity',0.3);
+               }
+           }, 1000);
+
+       });
+   </script>
