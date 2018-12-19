@@ -2,8 +2,8 @@
 return array(
     'adminName'=>'内容管理系统',
     'webName'=>'',
-    'domain'=>'http://'.$_SERVER['SERVER_NAME'],
-    'image_host'=>'http://'.$_SERVER['SERVER_NAME'],
+//    'domain'=>'http://'.$_SERVER['SERVER_NAME'],
+//    'image_host'=>'http://'.$_SERVER['SERVER_NAME'],
     'categoryType'=>array(
         'posts'=>'文章模型',
         'page'=>'单页模型',

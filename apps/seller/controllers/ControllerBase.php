@@ -1,8 +1,6 @@
 <?php
 namespace Bpai\Seller\Controllers;
 use Phalcon\Tag;
-//use Imagine\Image\Box;
-//use Imagine\Imagick\Imagine;
 
 /**
  * @Created by PhpStorm.
@@ -11,7 +9,6 @@ use Phalcon\Tag;
 class ControllerBase extends ControllerAbstract
 {
     protected $Controller;
-    protected $Imagine;
 
     protected function initialize()
     {
@@ -46,14 +43,10 @@ class ControllerBase extends ControllerAbstract
             $where['type'] = $getData['type'];
         }
 
-        if($getData['language']){
-
-            $where['language'] = $getData['language'];
-        }
-
         if($getData['ctype']){
 
             $ctype = explode('|',$getData['ctype']);
+            $getData['module'] = $ctype[1];
             $where['cid'] = $ctype[0];
         }
 
@@ -114,7 +107,6 @@ class ControllerBase extends ControllerAbstract
                 $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
             }elseif( in_array($this->Controller,array('links','banners')) && $postData['logo']){
 
-                $postData['logo'] = ltrim($postData['logo'],',');
                 $position = strpos($postData['logo'] , ',');
                 if($position){
 
@@ -163,16 +155,14 @@ class ControllerBase extends ControllerAbstract
 
                 $postData['attachment'] = $this->trimString($postData['attachment'],',');
                 $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
-            }elseif( in_array($this->Controller,array('links','banners')) && $postData['logo']){
+            }elseif( in_array($this->Controller,array('links','banners','system')) && $postData['logo']){
 
-                $postData['logo'] = ltrim($postData['logo'],',');
                 $position = strpos($postData['logo'] , ',');
                 if($position){
 
                     $postData['logo'] = substr($postData['logo'] , 0 , $position);
                 }
             }
-
             $this->Models->setWhere(array('code'=>$postData['code']));
             $res = $this->Models->saveRec($postData);
             if($res){

@@ -535,7 +535,7 @@
                     $('#thumb').val(response.path);
                 }else{
                     var oPath = $('#multi-thumb').val();
-                    var nPath = oPath+','+ response.path;
+                    var nPath = response.path +','+oPath;
                     $('#multi-thumb').val(nPath);
                 }
 

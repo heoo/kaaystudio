@@ -7,4 +7,4 @@ cache/api/*
 cache/seller/*
 cache/web/*
 composer.lock
-
+public/uploads/*

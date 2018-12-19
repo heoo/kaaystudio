@@ -1,8 +1,8 @@
-var FormLogoValidation = function () {
+var FormSystemValidation = function () {
     return {
         //main function to initiate the module
         init: function () {
-            var form2 = $('#form-logo');
+            var form2 = $('#form-system');
             var error2 = $('.alert-error', form2);
             var success2 = $('.alert-success', form2);
             form2.validate({
@@ -57,7 +57,7 @@ var FormLogoValidation = function () {
                     $.post(BASE_URL+$('#actions').val(),form2.serialize(),function(result){
                         if(result.errorNo==0)
                         {
-                            window.location.href=BASE_URL+'list';
+                            window.location.href=BASE_URL+'edit?code='+ $("input[name='code']").val();
                         }
                         else
                         {

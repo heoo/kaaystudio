@@ -7,14 +7,14 @@
 
 {{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
 {{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
-{{ javascript_include("templates/boot/js/form/form-logo.js") }}
+{{ javascript_include("templates/boot/js/form/form-system.js") }}
 {{ javascript_include("templates/boot/js/messages_zh.js") }}
 {{ javascript_include("templates/boot/js/cancel.js") }}
 
 
  <script>
     $(function(){
-        FormLogoValidation.init();
+        FormSystemValidation.init();
     });
 </script>
 
@@ -24,7 +24,7 @@
         <div class="portlet box light-grey">
             <div class="portlet-body">
 
-                <form class="form-horizontal" method="POST" action="#" id="form-logo" novalidate>
+                <form class="form-horizontal" method="POST" action="#" id="form-system" novalidate>
                     <fieldset>
                         <div class="alert alert-error hide">
                             <button class="close" data-dismiss="alert"></button>
@@ -35,23 +35,81 @@
                             表单验证成功！
                         </div>
 
+                        <div class="control-group">
+                            <label for="web_name" class="control-label">网站名称</label>
+                            <div class="controls">
+                                <input type="text" placeholder="网站名称" class="m-wrap span5" name="web_name" value="{{data.web_name}}">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="web_url" class="control-label">网站域名</label>
+                            <div class="controls">
+                                <input type="text" placeholder="网站域名" class="m-wrap span5" name="web_url" value="{{data.web_url}}">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="seo_keywords" class="control-label">关键字</label>
+                            <div class="controls">
+                                <input type="text" placeholder="关键字" class="m-wrap span5" name="seo_keywords" value="{{data.seo_keywords}}">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="description" class="control-label">描述</label>
+                            <div class="controls">
+                                <input type="text" placeholder="描述" class="m-wrap span5" name="description" value="{{data.description}}">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="copyright" class="control-label">版权</label>
+                            <div class="controls">
+                                <input type="text" placeholder="版权" class="m-wrap span5" name="copyright" value="{{data.copyright}}">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="email" class="control-label">管理员邮箱</label>
+                            <div class="controls">
+                                <input type="text" placeholder="管理员邮箱" class="m-wrap span5" name="email" value="{{data.email}}">
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label for="icp" class="control-label">ICP备案号</label>
+                            <div class="controls">
+                                <input type="text" placeholder="ICP备案号" class="m-wrap span5" name="icp" value="{{data.icp}}">
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label for="analytics" class="control-label">统计代码</label>
+                            <div class="controls">
+                                <input type="text" placeholder="统计代码" class="m-wrap span5" name="analytics" value="{{data.analytics}}">
+                            </div>
+                        </div>
+
 
                         <div class="control-group">
                             <label for="logo" class="control-label">LOGO图片</label>
                             <!-- File Upload -->
                             <div class="controls">
-                                <div id="wrapper" style="width: 595px;">
+                                <div id="wrapper" style="width: 45%;">
                                     <div id="container">
                                         <!--头部，相册选择和格式选择-->
                                         <div id="uploader">
                                             <div class="queueList">
                                                 <ul class='filelist' style='border-bottom: 1px solid #ccc; margin-bottom: 5px;'>
                                                     <li class="state-complete">
-                                                        <p class="imgWrap"><img src="{{src}}"></p>
-                                                        <p class="progress"><span style="display: none; width: 0px;"></span></p>
+                                                        <p class="imgWrap"><img src="{{data.logo}}"></p>
                                                         <span class="success"></span>
+                                                        <p class="progress"><span style="display: none; width: 0px;"></span></p>
                                                         <div class="file-panel" style="height: 0px;">
-                                                            <span class="cancel" data-rel="{{src}}" title="删除">删除</span>
+                                                            <span class="cancel" data-rel="{{data.logo}}" title="删除">删除</span>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -71,7 +129,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" id="multi-thumb" name="logo" value="">
+                                        <input type="hidden" id="multi-thumb" name="logo" value="{{data.logo}}">
                                     </div>
                                 </div>
                                 <span style="color: #b94a48;" >附件格式【jpg,jpeg,png,gif】</span>
@@ -82,6 +140,7 @@
                             <button class="btn green" type="submit"><i class="icon-ok"></i> 保存</button>
                             <button class="btn" type="button" onclick="mycancel()">取消</button>
                             <input type="hidden" id="actions" value="edit" >
+                            <input type="hidden" name="code" value="{{data.code}}" >
                             <span for="digits" class="message alert-error"></span>
                         </div>
                     </fieldset>

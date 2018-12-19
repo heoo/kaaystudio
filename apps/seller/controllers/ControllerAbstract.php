@@ -81,7 +81,7 @@ class ControllerAbstract extends Controller
                 }
                 $divHtml .= ' <li '.$class.' data-key="'.$navVal['controller'].'-'.$this->router->getControllerName();
                 $divHtml .= '" class="'.$open.'" ><a href="javascript:;">
-                              <i class="icon-sitemap"></i>
+                              <i class="'.$navVal['icons'].'"></i>
                               <span class="title">'.$navVal['name'].'</span>
                               <span class="arrow '.$open.'"></span>
                               </a> <ul class="sub-menu" '.$display.'>'.$liHtml.'</ul></li>';
@@ -143,7 +143,12 @@ class ControllerAbstract extends Controller
         $res = $Obj->listRec();
         if($res){
             foreach($res as $val){
-                $string .= "<li><a href='/{$this->router->getModuleName()}/posts/list?ctype={$val->id}|{$val->type}'>{$val->name}</a></li>";
+                $ctype = "{$val->id}|{$val->type}";
+                $class = '';
+                if($this->get('ctype') == $ctype){
+                    $class = 'active';
+                }
+                $string .= "<li class='{$class}'><a href='/{$this->router->getModuleName()}/posts/list?ctype={$ctype}'>{$val->name}</a></li>";
             }
         }
         return $string;
