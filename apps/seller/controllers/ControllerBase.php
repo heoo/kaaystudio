@@ -82,7 +82,6 @@ class ControllerBase extends ControllerAbstract
             }
             $result['total'] = $count;
         }
-
         $this->view->setVar("getData",$getData);
         $this->view->setVar('data',$result);
         $this->view->setVar('pageStr',$this->getNewPages($result['total'],$getData['page'],$getData['rows']));
@@ -103,11 +102,12 @@ class ControllerBase extends ControllerAbstract
             $postData['created'] = $postData['updated']  = time();
             $postData['createdby'] = $postData['updatedby'] = $this->user['username'];
 
-            $cid = explode('|',$postData['ctype']);
-            unset($postData['ctype']);
+            $postData['text'] = htmlspecialchars($postData['text']);
             $postData['language'] = $postData['language'] ? $postData['language'] : 'zh';
 
             if( $this->Controller  == 'posts'){
+                $cid = explode('|',$postData['ctype']);
+                unset($postData['ctype']);
                 $postData['cid'] = $cid[0];
                 $postData['type'] = $cid[1];
                 $postData['attachment'] = $this->trimString($postData['attachment'],',');
@@ -151,14 +151,15 @@ class ControllerBase extends ControllerAbstract
             $postData['updated'] = time();
             $postData['updatedby'] = $this->user['username'];
 
-
-            $cid = explode('|',$postData['cid']);
-            unset($postData['cid']);
-            $postData['cid'] = $cid[0];
-            $postData['type'] = $cid[1];
+            $postData['text'] = htmlspecialchars($postData['text']);
 
             $postData['language'] = $postData['language'] ? $postData['language'] : 'zh';
             if( $this->Controller  == 'posts'){
+
+                $cid = explode('|',$postData['cid']);
+                unset($postData['cid']);
+                $postData['cid'] = $cid[0];
+                $postData['type'] = $cid[1];
 
                 $postData['attachment'] = $this->trimString($postData['attachment'],',');
                 $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
@@ -174,7 +175,6 @@ class ControllerBase extends ControllerAbstract
 
             $this->Models->setWhere(array('code'=>$postData['code']));
             $res = $this->Models->saveRec($postData);
-
             if($res){
                 /* 单页模型 更新分类val 值 */
                 if($this->Controller == 'posts' && $cid[1] != 'posts'){
@@ -197,7 +197,7 @@ class ControllerBase extends ControllerAbstract
                 $images = explode(',',$result->attachment);
                 $this->view->setVar('images',$images);
             }
-
+            $result->text = htmlspecialchars_decode($result->text);
             $this->view->setVar('data',$result);
             $this->view->setVar('page',$getData['page']);
         }

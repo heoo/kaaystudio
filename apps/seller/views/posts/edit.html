@@ -11,11 +11,27 @@
 {{ javascript_include("templates/boot/js/messages_zh.js") }}
 {{ javascript_include("templates/boot/js/cancel.js") }}
 
+{{ stylesheet_link("plugins/editor/css/wangEditor.css") }}
+
+{{ javascript_include("plugins/editor/js/wangEditor.js") }}
+{{ javascript_include("plugins/editor/plupload/plupload.full.min.js") }}
+{{ javascript_include("plugins/editor/plupload/i18n/zh_CN.js") }}
+{{ javascript_include("plugins/editor/qiniu.js") }}
+{{ javascript_include("plugins/editor/uploads.js") }}
+
+
 <script>
     $(function(){
         FormPostsValidation.init();
+
+        // 生成编辑器
+        var editor = new wangEditor('editor');
+        editor.config.customUpload = true;
+        editor.config.customUploadInit = uploadInit;
+        editor.create();
     });
 </script>
+<input type="hidden" id="token" value="{{token}}">
 
 
 <div class="row-fluid">
@@ -50,23 +66,23 @@
                         {% endif %}
 
                         <div class="control-group">
-                            <label for="name" class="control-label">项目名称</label>
+                            <label for="name" class="control-label">文章标题</label>
                             <div class="controls">
-                                <input type="text" placeholder="项目名称" class="m-wrap span5" name="name" value="{{data.name}}">
+                                <input type="text" placeholder="文章标题" class="m-wrap span5" name="name" value="{{data.name}}">
                             </div>
                         </div>
 
                         <div class="control-group">
-                            <label for="keyword" class="control-label">项目关键字</label>
+                            <label for="keyword" class="control-label">关键字</label>
                             <div class="controls">
-                                <input type="text" placeholder="项目关键字" class="m-wrap span5" name="keyword" value="{{data.keyword}}">
+                                <input type="text" placeholder="关键字" class="m-wrap span5" name="keyword" value="{{data.keyword}}">
                                 <span style="color: #b94a48;" >多个以英文逗号【,】隔开</span>
                             </div>
                         </div>
 
                         <div class="control-group">
                             <!-- Textarea -->
-                            <label for="digest" class="control-label">项目摘要</label>
+                            <label for="digest" class="control-label">摘要</label>
                             <div class="controls">
                                 <div class="text">
                                     <textarea class="span5 m-wrap" rows="3" name="digest">{{data.digest}}</textarea>
@@ -74,31 +90,8 @@
                             </div>
                         </div>
 
-
                         <div class="control-group">
-                            <label for="class" class="control-label">图片排版</label>
-                            <div class="controls">
-                                <label class="radio type" data-val="2">
-                                    <div class="radio"><span class=""><input type="radio" value="default" name="class" {% if data.class=='default'%} checked="checked"{% endif %}></span></div>
-                                    默认(700*453)
-                                </label>
-                                <label class="radio type" data-val="1">
-                                    <div class="radio"><span class=""><input type="radio" value="horizontal" name="class"{% if data.class=='horizontal'%} checked="checked"{% endif %}></span></div>
-                                    水平(1200*389)
-                                </label>
-                                <label class="radio type" data-val="1">
-                                    <div class="radio"><span class=""><input type="radio" value="vertical" name="class"{% if data.class=='vertical'%} checked="checked"{% endif %}></span></div>
-                                    垂直(700*907)
-                                </label>
-                                <label class="radio type" data-val="1">
-                                    <div class="radio"><span class=""><input type="radio" value="large" name="class"{% if data.class=='large'%} checked="checked"{% endif %}></span></div>
-                                    放大(1200*777)
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label for="attachment" class="control-label">项目图片
+                            <label for="attachment" class="control-label">缩略图
                             </label>
                             <!-- File Upload -->
                             <div class="controls">
@@ -110,16 +103,6 @@
 
                                                {% if images %}
                                                <ul class='filelist' style='border-bottom: 1px solid #ccc; margin-bottom: 5px;'>
-                                                   {% if data.thumb %}
-                                                   <li class="state-complete">
-                                                       <p class="imgWrap"><img src="{{data.thumb}}" onerror="javascript:this.src='/templates/duo-i/ckplayer/flash.jpg'"></p>
-                                                       <p class="progress"><span style="display: none; width: 0px;"></span></p>
-                                                       <span class="success"></span>
-                                                       <div class="file-panel" style="height: 0px;">
-                                                           <span class="cancel" data-rel="{{data.thumb}}" title="删除" data-type="flash">删除</span>
-                                                       </div>
-                                                   </li>
-                                                   {% endif %}
                                                    {% for val in images %}
                                                    <li class="state-complete">
                                                        <p class="imgWrap"><img src="{{val}}"></p>
@@ -156,35 +139,11 @@
                             </div>
                         </div>
 
-                        <div class="control-group">
-                            <!-- Textarea -->
-                            <label for="text" class="control-label">项目简介</label>
-                            <div class="controls">
-                                <div class="text">
-                                    <textarea class="span5 m-wrap" rows="3" name="text">{{data.text}}</textarea>
-                                </div>
-                            </div>
-                        </div>
-
 
                         <div class="control-group">
-                            <label for="designer" class="control-label" >项目设计者</label>
+                            <label for="text" class="control-label">文章内容</label>
                             <div class="controls">
-                                <input type="text" placeholder="项目设计者" class="m-wrap span5" name="designer" value="{{data.designer}}">
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label for="language" class="control-label">项目版型</label>
-                            <div class="controls">
-                                <label class="radio type" data-val="2">
-                                    <div class="radio"><span class=""><input type="radio" value="en" name="language"{% if data.language=='en'%} checked="checked"{% endif %}></span></div>
-                                    英文版
-                                </label>
-                                <label class="radio type" data-val="1">
-                                    <div class="radio"><span class=""><input type="radio" value="zh" name="language"{% if data.language=='zh'%} checked="checked"{% endif %}></span></div>
-                                    中文版
-                                </label>
+                                <textarea class="text" name="text" style="height: 500px;" id="editor">{{data.text}}</textarea>
                             </div>
                         </div>
 

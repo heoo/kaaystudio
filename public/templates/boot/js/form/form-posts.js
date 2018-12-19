@@ -60,6 +60,8 @@ var FormPostsValidation = function () {
                     }
                 },
                 submitHandler: function (form) {
+                    // console.log(editor.$txt.html())
+                    // return false
 
                     $.post(BASE_URL+$('#actions').val(),form2.serialize(),function(result){
                         var url ='';

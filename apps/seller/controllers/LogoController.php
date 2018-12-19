@@ -19,7 +19,7 @@ class LogoController extends ControllerBase
 
         if(!$this->Src){
 
-            $this->Src = '/templates/duo-i/images/logo.png';
+            $this->Src = '/templates/kaay/images/logo.jpg';
         }
 
         $this->view->setVar('src',$this->Src);

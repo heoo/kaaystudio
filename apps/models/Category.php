@@ -10,6 +10,7 @@ class Category extends \Catchtech\Extensions\Model\BaseModel
     protected $name;
     protected $language;
     protected $type;
+    protected $listorder;
     protected $val;
     protected $isnav;
     protected $sort;
@@ -18,6 +19,24 @@ class Category extends \Catchtech\Extensions\Model\BaseModel
     protected $createdby;
     protected $updated;
     protected $updatedby;
+
+
+    /**
+     * @return mixed
+     */
+    public function getListorder()
+    {
+        return $this->listorder;
+    }
+
+    /**
+     * @param mixed $listorder
+     */
+    public function setListorder($listorder)
+    {
+        $this->listorder = $listorder;
+    }
+
 
 
     /**

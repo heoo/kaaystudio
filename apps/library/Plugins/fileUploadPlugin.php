@@ -90,7 +90,6 @@ class fileUploadPlugin
                 }
             }
         }
-
         $this->errorMess = $this->getError();
         return false;
     }

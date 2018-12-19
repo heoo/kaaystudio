@@ -3,6 +3,7 @@ namespace Bpai\Seller\Controllers;
 use Phalcon\Tag,
     Bpai\Models\Posts,
     Bpai\Models\Category;
+use Qiniu\Auth;
 /**
  * @Created by PhpStorm.
  * @Date: 16-6-15
@@ -13,6 +14,8 @@ class PostsController extends ControllerBase
 {
     protected $Models;
     protected $Category;
+    protected $AK;
+    protected $SK;
 
     public function initialize()
     {
@@ -33,5 +36,13 @@ class PostsController extends ControllerBase
         if( $this->Controller  == 'posts'){
             $this->view->setVar('ctype',$this->get('ctype'));
         }
+
+        $this->AK = 'LOvGV2VyZI2qIvQ4KoJVRvhCHSbV5cMUpz-Vw0jP';
+        $this->SK = 'qM5oVSvy5AEqP1UsWAfAhPCener5m6RiCdxRrq4D';
+        $auth = new Auth($this->AK, $this->SK);
+        $bucket = 'other';
+//// 生成上传Token
+        $token = $auth->uploadToken($bucket);
+        $this->view->setVar("token",$token);
     }
 }

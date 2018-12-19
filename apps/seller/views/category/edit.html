@@ -59,19 +59,15 @@
                             </div>
                         </div>
 
-                    <div class="control-group">
-                        <label for="language" class="control-label">栏目版型</label>
-                        <div class="controls">
-                            <label class="radio type" data-val="2">
-                                <div class="radio"><span class=""><input type="radio" value="en" name="language"{% if data.language=='en'%} checked="checked"{% endif %}></span></div>
-                                英文版
-                            </label>
-                            <label class="radio type" data-val="1">
-                                <div class="radio"><span class=""><input type="radio" value="zh" name="language"{% if data.language=='zh'%} checked="checked"{% endif %}></span></div>
-                                中文版
-                            </label>
+                        <div class="control-group listorder">
+                            <!-- Text input-->
+                            <label class="control-label" for="val">排序</label>
+                            <div class="controls">
+                                <input class="input-xlarge span3 m-wrap" name="listorder" type="text" value="{{data.listorder}}">
+                                <p class="help-block"></p>
+                            </div>
                         </div>
-                    </div>
+
 
                         <div class="control-group">
                             <label for="status" class="control-label">是否显示导航</label>

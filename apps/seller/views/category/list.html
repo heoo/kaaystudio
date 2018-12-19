@@ -11,11 +11,6 @@
 
                     where +='name='+name+'&';
                 }
-                var language = $("select[name='language']").val();
-                if(language){
-
-                    where +='language='+language+'&';
-                }
 
                 var status = $("select[name='status']").val();
                 if(status){
@@ -55,12 +50,7 @@
             <div class="btn-group">
 
                 <div class="btn-group">
-                    <input type="text" name="name" value="{{getData['name']}}" style='margin-right:3px;' class='span6' placeholder="请输入分类名称"/>
-                    <select name="language" style='margin-right:3px;' class='span4'>
-                        <option value="">栏目版型</option>
-                        <option {% if getData['language']=='en' %} selected {% endif %} value="en">英文</option>
-                        <option {% if getData['language']=='zh' %} selected {% endif %} value="zh">中文</option>
-                    </select>
+                    <input type="text" name="name" value="{{getData['name']}}" style='margin-right:3px;' class='span6' placeholder="请输入栏目名称"/>
                     <select name="status" style='margin-right:3px;' class='span4'>
                         <option value="">状态</option>
                         <option {% if getData['status']=='0' %} selected {% endif %} value="0">删除</option>
