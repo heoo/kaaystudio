@@ -10,7 +10,7 @@ class IndexController extends ControllerBase
     public function initialize()
     {
         parent::initialize();
-        \Phalcon\Tag::prependTitle($this->System->web_name);
+        \Phalcon\Tag::prependTitle($this->System['web_name']);
 
     }
     

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<meta name="renderer" content="webkit" />
     <meta name="copyright" content="{{system['copyright']}}"/>
-    <meta name="keywords" content="{{system['seo_keywords']}}"/>
+    <meta name="keywords" content="{% if data['keyword']%}{{data['keyword']}}{% else %}{{system['seo_keywords']}}{% endif %}"/>
     <meta name="description" content="{{system['description']}}"/>
     {{ get_title() }}
     {{ stylesheet_link("templates/kaay/css/bootstrap.min.css") }}

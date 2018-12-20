@@ -232,5 +232,18 @@ class ControllerAbstract extends Controller
         }
         return $banners;
     }
+    protected function getCategory($cid){
+        $data = array();
+        if($cid){
+            $this->Category = new Category();
+            $this->Category->setWhere(array('id'=>$cid,'type'=>'posts'));
+            $this->Category->setField(array('id','name'));
+            $result = $this->Category->findRec();
+            if($result){
+                $data = $result->toArray();
+            }
+        }
+        return $data;
+    }
 
 }

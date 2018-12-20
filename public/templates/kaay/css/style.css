@@ -1603,7 +1603,20 @@ li.list-group-item1 {
 }  
 .grid_5{
 	background:none;
-	padding:2em 0;
+	padding:1em 0;
+}
+.breadcrumb {
+	/*padding: 8px 15px;*/
+	margin-bottom: 2px !important;
+	/*list-style: none;*/
+	/*background-color: #f5f5f5;*/
+	/*border-radius: 4px;*/
+}
+.breadcrumb>li>a{
+	color: #777;
+}
+.breadcrumb>li>a:hover{
+	color: #EFA52C;
 }
 .grid_5 h3, .grid_5 h2, .grid_5 h1, .grid_5 h4, .grid_5 h5, h3.hdg, h3.bars {
     margin-bottom: 1em;

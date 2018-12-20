@@ -7,8 +7,10 @@ class ControllerBase extends ControllerAbstract
     public $Src;
     protected function initialize()
     {
-        Tag::setTitle($this->System['web_name']);
+
         parent::initialize();
         $this->view->setTemplateAfter('index');
+        Tag::appendTitle('-'.$this->System['web_name']);
+
     }
 }
