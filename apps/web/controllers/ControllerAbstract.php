@@ -209,6 +209,18 @@ class ControllerAbstract extends Controller
         return $arr;
     }
 
+    public function getPostsCount($cid =''){
+
+        $count = 0;
+        $Models = new Posts();
+        $where = array('status'=>1,'type'=>'posts');
+        if($cid){
+            $where['cid'] = $cid;
+        }
+        $Models->setWhere($where);
+        $count = $Models->countRec();
+        return $count;
+    }
     protected function getLinks(){
         $result = array();
         $Models = new \Bpai\Models\Links();
