@@ -54,7 +54,7 @@ a:focus, a:hover {
 /*-- Index-Page-Styling --*/
 /*-- Top-Bar --*/
 .top-bar {
-    position: absolute;
+    position: fixed;
     width: 100%;
     z-index: 99999;
     padding: 10px 0 0px;
@@ -708,12 +708,34 @@ h3.resp-accordion {
 	padding-top:45px;
 	font-family:微软雅黑;
 	font-size:15px;
-	margin-bottom:70px;
+	margin-bottom:10px;
 	border-top: 1px solid #cccccc;
 }
 .tz-cont-weixin p{
 	line-height:20px;
 	margin-bottom:20px;
+}
+.kaay-share{
+	/*display: block;*/
+	position: fixed;
+	bottom: 100px;
+	right: 1px;
+	z-index: 2;
+	/*text-align: center;*/
+}
+.kaay-share>ul>li{
+	list-style: none;
+}
+.kaay-share>ul>li>span{
+	padding: 20px !important;
+}
+.kaay-span-top{
+	border-top: 1px solid #777777;
+	border-left: 1px solid #777777;
+	border-right: 1px solid #777777;
+}
+.kaay-span-share{
+	border: 1px solid #777777;
 }
 .w3l-1 h3.text-center{ 
 	color:#EFA52C;
@@ -1765,6 +1787,9 @@ h2.typoh2{
     margin: 0 0 10px;
 }
 @media (max-width:768px){
+	.kaay-share{
+		display: none;
+	}
 	.grid_5 {
 		padding: 0 0 1em;
 	}
