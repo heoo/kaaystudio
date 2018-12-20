@@ -41,7 +41,6 @@ class PostsController extends ControllerBase
         $this->SK = 'qM5oVSvy5AEqP1UsWAfAhPCener5m6RiCdxRrq4D';
         $auth = new Auth($this->AK, $this->SK);
         $bucket = 'other';
-//// 生成上传Token
         $token = $auth->uploadToken($bucket);
         $this->view->setVar("token",$token);
     }

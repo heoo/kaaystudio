@@ -1,6 +1,6 @@
 <?php
 $router = new \Phalcon\Mvc\Router; 
-$router->setDefaultModule("manage");//设置默认访问模块
+$router->setDefaultModule("web");//设置默认访问模块
 /*全局路由规则*/
 $router->add("/:module/:controller/:action/:params",array(
 		'module' => 1,

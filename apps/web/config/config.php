@@ -6,7 +6,7 @@ return new \Phalcon\Config(array(
         'port'	   => 3306,
         'username' => 'root',
         'password' => 'password-for@mysql',
-        'dbname'   => 'duoi',
+        'dbname'   => 'kaay',
         'charset'  => 'UTF8',
     ), 
     'application' => array(

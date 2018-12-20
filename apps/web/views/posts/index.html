@@ -1,11 +1,12 @@
 {{partial("layouts/header")}}
 
+
 {% if data %}
 <div class="friend-agent agileits-1">
     <div class="container">
         <div class="friend-grids">
             {% for posts in data %}
-            <div class="col-md-3 friend-grid">
+            <div class="col-md-4 friend-grid">
                 <a href="/{{ModuleName}}/details/index?id={{posts['id']}}">
                     <img src="{{posts['thumb']}}" alt="{{posts['name']}}" class="img-responsive" >
                 </a>
@@ -18,15 +19,3 @@
     </div>
 </div>
 {% endif %}
-
-<!-- w3l-1 -->
-<div class="w3l-1">
-    <div class="container">
-        <h3 class="text-center">公众号</h3>
-        <div class="container " style="text-align: center;">
-            <img src="templates/kaay/images/wechat.png" style=" width: 50%; text-align: center;">
-        </div>
-
-    </div>
-</div>
-<!--/ w3l-1 -->

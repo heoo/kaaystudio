@@ -17,7 +17,6 @@ class ControllerBase extends ControllerAbstract
         $this->view->setTemplateAfter('main');
 
         $this->Controller = $this->router->getControllerName();
-
     }
 
     /**
@@ -94,9 +93,7 @@ class ControllerBase extends ControllerAbstract
             $postData['status'] = 1;
             $postData['created'] = $postData['updated']  = time();
             $postData['createdby'] = $postData['updatedby'] = $this->user['username'];
-
             $postData['text'] = htmlspecialchars($postData['text']);
-            $postData['language'] = $postData['language'] ? $postData['language'] : 'zh';
 
             if( $this->Controller  == 'posts'){
                 $cid = explode('|',$postData['ctype']);
@@ -105,11 +102,10 @@ class ControllerBase extends ControllerAbstract
                 $postData['type'] = $cid[1];
                 $postData['attachment'] = $this->trimString($postData['attachment'],',');
                 $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
-            }elseif( in_array($this->Controller,array('links','banners')) && $postData['logo']){
+            }elseif( in_array($this->Controller,array('links','banners','system')) && $postData['logo']){
 
                 $position = strpos($postData['logo'] , ',');
                 if($position){
-
                     $postData['logo'] = substr($postData['logo'] , 0 , $position);
                 }
             } 
@@ -142,10 +138,8 @@ class ControllerBase extends ControllerAbstract
             $postData = $this->post();
             $postData['updated'] = time();
             $postData['updatedby'] = $this->user['username'];
-
             $postData['text'] = htmlspecialchars($postData['text']);
 
-            $postData['language'] = $postData['language'] ? $postData['language'] : 'zh';
             if( $this->Controller  == 'posts'){
 
                 $cid = explode('|',$postData['cid']);
@@ -231,7 +225,7 @@ class ControllerBase extends ControllerAbstract
 
             $thumb = substr($attachment,0,strpos($attachment,','));
             $thumb = $thumb ? $thumb : $attachment;
-            $newname = str_replace('.','thumb.',$thumb);
+            $newname =  $thumb;
 //            $this->Imagine->open(__DIR__.'/../../../public/'.$thumb)->resize(new Box($size[$class][0], $size[$class][1]))->save(__DIR__.'/../../../public/'.$newname, array('flatten' => false));
         }
         return $newname;

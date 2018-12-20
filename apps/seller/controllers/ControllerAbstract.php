@@ -51,9 +51,9 @@ class ControllerAbstract extends Controller
                     }
                     if($elementKey != 'posts') {
                         if ($roleCode == '7b8312f30b') {
-                            $liHtml .= '<li ' . $class . '><a href="' . $urlArr[1] . '"' . $class . ' >' . $urlArr[0] . '</a></li>';
+                            $liHtml .= "<li {$class}><a href='{$urlArr[1]}' {$class} >{$urlArr[0]}</a></li>";
                         } else if (is_array($aclsNav) && in_array($elementKey, $aclsNav)) {
-                            $liHtml .= '<li ' . $class . '><a href="' . $urlArr[1] . ' ">' . $urlArr[0] . '</a></li>';
+                            $liHtml .= "<li {$class}><a href='{$urlArr[1]}' {$class} >{$urlArr[0]}</a></li>";
                         }
                     }
                     if($elementKey == 'posts'){
@@ -77,14 +77,14 @@ class ControllerAbstract extends Controller
 
                 if($this->router->getControllerName() == $navVal['controller'] )
                 {
-                    $class = ' class="active"';
+                    $class = 'class="active"';
                 }
-                $divHtml .= ' <li '.$class.' data-key="'.$navVal['controller'].'-'.$this->router->getControllerName();
-                $divHtml .= '" class="'.$open.'" ><a href="javascript:;">
-                              <i class="'.$navVal['icons'].'"></i>
-                              <span class="title">'.$navVal['name'].'</span>
-                              <span class="arrow '.$open.'"></span>
-                              </a> <ul class="sub-menu" '.$display.'>'.$liHtml.'</ul></li>';
+                $divHtml .= "<li {$class} data-key='{$navVal['controller']}-{$this->router->getControllerName()}'";
+                $divHtml .= "class='{$open}' ><a href='javascript:;'>
+                              <i class='{$navVal['icons']}'></i>
+                              <span class='title'>{$navVal['name']}</span>
+                              <span class='arrow {$open}'></span>
+                              </a> <ul class='sub-menu {$display}'>{$liHtml}</ul></li>";
             }
         }
 
@@ -139,7 +139,7 @@ class ControllerAbstract extends Controller
         $string = '';
         $Obj = new \Bpai\Models\Category();
         $Obj->setField(array('name','id','type'));
-        $Obj->setOrder(array('id'=>'DESC'));
+        $Obj->setOrder(array('listorder'=>'DESC'));
         $res = $Obj->listRec();
         if($res){
             foreach($res as $val){

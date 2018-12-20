@@ -20,7 +20,7 @@ return array(
     ),
     'bannersLocation'=>array(
         'index'=>'首页',
-        'list'=>'栏目页',
-        'info'=>'内容页'
+        'posts'=>'栏目页',
+        'details'=>'内容页'
     )
 );
