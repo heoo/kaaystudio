@@ -1,2 +1,55 @@
 {{partial("layouts/header")}}
-{{partial("layouts/breadcrumb")}}
+<div class="w3l-1-content">
+    <div class="container">
+
+        <div class="col-md-9 centered w3l-1-left">
+            {{partial("layouts/breadcrumb")}}
+
+            <h3 class="text-center">{{data['name']}}</h3>
+            <div class="content-tags">
+                <span class="glyphicon glyphicon-tags"></span>{{data['keyword']}}
+                <span class="glyphicon glyphicon-eye-open"></span>{{data['hits']}}
+                <span class="glyphicon glyphicon-user"></span>{{data['createdby']}}
+                <span class="glyphicon glyphicon-time"></span>{{data['time']}}
+            </div>
+            <div class="disc-blank"></div>
+            <div class="kaay-content">
+                {{data['text']}}
+            </div>
+
+            <div class="container tz-cont-weixin">
+                <p>扫描二维码即可订阅『<b>{{system['web_name']}}</b>』</p>
+                <p>微信号：<b>{{system['web_url']}}</b></p>
+                <p>
+                    <img src="/templates/kaay/images/wechat.png" style=" width: 50%; text-align: center;">
+                </p>
+            </div>
+
+            <div class="friend-agent-content">
+                <div class="friend-grids">
+                    {% for posts in more %}
+                    <div class="col-md-3 friend-grid kaay-content-bottom">
+                        <a href="/{{ModuleName}}/details/index?id={{posts['id']}}">
+                            <img src="{{posts['thumb']}}" alt="{{posts['name']}}" class="img-responsive" >
+                        </a>
+                        <p>{{posts['name']}}</p>
+                    </div>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 friend-grid kaay-content-right">
+            {% if right %}
+                {% for p in right %}
+                    <a href="/{{ModuleName}}/details/index?id={{p['id']}}">
+                        <img src="{{p['thumb']}}" alt="{{p['name']}}" class="img-responsive" >
+                    </a>
+                    <p>{{p['name']}}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div><!--/ .container -->
+</div>

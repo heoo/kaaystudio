@@ -1,7 +1,7 @@
 
 <div class="grid_5">
     <ol class="breadcrumb">
-        <li><a href="/">首页</a></li>
+        <li><a href="/"><span class="glyphicon glyphicon-home" style="vertical-align: sub;"></span>首页</a></li>
         {% if category %}
         <li><a  {% if ControllerName == 'posts'%}class="active" href="javascript:void(0);" {% else %} href="/{{ModuleName}}/{{ControllerName}}/{{ActionName}}?cid={{getData['cid']}}" {% endif %}>{{category['name']}}</a></li>
         {% endif %}

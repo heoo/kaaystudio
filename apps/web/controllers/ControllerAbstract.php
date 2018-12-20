@@ -190,7 +190,7 @@ class ControllerAbstract extends Controller
         return $number;
     }
 
-    public function getPosts($cid ='',$rows=0,$start=0){
+    public function getPosts($cid=0,$order='id',$rows=0,$start=0){
 
         $arr = array();
         $Models = new Posts();
@@ -200,7 +200,7 @@ class ControllerAbstract extends Controller
         }
         $rows = $rows ? $rows : 10;
         $Models->setWhere($where);
-        $Models->setOrder(array('id'=>'DESC'));
+        $Models->setOrder(array($order=>'DESC'));
         $Models->setLimit($rows,$start);
         $data = $Models->listRec();
         if($data){
@@ -220,6 +220,18 @@ class ControllerAbstract extends Controller
         $Models->setWhere($where);
         $count = $Models->countRec();
         return $count;
+    }
+
+    public function setPostsHits($id =''){
+        if($id){
+            $Models = new Posts();
+            $where = array('id'=>$id);
+            $Models->setWhere($where);
+            $result = $Models->findRec();
+            if($result){
+                $result->saveRec(array('hits'=>$result->hits+1));
+            }
+        }
     }
     protected function getLinks(){
         $result = array();

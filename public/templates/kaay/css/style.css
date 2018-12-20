@@ -631,6 +631,11 @@ h3.resp-accordion {
     background: #f5f5f5;
 	text-align: center;
 }
+.friend-agent-content{
+	padding: 1em 0;
+	background: #f5f5f5;
+	text-align: center;
+}
 .friend-grid h4 {
     font-size: 1.5em;
     padding: .8em 0 .5em 0;
@@ -662,7 +667,53 @@ h3.resp-accordion {
 /*-- Services Section --*/
 .w3l-1 {
 	padding:5em 0;
-	
+
+}
+.w3l-1-content {
+	padding:1em 0;
+}
+.disc-blank{
+	height: 20px;
+	width: 100%;
+}
+.kaay-content-right{
+	text-align: center;
+	overflow: hidden;
+}
+.kaay-content-right>p{
+	height: 25px;
+}
+.kaay-content-bottom{
+	text-align: center;
+	overflow: hidden;
+}
+.kaay-content-bottom>p{
+	height: 15px;
+}
+.content-tags{
+	border-bottom: 1px solid #cccccc;
+	padding-bottom: 5px;
+}
+.content-tags>span{
+	margin-left: 10px;
+}
+.content-tags>span.glyphicon{
+	margin-right: 10px !important;
+	vertical-align: sub !important;
+}
+
+.tz-cont-weixin{
+	width:100%;
+	text-align:center;
+	padding-top:45px;
+	font-family:微软雅黑;
+	font-size:15px;
+	margin-bottom:70px;
+	border-top: 1px solid #cccccc;
+}
+.tz-cont-weixin p{
+	line-height:20px;
+	margin-bottom:20px;
 }
 .w3l-1 h3.text-center{ 
 	color:#EFA52C;
@@ -693,7 +744,7 @@ h3.resp-accordion {
 /*-- /Services Section --*/
 .footer {
     background: #000000;
-	padding:2em 0;
+	padding:1em 0;
 }
 ul.fb_icons2 {
     text-align: center;
@@ -733,7 +784,7 @@ p.copyright {
     text-align: center;
     color: #fff;
     font-size: 15px;
-    margin-top: 14px;
+    margin-top: 5px;
 }
 p.copyright a {
     text-decoration: none;

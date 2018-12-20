@@ -25,8 +25,18 @@ class DetailsController extends ControllerBase {
                 Tag::setTitle($data['name'].'-'.$category['name']);
             }
         }
+        $data['text'] = htmlspecialchars_decode($data['text']);
+        $data['time'] = date('Y-m-y H:i',$data['created']);
 
+        self::setPostsHits($data['id']);
         $this->view->setVar('data',$data);
+
+
+        $more = $this->getPosts(0,'id',4);
+        $this->view->setVar('more',$more);
+
+        $right = $this->getPosts(0,'hits',8);
+        $this->view->setVar('right',$right);
 	}
 
 }

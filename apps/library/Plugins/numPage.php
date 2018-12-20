@@ -256,4 +256,151 @@ class numPage {
 
         return $str;
     }
+
+
+    public function GetPager(){
+        $str = "<ul>";
+
+        //首页 上一页
+        if($this->pageIndex==1){
+            $str .="<li class='active'><a href='#'>上一页</a></li>";
+        }else{
+            $str .="<li><a href='{$this->pageUrl}=".($this->pageIndex-1)."'>上一页</a></li>";
+        }
+
+        //10页（含）以下
+        $currnt="";
+        if($this->totalPagesCount<=10)
+        {
+            for($i=1;$i<=$this->totalPagesCount;$i++)
+
+            {
+                if($i==$this->pageIndex)
+                {
+                    $currnt=" class='active'";
+                }
+                else
+                {
+                    $currnt="";
+                }
+                $str .="<li {$currnt}><a href='{$this->pageUrl}={$i} ' >$i</a></li>";
+            }
+        }
+        else                                //10页以上
+        {
+            if($this->pageIndex<3)  //当前页小于3
+            {
+                for($i=1;$i<=3;$i++)
+                {
+                    if($i==$this->pageIndex)
+                    {
+                        $currnt=" class='active'";
+                    }
+                    else
+                    {
+                        $currnt="";
+                    }
+                    $str .="<li {$currnt}><a href='{$this->pageUrl}={$i} ' >$i</a></li>";
+                }
+
+                //$str.="<span class=\"dot\">……</span>"."\n";
+
+                for($i=$this->totalPagesCount-3+1;$i<=$this->totalPagesCount;$i++)//功能1
+                {
+                    $str .="<li><a href='{$this->pageUrl}={$i} ' >$i</a></li>";
+                }
+            }
+            elseif($this->pageIndex<=5)   //   5 >= 当前页 >= 3
+            {
+                for($i=1;$i<=($this->pageIndex+1);$i++)
+                {
+                    if($i==$this->pageIndex)
+                    {
+                        $currnt=" class='active'";
+                    }
+                    else
+                    {
+                        $currnt="";
+                    }
+                    $str .="<li {$currnt}><a href='{$this->pageUrl}={$i} ' >$i</a></li>";
+                }
+                //$str.="<span class=\"dot\">……</span>"."\n";
+
+                for($i=$this->totalPagesCount-3+1;$i<=$this->totalPagesCount;$i++)//功能1
+                {
+                    $str .="<li><a href='{$this->pageUrl}={$i} ' >$i</a></li>";
+                }
+
+            }
+            elseif(5<$this->pageIndex  &&  $this->pageIndex<=$this->totalPagesCount-5 )             //当前页大于5，同时小于总页数-5
+            {
+
+                for($i=1;$i<=3;$i++)
+                {
+                    $str .="<li><a href='{$this->pageUrl}={$i} ' >$i</a></li>";
+                }
+                //$str.="<span class=\"dot\">……</span>";
+                for($i=$this->pageIndex-1 ;$i<=$this->pageIndex+1 && $i<=$this->totalPagesCount-5+1;$i++)
+                {
+                    if($i==$this->pageIndex)
+                    {
+                        $currnt=" class='active'";
+                    }
+                    else
+                    {
+                        $currnt="";
+                    }
+                    $str .="<li {$currnt}><a href='{$this->pageUrl}={$i} ' >$i</a></li>";
+                }
+                //$str.="<span class=\"dot\">……</span>";
+
+                for($i=$this->totalPagesCount-3+1;$i<=$this->totalPagesCount;$i++)
+                {
+                    $str .="<li><a href='{$this->pageUrl}={$i} ' >$i</a></li>";
+
+                }
+            }
+            else
+            {
+
+                for($i=1;$i<=3;$i++)
+                {
+                    $str .="<li><a href='{$this->pageUrl}={$i} ' >$i</a></li>";
+                }
+                //$str.="<span class=\"dot\">……</span>"."\n";
+
+                for($i=$this->totalPagesCount-5;$i<=$this->totalPagesCount;$i++)//功能1
+                {
+                    if($i==$this->pageIndex)
+                    {
+                        $currnt=" class='active' ";
+                    }
+                    else
+                    {
+                        $currnt="";
+                    }
+                    $str .="<li {$currnt}><a href='{$this->pageUrl}={$i} ' >$i</a></li>";
+
+                }
+            }
+
+        }
+        /*
+        除首末后 页面分页逻辑结束
+        */
+        //下一页 末页
+        if($this->pageIndex==$this->totalPagesCount)
+        {
+            $str .="<li class='active'><a href='#'>下一页</a></li>";
+        }
+        else
+        {
+            $str .="<li><a href='{$this->pageUrl}=".($this->pageIndex+1)."'>下一页</a></li>";
+        }
+        //$str .= '<a class="num">共'.$this->totalPagesCount.'页,</a></div>';
+        $str .="</ul>";
+        return $str;
+
+    }
+
 }
