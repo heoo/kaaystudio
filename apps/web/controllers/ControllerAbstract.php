@@ -32,6 +32,8 @@ class ControllerAbstract extends Controller
         $this->view->setVar('system',$this->System);
         $this->view->setVar('links',self::getLinks());
         $this->view->setVar('banners',self::getBanners());
+
+        $this->view->setVar('url','http://'.$_SERVER['HTTP_HOST'].$this->request->getURI());
     }
 
     public function getNavigation(){

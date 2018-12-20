@@ -730,6 +730,7 @@ h3.resp-accordion {
 	padding: 20px !important;
 }
 .kaay-span-top{
+	/*display: none;*/
 	border-top: 1px solid #777777;
 	border-left: 1px solid #777777;
 	border-right: 1px solid #777777;

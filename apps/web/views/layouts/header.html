@@ -14,11 +14,11 @@
                     </div>
                     <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav ">
-                            <li><a class=" active" href="/">首页</a></li>
+                            <li><a {% if ControllerName=='index' or ControllerName is null %}class="active"{% endif %} href="/">首页</a></li>
                             {% if navigation %}
-                            {% for nav in navigation %}
-                            <li><a href="{{nav['url']}}">{{nav['name']}}</a></li>
-                            {% endfor %}
+                                {% for nav in navigation %}
+                                    <li><a {% if url == nav['url'] %}class="active"{% endif %} href="{{nav['url']}}">{{nav['name']}}</a></li>
+                                {% endfor %}
                             {% endif %}
                         </ul>
                     </div>
