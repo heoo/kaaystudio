@@ -11,32 +11,13 @@
     {{ get_title() }}
     {{ stylesheet_link("templates/kaay/css/bootstrap.min.css") }}
     {{ stylesheet_link("templates/kaay/css/style.css") }}
-    {{ stylesheet_link("templates/kaay/css/share.css") }}
-
 
     {{ javascript_include("templates/kaay/js/jquery-2.1.4.min.js") }}
     {{ javascript_include("templates/kaay/js/bootstrap.min.js") }}
-    {{ javascript_include("templates/kaay/js/responsiveslides.min.js") }}
-
     {{ javascript_include("templates/kaay/js/jquery.slides.min.js") }}
 
     <script type="application/javascript">
         $(function () {
-            $("#slider").responsiveSlides({
-                auto: true,
-                pager: true,
-                nav: true,
-                speed: 1000,
-                namespace: "callbacks",
-                before: function () {
-                    $('.events').append("<li>before event fired.</li>");
-                },
-                after: function () {
-                    $('.events').append("<li>after event fired.</li>");
-                }
-            });
-
-
             var W = 400;
             if($(window).width() < 767)
                 W = 600
@@ -76,8 +57,6 @@
                     backButton.fadeOut();
             });
             $(window).trigger('scroll');/*触发滚动事件，避免刷新的时候显示回到顶部按钮*/
-
-//            $('.slider').height($(window).height()/2)
         });
 
         var ModuleName = "/{{ModuleName}}";
