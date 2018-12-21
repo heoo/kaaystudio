@@ -1,25 +1,9 @@
-
 {% if banners %}
-<div class="slider">
-    <div class="callbacks_container">
-        <ul class="rslides" id="slider">
-            {% for banner in banners %}
-            <li>
-                <div class="slider-img">
-                    <a href="{% if banner['siteurl'] %}{{banner['siteurl']}}{% else %}javascript:void(0);{% endif %}">
-                        <img src="{{banner['logo']}}" class="img-responsive" alt="Manufactory">
-                    </a>
-                </div>
-                <div class="slider-info w3ls-1">
-                    <h3>{{banner['name']}}</h3>
-                    <div class="underline"></div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor et.</p>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
-
+    <div id="kaay-slides">
+        {% for banner in banners %}
+        <a href="{% if banner['siteurl'] %}{{banner['siteurl']}}{% else %}javascript:void(0);{% endif %}">
+            <img src="{{banner['logo']}}" alt="{{banner['name']}}">
+        </a>
+        {% endfor %}
     </div>
-    <div class="clearfix"></div>
-</div>
 {% endif %}

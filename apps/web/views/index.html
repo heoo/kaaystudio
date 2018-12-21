@@ -11,10 +11,14 @@
     {{ get_title() }}
     {{ stylesheet_link("templates/kaay/css/bootstrap.min.css") }}
     {{ stylesheet_link("templates/kaay/css/style.css") }}
+    {{ stylesheet_link("templates/kaay/css/share.css") }}
+
 
     {{ javascript_include("templates/kaay/js/jquery-2.1.4.min.js") }}
     {{ javascript_include("templates/kaay/js/bootstrap.min.js") }}
     {{ javascript_include("templates/kaay/js/responsiveslides.min.js") }}
+
+    {{ javascript_include("templates/kaay/js/jquery.slides.min.js") }}
 
     <script type="application/javascript">
         $(function () {
@@ -32,18 +36,48 @@
                 }
             });
 
+
+            var W = 400;
+            if($(window).width() < 767)
+                W = 600
+            $('#kaay-slides').slidesjs({
+//                width: 940,
+                height: W,
+                navigation: {
+                    effect: "fade"
+                },
+                pagination: {
+                    active:false,
+                    effect: "fade"
+                },
+                effect: {
+                    fade: {
+                        speed: 400
+                    }
+                },
+                play:{
+                    active: false,
+                    auto: true,
+                    interval: 3000,
+                    swap: true,
+                    effect:"fade"
+                }
+            });
+
             var backButton=$('.kaay-span-top');
             function backToTop() {
                 $('html,body').animate({scrollTop: 0}, 800);
             }
             backButton.on('click', backToTop);
             $(window).on('scroll', function () {
-                if ($(window).scrollTop() > $(window).height())
+                if ($(window).scrollTop() > $(window).height()/2)
                     backButton.fadeIn();
                 else
                     backButton.fadeOut();
             });
             $(window).trigger('scroll');/*触发滚动事件，避免刷新的时候显示回到顶部按钮*/
+
+//            $('.slider').height($(window).height()/2)
         });
 
         var ModuleName = "/{{ModuleName}}";

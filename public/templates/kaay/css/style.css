@@ -54,9 +54,10 @@ a:focus, a:hover {
 /*-- Index-Page-Styling --*/
 /*-- Top-Bar --*/
 .top-bar {
-    position: fixed;
+	/*position: absolute;*/
+	/*position: fixed;*/
     width: 100%;
-    z-index: 99999;
+    z-index: 100;
     padding: 10px 0 0px;
     border-bottom:1px solid #6f6f6f;
 	background:rgba(0, 0, 0, 0.65);
@@ -102,6 +103,48 @@ a:focus, a:hover {
 /*-- //Info --*/
 /*-- //Top-Bar --*/
 /*-- Slider --*/
+#kaay-slides{
+	/*position: absolute;*/
+	/*width: 100%;*/
+}
+#kaay-slides a,#kaay-slides img{
+	width: 100%;
+	height: 100%;
+}
+#kaay-slides .slidesjs-navigation{
+	color: red;
+	position: fixed;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	top: 20em;
+	left: 0;
+	z-index: 100;
+	text-indent: -9999px;
+	overflow: hidden;
+	text-decoration: none;
+	height: 67px;
+	width: 56px;
+	background: url("../images/arrows.png") no-repeat 0px -26px;
+}
+.slidesjs-next{
+	left: auto !important;
+	background: url("../images/arrows.png") no-repeat -112px -26px !important;
+	right: 0;
+}
+/* For smaller displays like laptops */
+@media (min-width: 768px) and (max-width: 979px) {
+
+	#kaay-slides .slidesjs-navigation{
+		top: 7em;
+	}
+}
+/* For smartphones */
+@media (max-width: 480px) {
+
+	#kaay-slides .slidesjs-navigation{
+		top: 7em;
+	}
+}
+
 #slider {
 	box-shadow: none;
 	-moz-box-shadow: none;
@@ -152,6 +195,7 @@ a:focus, a:hover {
 	position: relative;
 	float: left;
 	width: 100%;
+	height: 100%;
 }
 .callbacks {
 	position: relative;
@@ -262,7 +306,7 @@ a:focus, a:hover {
 	float: none;
 }
 .rslides img {
-	height: auto;
+	height: 100%;
 	border: 0;
 }
 .callbacks_tabs {
@@ -728,6 +772,8 @@ h3.resp-accordion {
 }
 .kaay-share>ul>li>span{
 	padding: 20px !important;
+	background-color: #777777;
+	border-radius: 5px;
 }
 .kaay-span-top{
 	/*display: none;*/
@@ -1788,6 +1834,9 @@ h2.typoh2{
     margin: 0 0 10px;
 }
 @media (max-width:768px){
+	.slider{
+		/*height: 300px;*/
+	}
 	.kaay-share{
 		display: none;
 	}
