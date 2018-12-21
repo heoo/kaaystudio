@@ -113,7 +113,7 @@ a:focus, a:hover {
 }
 #kaay-slides .slidesjs-navigation{
 	color: red;
-	position: fixed;
+	position: absolute;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	top: 20em;
 	left: 0;

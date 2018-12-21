@@ -7,9 +7,7 @@
 </div>
 <div class="footer w3-agile-1">
     <div class="container">
-
         <ul class="fb_icons2 agile-1">
-
             {% for v in links %}
             <li><a href="{{v['siteurl']}}" target="_blank" title="{{v['name']}}">{% if v['logo'] %}<img src="{{v['logo']}}" alt="{{v['name']}}">{% else %}{{v['name']}}{% endif %}</a></li>
             {% endfor %}
