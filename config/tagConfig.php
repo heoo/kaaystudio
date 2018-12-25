@@ -1,10 +1,11 @@
 <?php
 return array(
     'adminName'=>'内容管理系统',
-    'webName'=>'',
+    'webName'=>'KaayStudio',
 //    'domain'=>'http://'.$_SERVER['SERVER_NAME'],
 //    'image_host'=>'http://'.$_SERVER['SERVER_NAME'],
     'categoryType'=>array(
+        'images'=>'图片模型',
         'posts'=>'文章模型',
         'page'=>'单页模型',
         'url'=>'外部链接',

@@ -10,8 +10,11 @@ class Category extends \Catchtech\Extensions\Model\BaseModel
     protected $name;
     protected $language;
     protected $type;
+    protected $logo;
     protected $listorder;
+    protected $text;
     protected $val;
+    protected $more;
     protected $isnav;
     protected $sort;
     protected $status;
@@ -20,6 +23,53 @@ class Category extends \Catchtech\Extensions\Model\BaseModel
     protected $updated;
     protected $updatedby;
 
+    /**
+     * @return mixed
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
+     * @param mixed $logo
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param mixed $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMore()
+    {
+        return $this->more;
+    }
+
+    /**
+     * @param mixed $more
+     */
+    public function setMore($more)
+    {
+        $this->more = $more;
+    }
 
     /**
      * @return mixed

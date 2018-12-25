@@ -102,13 +102,13 @@ class ControllerBase extends ControllerAbstract
                 $postData['type'] = $cid[1];
                 $postData['attachment'] = $this->trimString($postData['attachment'],',');
                 $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
-            }elseif( in_array($this->Controller,array('links','banners','system')) && $postData['logo']){
+            }elseif( in_array($this->Controller,array('links','banners','system','category')) && $postData['logo']){
 
                 $position = strpos($postData['logo'] , ',');
                 if($position){
                     $postData['logo'] = substr($postData['logo'] , 0 , $position);
                 }
-            } 
+            }
             $res = $this->Models->saveRec($postData);
             if($res){
 
@@ -125,6 +125,12 @@ class ControllerBase extends ControllerAbstract
                 echo json_encode(array('errorNo'=>00001,'errorMsg'=>'添加失败'));exit;
             }
         }
+        $type = '';
+        $typeArr = explode('|',$this->request->getURI());
+        if($typeArr){
+            $type = $typeArr[1];
+        }
+        $this->view->setVar('type',$type);
     }
 
     /**
@@ -149,7 +155,7 @@ class ControllerBase extends ControllerAbstract
 
                 $postData['attachment'] = $this->trimString($postData['attachment'],',');
                 $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
-            }elseif( in_array($this->Controller,array('links','banners','system')) && $postData['logo']){
+            }elseif( in_array($this->Controller,array('links','banners','system','category')) && $postData['logo']){
 
                 $position = strpos($postData['logo'] , ',');
                 if($position){
@@ -184,6 +190,13 @@ class ControllerBase extends ControllerAbstract
             $result->text = htmlspecialchars_decode($result->text);
             $this->view->setVar('data',$result);
             $this->view->setVar('page',$getData['page']);
+
+            $type = '';
+            $typeArr = explode('|',$this->request->getURI());
+            if($typeArr){
+                $type = $typeArr[1];
+            }
+            $this->view->setVar('type',$type);
         }
     }
 

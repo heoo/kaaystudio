@@ -9,25 +9,25 @@
 {{ javascript_include("templates/boot/js/messages_zh.js") }}
 {{ javascript_include("templates/boot/js/cancel.js") }}
 
-
-{{ stylesheet_link("plugins/editor/css/wangEditor.css") }}
-
-{{ javascript_include("plugins/editor/js/wangEditor.js") }}
-{{ javascript_include("plugins/editor/plupload/plupload.full.min.js") }}
-{{ javascript_include("plugins/editor/plupload/i18n/zh_CN.js") }}
-{{ javascript_include("plugins/editor/qiniu.js") }}
-{{ javascript_include("plugins/editor/uploads.js") }}
-
+{% if type != 'images' %}
+    {{ stylesheet_link("plugins/editor/css/wangEditor.css") }}
+    {{ javascript_include("plugins/editor/js/wangEditor.js") }}
+    {{ javascript_include("plugins/editor/plupload/plupload.full.min.js") }}
+    {{ javascript_include("plugins/editor/plupload/i18n/zh_CN.js") }}
+    {{ javascript_include("plugins/editor/qiniu.js") }}
+    {{ javascript_include("plugins/editor/uploads.js") }}
+{% endif %}
 
 <script>
     $(function(){
         FormPostsValidation.init();
-
+        {% if type != 'images' %}
         // 生成编辑器
         var editor = new wangEditor('editor');
         editor.config.customUpload = true;
         editor.config.customUploadInit = uploadInit;
         editor.create();
+        {% endif %}
     });
 </script>
 <input type="hidden" id="token" value="{{token}}">
@@ -108,12 +108,14 @@
                             </div>
                         </div>
 
+                        {% if type != 'images' %}
                         <div class="control-group">
                             <label for="text" class="control-label">文章内容</label>
                             <div class="controls">
                                 <textarea class="text" name="text" style="height: 500px;" id="editor"></textarea>
                             </div>
                         </div>
+                        {% endif %}
 
                         <div class="control-group">
                             <label for="status" class="control-label">状态</label>

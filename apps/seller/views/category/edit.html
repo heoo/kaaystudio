@@ -1,4 +1,14 @@
+{{ stylesheet_link("plugins/upload/css/webuploader.css") }}
+{{ javascript_include("plugins/upload/dist/webuploader.js") }}
+{{ stylesheet_link("plugins/upload/css/multi-file-upload.css") }}
+{{ javascript_include("plugins/upload/multi-file-upload.js") }}
 
+{{ stylesheet_link("plugins/editor/css/wangEditor.css") }}
+{{ javascript_include("plugins/editor/js/wangEditor.js") }}
+{{ javascript_include("plugins/editor/plupload/plupload.full.min.js") }}
+{{ javascript_include("plugins/editor/plupload/i18n/zh_CN.js") }}
+{{ javascript_include("plugins/editor/qiniu.js") }}
+{{ javascript_include("plugins/editor/uploads.js") }}
 <!-- 表单验证 -->
 {{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
 {{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
@@ -8,6 +18,12 @@
 <script>
     $(function(){
         FormCategoryValidation.init();
+
+        // 生成编辑器
+        var editor = new wangEditor('editor');
+        editor.config.customUpload = true;
+        editor.config.customUploadInit = uploadInit;
+        editor.create();
     });
 </script>
 
@@ -59,9 +75,71 @@
                             </div>
                         </div>
 
-                        <div class="control-group listorder">
+                        <div class="control-group">
+                            <label for="logo" class="control-label">栏目图片</label>
+                            <!-- File Upload -->
+                            <div class="controls">
+                                <div id="wrapper" style="width: 595px;">
+                                    <div id="container">
+                                        <!--头部，相册选择和格式选择-->
+                                        <div id="uploader">
+                                            <div class="queueList">
+
+                                                {% if data.logo %}
+                                                <ul class='filelist' style='border-bottom: 1px solid #ccc; margin-bottom: 5px;'>
+                                                    <li class="state-complete">
+                                                        <p class="imgWrap"><img src="{{data.logo}}"></p>
+                                                        <p class="progress"><span style="display: none; width: 0px;"></span></p>
+                                                        <span class="success"></span>
+                                                        <div class="file-panel" style="height: 0px;">
+                                                            <span class="cancel" data-rel="{{data.logo}}" title="删除" data-type="images">删除</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                {% endif %}
+                                                <div id="dndArea">
+                                                    <div id="files-uploads"></div>
+                                                </div>
+                                            </div>
+                                            <div class="statusBar" style="display:block;">
+                                                <div class="progress">
+                                                    <span class="text">0%</span>
+                                                    <span class="percentage"></span>
+                                                </div>
+                                                <div class="info"></div>
+                                                <div class="btns">
+                                                    <div id="files-uploads-continue"></div><div class="uploadBtn">开始上传</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="multi-thumb" name="logo">
+                                    </div>
+                                </div>
+                                <span style="color: #b94a48;" >附件格式【jpg,jpeg,png,gif】</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="text">栏目简介</label>
+                            <div class="controls">
+                                <textarea class="text" name="digest" style="height: 500px;" id="editor">{{data.text}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
                             <!-- Text input-->
-                            <label class="control-label" for="val">排序</label>
+                            <label class="control-label" for="more">链接文字</label>
+                            <div class="controls">
+                                <input class="input-xlarge span3 m-wrap" name="more" type="text" value="{{data.more}}">
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+
+
+                        <div class="control-group">
+                            <!-- Text input-->
+                            <label class="control-label" for="listorder">排序</label>
                             <div class="controls">
                                 <input class="input-xlarge span3 m-wrap" name="listorder" type="text" value="{{data.listorder}}">
                                 <p class="help-block"></p>
@@ -70,7 +148,7 @@
 
 
                         <div class="control-group">
-                            <label for="status" class="control-label">是否显示导航</label>
+                            <label class="control-label" for="status">是否显示导航</label>
                             <div class="controls">
                                 <label class="radio">
                                     <div class="radio"><span class=""><input type="radio" value="0" name="isnav" {% if data.isnav == 0%} checked="checked"{% endif %}></span></div>
@@ -84,7 +162,7 @@
                         </div>
 
                         <div class="control-group">
-                            <label for="status" class="control-label">状态</label>
+                            <label class="control-label" for="status">状态</label>
                             <div class="controls">
                                 <label class="radio">
                                     <div class="radio"><span class=""><input type="radio" value="0" name="status"{% if data.status==0%} checked="checked"{% endif %}></span></div>
