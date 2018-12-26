@@ -1,9 +1,0 @@
-{% if banners %}
-    <div id="kaay-slides">
-        {% for banner in banners %}
-        <a href="{% if banner['siteurl'] %}{{banner['siteurl']}}{% else %}javascript:void(0);{% endif %}">
-            <img src="{{banner['logo']}}" alt="{{banner['name']}}">
-        </a>
-        {% endfor %}
-    </div>
-{% endif %}

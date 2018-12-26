@@ -1,26 +1,32 @@
-{{partial("layouts/header")}}
+<div class="site-container">
+    {{partial("layouts/header")}}
+</div>
 
-{{partial("layouts/breadcrumb")}}
+<div class="site-inner">
+    <div class="content-sidebar-wrap">
+        <main class="content" id="genesis-content">
+            <article class="page type-page status-publish entry">
 
+                <div class="entry-content">
 
-<div class="friend-agent agileits-1">
-    {% if data %}
-    <div class="container">
-        <div class="friend-grids">
-            {% for posts in data %}
-            <div class="col-md-4 friend-grid">
-                <a href="/{{ModuleName}}/details/index?id={{posts['id']}}">
-                    <img src="{{posts['thumb']}}" alt="{{posts['name']}}" class="img-responsive" >
-                </a>
-                <h4>{{posts['name']}}</h4>
-                <p>{{posts['digest']}}</p>
-            </div>
-            {% endfor %}
-            <div class="clearfix"></div>
-        </div>
+                    <div class="recent-posts">
+                        {% if data %}
+                            {% for k,posts in data %}
+                                <div class="one-half {% if k is even%}first{% endif%}">
+                                    <a href="/{{ModuleName}}/details/index?id={{posts['id']}}"><img src="{{posts['thumb']}}">
+                                    </a>
+                                    <h4>
+                                        <a href="/{{ModuleName}}/details/index?id={{posts['id']}}">{{posts['name']}}</a>
+                                    </h4>
+                                    <p>{{posts['digest']}}</p>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div style="text-align: center;"><h1>暂无数据</h1></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+        </main>
     </div>
-    {{pages}}
-    {% else %}
-        <h4 class="text-center">暂无数据</h4>
-    {% endif %}
 </div>

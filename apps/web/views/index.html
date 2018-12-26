@@ -9,61 +9,42 @@
     <meta name="keywords" content="{% if data['keyword']%}{{data['keyword']}}{% else %}{{system['seo_keywords']}}{% endif %}"/>
     <meta name="description" content="{{system['description']}}"/>
     {{ get_title() }}
-    {{ stylesheet_link("templates/kaay/css/bootstrap.min.css") }}
-    {{ stylesheet_link("templates/kaay/css/style.css") }}
+    {{ stylesheet_link("templates/white/css/style.css") }}
+    {{ stylesheet_link("templates/white/css/icon.min.css") }}
 
-    {{ javascript_include("templates/kaay/js/jquery-2.1.4.min.js") }}
-    {{ javascript_include("templates/kaay/js/bootstrap.min.js") }}
-    {{ javascript_include("templates/kaay/js/jquery.slides.min.js") }}
-
-    <script type="application/javascript">
-        $(function () {
-            var W = 400;
-            if($(window).width() < 767)
-                W = 600
-            $('#kaay-slides').slidesjs({
-//                width: 940,
-                height: W,
-                navigation: {
-                    effect: "fade"
-                },
-                pagination: {
-                    active:false,
-                    effect: "fade"
-                },
-                effect: {
-                    fade: {
-                        speed: 400
-                    }
-                },
-                play:{
-                    active: false,
-                    auto: true,
-                    interval: 3000,
-                    swap: true,
-                    effect:"fade"
-                }
-            });
-
-            var backButton=$('.kaay-span-top');
-            function backToTop() {
-                $('html,body').animate({scrollTop: 0}, 800);
-            }
-            backButton.on('click', backToTop);
-            $(window).on('scroll', function () {
-                if ($(window).scrollTop() > $(window).height()/2)
-                    backButton.fadeIn();
-                else
-                    backButton.fadeOut();
-            });
-            $(window).trigger('scroll');/*触发滚动事件，避免刷新的时候显示回到顶部按钮*/
-        });
+    {{ javascript_include("templates/white/js/jquery-2.1.4.min.js") }}
+    {{ javascript_include("templates/white/js/global.js") }}
+    <!--[if lt IE 9]>
+    {{ javascript_include("templates/white/js/html5shiv.min.js") }}
+    <![endif]-->
+    <script type='text/javascript'>
         var ModuleName = "/{{ModuleName}}";
         var BASE_URL="/{{ModuleName}}/{{ControllerName}}/";
+        $(function () {
+            $('#genesis-mobile-nav-primary').click(function () {
+                if(!$(this).hasClass('activated')){
+                    $(this).addClass('activated')
+                }else {
+                    $(this).removeClass('activated')
+                }
+                $('#genesis-nav-primary').toggle();
+            });
+         })
     </script>
 </head>
-    <body>
-    
+
+    {% if ControllerName == 'posts' %}
+        {% if category['type'] == 'images' %}
+            <body class="archive post-type-archive post-type-archive-works custom-header header-image header-full-width full-width-content works-archive">
+        {% else %}
+            <body class="page-template-default page custom-header header-image header-full-width full-width-content newsroom">
+        {% endif %}
+    {% elseif  ControllerName == 'details' %}
+        <body class="page-template page-template-page_about page-template-page_about-php custom-header header-image header-full-width full-width-content about">
+    {% else %}
+        <body class="home blog custom-header header-image header-full-width full-width-content front-page featured-section">
+    {% endif %}
+
     {{ content() }}
 
    {{ partial("layouts/foot") }}

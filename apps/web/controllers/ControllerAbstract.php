@@ -25,7 +25,7 @@ class ControllerAbstract extends Controller
         $this->view->setVar('_TagConfig',$this->_TagConfig);
         $this->view->setVar('navigation',$this->getNavigation());
 
-        if($this->session->get('system') == false){
+        if($this->session->get('system') == true){
             self::getSystem();
         }
         $this->System = $this->session->get('system');
@@ -39,7 +39,7 @@ class ControllerAbstract extends Controller
     public function getNavigation(){
 
         $this->Category = new Category();
-        $this->Category->setField(array('id','name','type','val'));
+        $this->Category->setField(array('id','name','type','val','text','more'));
         $this->Category->setWhere(array('status'=>1,'isnav'=>1));
         $this->Category->setOrder(array('listorder'=>'DESC'));
         $this->Category->setLimit(9);
@@ -47,7 +47,7 @@ class ControllerAbstract extends Controller
         if($Category){
             foreach($Category as $val){
                 $url = '';
-                if($val['type'] == 'posts'){
+                if( in_array($val['type'],array('posts','images'))){
                     $url = "http://{$_SERVER['HTTP_HOST']}/{$this->router->getModuleName()}/posts/index?cid={$val['id']}";
                 }elseif($val['type'] == 'page') {
                     $url = "http://{$_SERVER['HTTP_HOST']}/{$this->router->getModuleName()}/details/index?id={$val['val']}";
@@ -196,7 +196,7 @@ class ControllerAbstract extends Controller
 
         $arr = array();
         $Models = new Posts();
-        $where = array('status'=>1,'type'=>'posts');
+        $where = array('status'=>1);
         if($cid){
             $where['cid'] = $cid;
         }
@@ -262,8 +262,8 @@ class ControllerAbstract extends Controller
         $data = array();
         if($cid){
             $this->Category = new Category();
-            $this->Category->setWhere(array('id'=>$cid,'type'=>'posts'));
-            $this->Category->setField(array('id','name'));
+            $this->Category->setWhere(array('id'=>$cid));
+            $this->Category->setField(array('id','name','type'));
             $result = $this->Category->findRec();
             if($result){
                 $data = $result->toArray();

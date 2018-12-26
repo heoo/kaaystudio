@@ -1,18 +1,52 @@
-<!-- footer -->
-<div class="kaay-share">
-    <ul>
-        <li><span class="glyphicon glyphicon-chevron-up kaay-span-top"></span></li>
-        <li><span class="glyphicon glyphicon-share-alt kaay-span-share"></span></li>
-    </ul>
-</div>
-<div class="footer w3-agile-1">
-    <div class="container">
-        <ul class="fb_icons2 agile-1">
-            {% for v in links %}
-            <li><a href="{{v['siteurl']}}" target="_blank" title="{{v['name']}}">{% if v['logo'] %}<img src="{{v['logo']}}" alt="{{v['name']}}">{% else %}{{v['name']}}{% endif %}</a></li>
+
+
+<nav class="nav-footer">
+    <ul class="genesis-nav-menu">
+        <li class="menu-item"><a itemprop="url" href="/">首页.</a></li>
+        {% if navigation %}
+            {% for nav in navigation %}
+                <li class="menu-item"><a href="{{nav['url']}}" itemprop="url">{{nav['name']}}.</a></li>
             {% endfor %}
-        </ul>
+        {% endif %}
+    </ul>
+</nav>
+
+<div class="footer-widgets" id="genesis-footer-widgets">
+    <h2 class="genesis-sidebar-title screen-reader-text">Footer</h2>
+    <div class="wrap">
+        <div class="widget-area footer-widgets-1 footer-widget-area">
+            <section id="custom_html-2" class="widget_text widget widget_custom_html">
+                <div class="widget_text widget-wrap">
+                    <div class="textwidget custom-html-widget">
+                        {% if links %}
+                        <div class="contact-details">
+                            <p class="social-media">
+                                {% for link in links %}
+                                <a target="_blank" href="{{link['siteurl']}}">
+                                    <i class="fab"><img src="{{link['logo']}}"></i>
+                                </a>
+                                {% endfor %}
+                            </p>
+                            <p class="p8"><a href="mailto:{{system['email']}}">{{system['email']}}</a>
+                            </p>
+                            <p class="p8" style="font-size: 12px;margin-top: 31px;text-transform: uppercase;line-height: 37px;">
+                                <span style="font-size: 15px">{{system['phone']}}</span>
+                            </p>
+                        </div>
+                        {% endif %}
+                        <div class="terms-menu">
+                            <p>
+                                <a href="/">《使用条款》</a>
+                                <a href="/">《隐私条款》</a>
+                                <a href="/">《法律声明》</a>
+                            </p>
+                            <p>
+                                {{system['web_name']}} &nbsp;&nbsp;Copyright &copy; 2018.{{system['copyright']}}&nbsp;&nbsp;{{system['icp']}} &nbsp;{{system['analytics']}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
-    <p class="copyright">{{system['web_name']}} &nbsp;&nbsp;Copyright &copy; 2018.{{system['copyright']}}&nbsp;&nbsp;{{system['icp']}} &nbsp;{{system['analytics']}}</p>
 </div>
-<!-- footer -->

@@ -29,6 +29,10 @@ class PostsController extends ControllerBase {
         $myPage=new numPage($this->getPostsCount($getData['cid']),intval($getData['page']),$getData['rows']);
         $pageStr= $myPage->GetPagerContent();
         $this->view->setVar('pages',$pageStr);
+
+        if($category['type'] == 'images'){
+            $this->view->pick('posts/images');
+        }
 	}
 
 }

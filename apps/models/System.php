@@ -72,6 +72,13 @@ class System extends  \Catchtech\Extensions\Model\BaseModel
     /**
      *
      * @var string
+     * @Column(column="phone", type="string", length=50, nullable=false)
+     */
+    public $phone;
+
+    /**
+     *
+     * @var string
      * @Column(column="email", type="string", length=50, nullable=false)
      */
     public $email;

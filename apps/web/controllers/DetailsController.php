@@ -31,12 +31,15 @@ class DetailsController extends ControllerBase {
         self::setPostsHits($data['id']);
         $this->view->setVar('data',$data);
 
+        $this->Models->setField(array('id','name'));
+        $this->Models->setWhere(array('status'=>1,'cid'=>$data['cid'],array('id','<',$data['id'])));
+        $prevRes = $this->Models->findRec();
+        $this->view->setVar('prev',$prevRes);
 
-        $more = $this->getPosts(0,'id',4);
-        $this->view->setVar('more',$more);
-
-        $right = $this->getPosts(0,'hits',8);
-        $this->view->setVar('right',$right);
+        $this->Models->setField(array('id','name'));
+        $this->Models->setWhere(array('status'=>1,'cid'=>$data['cid'],array('id','>',$data['id'])));
+        $nextRes = $this->Models->findRec();
+        $this->view->setVar('next',$nextRes);
 	}
 
 }

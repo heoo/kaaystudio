@@ -307,9 +307,7 @@ class BaseModel extends \Catchtech\Extensions\Model\ModelAbstract {
     public function findRec()
     {
         $this->getWhere();
-//        print_r( $this->property);exit;
         $res = $this->findFirst($this->property);
-//        var_dump($res->code);exit;
         $this->clear();
         return $res;
     }

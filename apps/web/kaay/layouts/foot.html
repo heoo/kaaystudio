@@ -1,0 +1,18 @@
+<!-- footer -->
+<div class="kaay-share">
+    <ul>
+        <li><span class="glyphicon glyphicon-chevron-up kaay-span-top"></span></li>
+        <li><span class="glyphicon glyphicon-share-alt kaay-span-share"></span></li>
+    </ul>
+</div>
+<div class="footer w3-agile-1">
+    <div class="container">
+        <ul class="fb_icons2 agile-1">
+            {% for v in links %}
+            <li><a href="{{v['siteurl']}}" target="_blank" title="{{v['name']}}">{% if v['logo'] %}<img src="{{v['logo']}}" alt="{{v['name']}}">{% else %}{{v['name']}}{% endif %}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <p class="copyright">{{system['web_name']}} &nbsp;&nbsp;Copyright &copy; 2018.{{system['copyright']}}&nbsp;&nbsp;{{system['icp']}} &nbsp;{{system['analytics']}}</p>
+</div>
+<!-- footer -->
