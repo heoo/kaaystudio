@@ -1,0 +1,15 @@
+
+{% if data %}
+    {% for k,posts in data %}
+        <div class="one-half {% if k is even%}first{% endif%}">
+            <a href="/{{ModuleName}}/details/index?id={{posts['id']}}"><img src="{{posts['thumb']}}">
+            </a>
+            <h4>
+                <a href="/{{ModuleName}}/details/index?id={{posts['id']}}">{{posts['name']}}</a>
+            </h4>
+            <p>{{posts['digest']}}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <div style="text-align: center;"><h1>暂无数据</h1></div>
+{% endif %}

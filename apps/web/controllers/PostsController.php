@@ -25,10 +25,12 @@ class PostsController extends ControllerBase {
         $data = $this->getPosts($getData['cid'],$getData['rows'],($getData['page']-1)*$getData['rows']);
         $this->view->setVar('data',$data);
         $this->view->setVar('getData',$getData);
+        $count = $this->getPostsCount($getData['cid']);
 
-        $myPage=new numPage($this->getPostsCount($getData['cid']),intval($getData['page']),$getData['rows']);
+        $myPage=new numPage($count,intval($getData['page']),$getData['rows']);
         $pageStr= $myPage->GetPagerContent();
         $this->view->setVar('pages',$pageStr);
+        $this->view->setVar('countPages',ceil($count/$getData['rows']));
 
         if($category['type'] == 'images'){
             $this->view->pick('posts/images');
