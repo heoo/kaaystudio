@@ -98,6 +98,27 @@ class System extends  \Catchtech\Extensions\Model\BaseModel
     public $analytics;
 
     /**
+     *
+     * @var string
+     * @Column(column="AccessKey", type="string", length=50, nullable=false)
+     */
+    public $AccessKey;
+
+    /**
+     *
+     * @var string
+     * @Column(column="SecretKey", type="string", length=50, nullable=false)
+     */
+    public $SecretKey;
+
+    /**
+     *
+     * @var string
+     * @Column(column="BucketName", type="string", length=50, nullable=false)
+     */
+    public $BucketName;
+
+    /**
      * Initialize method for model.
      */
     public function initialize()

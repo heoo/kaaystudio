@@ -3,11 +3,16 @@ namespace Bpai\Seller\Controllers;
 
 use Phalcon\Exception;
 use Phalcon\Mvc\Controller;
+use Qiniu\Auth;
+use Bpai\Models\System;
+
 
 class ControllerAbstract extends Controller
 {
     protected $user;
     protected $tagConfig;
+    protected $QNToken;
+    protected $System;
 
     protected function initialize(){
         $this->user = $this->session->get('admins');
@@ -23,7 +28,24 @@ class ControllerAbstract extends Controller
 
         $this->tagConfig = include __DIR__ . "/../../../config/tagConfig.php";
         $this->view->setVar('tagConfig',$this->tagConfig);
+        $this->QNToken = $this->session->get('QNToken');
 
+        if($this->session->get('system') == true){
+            self::getSystem();
+        }
+        $this->System = $this->session->get('system');
+
+        if($this->QNToken && $this->System['AccessKey'] && $this->System['SecretKey'] && $this->System['BucketName']){
+            $auth = new Auth($this->System['AccessKey'], $this->System['SecretKey']);
+
+            $policy = array(
+                'returnBody' => '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)"}',
+                'callbackBodyType' => 'application/json'
+            );
+            $this->QNToken = $auth->uploadToken($this->System['BucketName'], null, 3600, $policy, true);
+            $this->session->set('QNToken',$this->QNToken);
+        }
+        $this->view->setVar("token",$this->QNToken);
     }
 
     /**
@@ -118,7 +140,7 @@ class ControllerAbstract extends Controller
         }
     }
 
-    function trimString( $String , $key){
+    public function trimString( $String , $key){
         $tmp = '';
         if($String){
             $arr = explode($key,$String);
@@ -133,6 +155,13 @@ class ControllerAbstract extends Controller
         }
         return $String;
     }
+
+
+    protected function getSystem(){
+        $Models = new System();
+        $this->session->set('system',$Models->findRec()->toArray());
+    }
+
 
     public function getCoreMenus()
     {

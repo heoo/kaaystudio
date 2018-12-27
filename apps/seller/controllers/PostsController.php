@@ -36,12 +36,5 @@ class PostsController extends ControllerBase
         if( $this->Controller  == 'posts'){
             $this->view->setVar('ctype',$this->get('ctype'));
         }
-
-        $this->AK = 'LOvGV2VyZI2qIvQ4KoJVRvhCHSbV5cMUpz-Vw0jP';
-        $this->SK = 'qM5oVSvy5AEqP1UsWAfAhPCener5m6RiCdxRrq4D';
-        $auth = new Auth($this->AK, $this->SK);
-        $bucket = 'other';
-        $token = $auth->uploadToken($bucket);
-        $this->view->setVar("token",$token);
     }
 }

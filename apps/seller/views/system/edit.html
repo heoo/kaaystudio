@@ -9,8 +9,6 @@
 {{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
 {{ javascript_include("templates/boot/js/form/form-system.js") }}
 {{ javascript_include("templates/boot/js/messages_zh.js") }}
-{{ javascript_include("templates/boot/js/cancel.js") }}
-
 
  <script>
     $(function(){
@@ -145,7 +143,7 @@
 
                         <div class="form-actions">
                             <button class="btn green" type="submit"><i class="icon-ok"></i> 保存</button>
-                            <button class="btn" type="button" onclick="mycancel()">取消</button>
+                            <button class="btn" type="button" onclick="javascript:window.location.href='/{{ModuleName}}'">取消</button>
                             <input type="hidden" id="actions" value="edit" >
                             <input type="hidden" name="code" value="{{data.code}}" >
                             <span for="digits" class="message alert-error"></span>

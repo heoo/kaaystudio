@@ -25,7 +25,7 @@ class ControllerAbstract extends Controller
         $this->view->setVar('_TagConfig',$this->_TagConfig);
         $this->view->setVar('navigation',$this->getNavigation());
 
-        if($this->session->get('system') == true){
+        if($this->session->get('system') == false){
             self::getSystem();
         }
         $this->System = $this->session->get('system');

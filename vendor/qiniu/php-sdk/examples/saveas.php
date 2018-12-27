@@ -26,3 +26,4 @@ $finalURL = "http://" . $newurl . "/sign/" . $accessKey . ":" . $encodedSign;
 $callbackBody = file_get_contents("$finalURL");
 
 echo $callbackBody;
+
