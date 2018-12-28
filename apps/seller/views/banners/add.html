@@ -1,9 +1,7 @@
-
-
 {{ stylesheet_link("plugins/upload/css/webuploader.css") }}
 {{ javascript_include("plugins/upload/dist/webuploader.js") }}
 {{ stylesheet_link("plugins/upload/css/multi-file-upload.css") }}
-{{ javascript_include("plugins/upload/multi-file-upload.js") }}
+{{ javascript_include("plugins/upload/file-upload.js") }}
 
 {{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
 {{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
@@ -110,7 +108,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" id="multi-thumb" name="logo">
+                                        <input type="hidden" id="thumb" name="logo">
                                     </div>
                                 </div>
                                 <span style="color: #b94a48;" >附件格式【jpg,jpeg,png,gif】</span>

@@ -44,7 +44,7 @@ class System extends  \Catchtech\Extensions\Model\BaseModel
     /**
      *
      * @var string
-     * @Column(column="logo", type="string", length=50, nullable=false)
+     * @Column(column="logo", type="string", length=100, nullable=false)
      */
     public $logo;
 

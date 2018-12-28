@@ -100,14 +100,8 @@ class ControllerBase extends ControllerAbstract
                 unset($postData['ctype']);
                 $postData['cid'] = $cid[0];
                 $postData['type'] = $cid[1];
-                $postData['attachment'] = $this->trimString($postData['attachment'],',');
-                $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
-            }elseif( in_array($this->Controller,array('links','banners','system','category')) && $postData['logo']){
-
-                $position = strpos($postData['logo'] , ',');
-                if($position){
-                    $postData['logo'] = substr($postData['logo'] , 0 , $position);
-                }
+//                $postData['attachment'] = $this->trimString($postData['attachment'],',');
+//                $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
             }
             $res = $this->Models->saveRec($postData);
             if($res){
@@ -152,16 +146,8 @@ class ControllerBase extends ControllerAbstract
                 unset($postData['cid']);
                 $postData['cid'] = $cid[0];
                 $postData['type'] = $cid[1];
-
-                $postData['attachment'] = $this->trimString($postData['attachment'],',');
-                $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
-            }elseif( in_array($this->Controller,array('links','banners','system','category')) && $postData['logo']){
-
-                $position = strpos($postData['logo'] , ',');
-                if($position){
-
-                    $postData['logo'] = substr($postData['logo'] , 0 , $position);
-                }
+//                $postData['attachment'] = $this->trimString($postData['attachment'],',');
+//                $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
             }
             $this->Models->setWhere(array('code'=>$postData['code']));
             $res = $this->Models->saveRec($postData);

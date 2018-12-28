@@ -1,5 +1,6 @@
 <?php
 namespace Bpai\Web\Controllers;
+use Bpai\Models\Category;
 
 /**
  * @desc 首页
@@ -16,7 +17,15 @@ class IndexController extends ControllerBase
     
     public function indexAction()
     {
-        $data = $this->getPosts(0,4);
+        $data = [];
+        $models = new  Category();
+        $models->setWhere(array('status'=>1));
+        $models->setOrder(array('listorder'=>'DESC'));
+        $res = $models->listRec();
+        if($res){
+            $data = $res->toArray();
+        }
+        echo '<pre>';var_dump($data);exit;
         $this->view->setVar('data',$data);
     }
  }

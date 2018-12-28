@@ -1,9 +1,9 @@
-{{ javascript_include("templates/boot/js/form/posts-add-edit.js") }}
+{{ javascript_include("plugins/upload/edit.js") }}
 
 {{ stylesheet_link("plugins/upload/css/webuploader.css") }}
 {{ javascript_include("plugins/upload/dist/webuploader.js") }}
 {{ stylesheet_link("plugins/upload/css/multi-file-upload.css") }}
-{{ javascript_include("plugins/upload/multi-file-upload.js") }}
+{{ javascript_include("plugins/upload/file-upload.js") }}
 
 {{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
 {{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
@@ -95,8 +95,7 @@
                         </div>
 
                         <div class="control-group">
-                            <label for="attachment" class="control-label">缩略图
-                            </label>
+                            <label for="attachment" class="control-label">缩略图</label>
                             <!-- File Upload -->
                             <div class="controls">
                                 <div id="wrapper" style="width: 595px;">
@@ -105,18 +104,16 @@
                                        <div id="uploader">
                                            <div class="queueList">
 
-                                               {% if images %}
+                                               {% if data.thumb %}
                                                <ul class='filelist' style='border-bottom: 1px solid #ccc; margin-bottom: 5px;'>
-                                                   {% for val in images %}
                                                    <li class="state-complete">
-                                                       <p class="imgWrap"><img src="{{val}}"></p>
+                                                       <p class="imgWrap"><img src="{{data.thumb}}"></p>
                                                        <p class="progress"><span style="display: none; width: 0px;"></span></p>
                                                        <span class="success"></span>
                                                        <div class="file-panel" style="height: 0px;">
-                                                           <span class="cancel" data-rel="{{val}}" title="删除" data-type="images">删除</span>
+                                                           <span class="cancel" data-rel="{{data.attachment}}" title="删除" data-type="images">删除</span>
                                                        </div>
                                                    </li>
-                                                   {% endfor %}
                                                </ul>
                                                {% endif %}
 
@@ -136,7 +133,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <input type="hidden" id="multi-thumb" name="attachment" value="{{data.attachment}}">
+                                       <input type="hidden" id="thumb" name="thumb" value="{{data.thumb}}">
                                    </div>
                                 </div>
                                 <span style="color: #b94a48;" >附件格式【jpg,jpeg,png,gif,flv】</span>
@@ -175,7 +172,6 @@
                             <input type="hidden" name="id" value="{{data.id}}" >
                             <input type="hidden" name="ctype" value="{{ctype}}">
                             <input type="hidden" name="page" value="{{page}}">
-                            <input type="hidden" id="thumb" name="thumb" value="{{data.thumb}}" >
                             <span for="digits" class="message alert-error"></span>
                         </div>
                     </fieldset>

@@ -481,8 +481,9 @@
         //上传成功
         uploader.on('uploadSuccess', function (file, response) {
             if (response.Succenss) {
-                $('#product-src').attr('src',response.path);
-                $('#product-thumb').val(response.path);
+                $('#thumb').val(response.path);
+                // $('#product-src').attr('src',response.path);
+                // $('#product-thumb').val(response.path);
                 //return;
             }
             //$.messager.alert('错误','文件上传失败','error');

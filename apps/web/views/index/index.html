@@ -4,26 +4,35 @@
     <div class="content-sidebar-wrap">
         <main class="content" id="genesis-content">
             <h2 class="screen-reader-text">Main Content</h2>
-            <div id="front-page-1" class="front-page-1" tabindex="-1">
-                <div class="image-section" style="height: 790px;">
-                    <div class="flexible-widgets widget-area widget-full">
-                        <div class="wrap">
-                            <section id="featured-page-5" class="widget featured-content featuredpage">
-                                <div class="widget-wrap">
-                                    <article class="post-10 page type-page status-publish has-post-thumbnail entry">
-                                        <div class="entry-content">
-                                            <h4 class="p2">dreaming.<br>creating. <br>visualizing. </h4>
-                                        </div>
-                                    </article>
-                                </div>
-                            </section>
+
+            {% if data %}
+                {% for i,page in data %}
+                    {% set i+=1 %}
+                <div id="front-page-{{i}}" class="front-page-{{i}}" tabindex="-1" style="background-image:url({{page['logo']}});">
+                    <div class="image-section">
+                        <div class="flexible-widgets widget-area widget-full">
+                            <div class="wrap">
+                                <section id="featured-page-5" class="widget featured-content featuredpage">
+                                    <div class="widget-wrap">
+                                        <article class="post-10 page type-page status-publish has-post-thumbnail entry">
+                                            <div class="entry-content">
+                                                <h4 class="p2">dreaming.<br>creating. <br>visualizing. </h4>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </section>
+                            </div>
                         </div>
                     </div>
+                    {% if i ==1 %}
+                    <a href="#front-page-2" title="Click here to scroll down" class="scroll-down" style="display: none;">
+                        <span class="scroll-down-inner"></span>&nbsp;
+                    </a>
+                    {% endif %}
                 </div>
-                <a href="#front-page-2" title="Click here to scroll down" class="scroll-down" style="display: none;">
-                    <span class="scroll-down-inner"></span>&nbsp;
-                </a>
-            </div>
+
+                {% endfor %}
+            {% endif %}
 
 
             <div id="front-page-2" class="front-page-2" tabindex="-1"><div class="solid-section" style="height: 790px;"><div class="flexible-widgets widget-area widget-full"><div class="wrap"><section id="featured-page-3" class="widget featured-content featuredpage"><div class="widget-wrap"><h3 class="widgettitle widget-title">we’re element.</h3>
