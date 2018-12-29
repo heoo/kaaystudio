@@ -25,7 +25,8 @@ class IndexController extends ControllerBase
         if($res){
             $data = $res->toArray();
         }
-        echo '<pre>';var_dump($data);exit;
+//        echo '<pre>';var_dump($data);exit;
         $this->view->setVar('data',$data);
+//        $this->view->pick('index/main');
     }
  }

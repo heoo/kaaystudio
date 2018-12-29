@@ -12,14 +12,20 @@
     {{ stylesheet_link("templates/white/css/style.css") }}
     {{ stylesheet_link("templates/white/css/icon.min.css") }}
 
-    {{ javascript_include("templates/white/js/jquery-2.1.4.min.js") }}
-    {{ javascript_include("templates/white/js/global.js") }}
+
+    {{ javascript_include("templates/white/js/jquery.js") }}
+    {{ javascript_include("templates/white/js/jquery-migrate.min.js") }}
+
+
     <!--[if lt IE 9]>
     {{ javascript_include("templates/white/js/html5shiv.min.js") }}
     <![endif]-->
+
     <script type='text/javascript'>
         var ModuleName = "/{{ModuleName}}";
         var BASE_URL="/{{ModuleName}}/{{ControllerName}}/";
+        var $=jQuery.noConflict();
+
         $(function () {
             $('#genesis-mobile-nav-primary').click(function () {
                 if(!$(this).hasClass('activated')){
@@ -29,7 +35,24 @@
                 }
                 $('#genesis-nav-primary').toggle();
             });
-         })
+
+            var windowHeight = $( window ).height();
+            $( '.image-section' ) .css({'height': windowHeight +'px'});
+            $( '.solid-section' ) .css({'height': windowHeight +'px'});
+
+            if( $( document ).scrollTop() > 0 ){
+                $( '.site-header' ).addClass( 'dark' );
+            }
+            $( document ).on('scroll', function(){
+                if ( $( document ).scrollTop() > 0 ){
+                    $( '.site-header' ).addClass( 'dark' );
+
+                } else {
+                    $( '.site-header' ).removeClass( 'dark' );
+                }
+            });
+
+        });
     </script>
 </head>
 
