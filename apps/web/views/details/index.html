@@ -19,10 +19,10 @@
 </div>
 
 {% if prev %}
-<div class="prev-post pagination-previous"><a href="/{{ModuleName}}/details/index?id={{prev['id']}}" title="{{prev['name']}}" rel="prev"></a></div>
+<div class="prev-post pagination-previous"><a href="/{{ModuleName}}/{{ControllerName}}/index?id={{prev['id']}}" title="{{prev['name']}}" rel="prev"></a></div>
 {% endif %}
 
 {% if next %}
-<div class="next-post pagination-next "><a href="/{{ModuleName}}/details/index?id={{next['id']}}" rel="next"></a></div>
+<div class="next-post pagination-next "><a href="/{{ModuleName}}/{{ControllerName}}/index?id={{next['id']}}" rel="next"></a></div>
 {% endif %}
 
