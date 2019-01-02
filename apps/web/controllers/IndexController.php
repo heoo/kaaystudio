@@ -23,9 +23,21 @@ class IndexController extends ControllerBase
         $models->setOrder(array('listorder'=>'DESC'));
         $res = $models->listRec();
         if($res){
-            $data = $res->toArray();
+            foreach ($res->toArray() as $val){
+                $val['text'] = htmlspecialchars_decode($val['text']);
+                $val['url'] = '';
+                if( in_array($val['type'],array('posts','images'))){
+                    $val['url'] = "http://{$_SERVER['HTTP_HOST']}/{$this->router->getModuleName()}/posts/index?cid={$val['id']}";
+                }elseif($val['type'] == 'page') {
+                    $val['url'] = "http://{$_SERVER['HTTP_HOST']}/{$this->router->getModuleName()}/details/index?id={$val['val']}";
+                }elseif($val['type'] == 'url'){
+                    $val['url'] = $val['val'];
+                }
+                $data[] = $val;
+            }
         }
-//        echo '<pre>';var_dump($data);exit;
+//                echo '<pre>';var_dump($data);exit;
+
         $this->view->setVar('data',$data);
 //        $this->view->pick('index/main');
     }

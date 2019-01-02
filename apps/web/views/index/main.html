@@ -5,67 +5,51 @@
 
                 <h2 class="screen-reader-text">{{system['web_name']}}</h2>
 
-                <div id="front-page-1" class="front-page-1" tabindex="-1">
+
+
+                {% if data %}
+                {% for i,item in data %}
+                <div class="front-page kaay-font-page bg-at-fixed {% if i is true %}kaay-m20{% endif %} " tabindex="-1" {% if item['logo'] %} style="background-image: url('{{item['logo']}}');"{% endif %}>
+                {% if item['logo'] is null %}
+                    <div class="solid-section">
+                        <div class="flexible-widgets widget-area widget-full">
+                            <div class="wrap">
+                                <section class="widget featured-content featuredpage">
+                                    <div class="widget-wrap">
+                                        <h3 class="widgettitle widget-title">{{item['name']}}</h3>
+                                        <article class="post-19 page type-page status-publish entry">
+                                            <div class="entry-content">
+                                                <!--<blockquote>{{item['name']}}</blockquote>-->
+                                                {{item['text']}}
+                                                <div class="read-more-container">
+                                                    <a class="button" href="">{{item['more']}}</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
                     <div class="image-section">
-                        <div class="flexible-widgets widget-area widget-full"><div class="wrap"><section id="featured-page-5" class="widget featured-content featuredpage"><div class="widget-wrap"><article class="post-10 page type-page status-publish has-post-thumbnail entry"><div class="entry-content"><h4 class="p2">dreaming.<br>creating. <br>visualizing. </h4>
-                </div></article></div></section>
-                </div></div></div><a href="https://welcometoelement.com/#front-page-2" title="Click here to scroll down" class="scroll-down" style="display: none;"><span class="scroll-down-inner"></span>&nbsp;</a></div>
-
-                <div id="front-page-2" class="front-page-2" tabindex="-1"><div class="solid-section"><div class="flexible-widgets widget-area widget-full"><div class="wrap"><section id="featured-page-3" class="widget featured-content featuredpage"><div class="widget-wrap"><h3 class="widgettitle widget-title">we’re element.</h3>
-                    <article class="post-19 page type-page status-publish entry"><div class="entry-content"><blockquote><p>
-                        Each day we take on a challenging project. We look for the right frame, we play with light, we learn. All this brings us closer to a beautiful image.
-                    </p></blockquote>
-                        <p>Creating something new that does not physically exist is one of the most thrilling feelings in our work. Making things out of nothing satisfies our curiosity and allows us to test new solutions. This is what gives our work meaning and pushes us forward into action. By now we have delivered hundreds of architectural visualizations depicting exteriors, interiors and bird’s eye views to private and public clients from the field of design, architecture and built environment.</p>
-                        <div class="read-more-container"><a href="https://welcometoelement.com/about" class="button">Read more</a></div>
-                    </div></article></div></section>
-                </div></div></div></div>
-
-
-                <div id="front-page-3" class="front-page-3" tabindex="-1"><div class="image-section"><div class="flexible-widgets widget-area widget-full"><div class="wrap"><section id="text-7" class="widget widget_text"><div class="widget-wrap"><h3 class="widgettitle widget-title">works.</h3>
-                    <div class="textwidget"><p><a class="button" href="https://welcometoelement.com/works">see more</a></p>
+                        <div class="flexible-widgets widget-area widget-full">
+                            <div class="wrap">
+                                <section class="widget widget_text">
+                                    <div class="widget-wrap">
+                                        <h3 class="widgettitle widget-title">{{item['name']}}.</h3>
+                                        <div class="textwidget">
+                                            <p><a class="button" href="">{{item['more']}}</a></p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
                     </div>
-                </div></section>
-                </div></div></div></div>
-
-
-                <div id="front-page-4" class="front-page-4" tabindex="-1"><div class="solid-section"><div class="flexible-widgets widget-area widget-full"><div class="testimonials-prev"></div><div class="testimonials-next"></div><div class="wrap" style="opacity: 1;"><section id="custom_html-4" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><blockquote class="testimonial">
-                    <p>The night shot made for the Galileo Reference Centre competition entree was a winner. For the jury, it was clear, seeing this image, who the winner should be. Not just because of the design but understanding the universe and the client as well.</p>
-                </blockquote>
-
-                    <hr class="testimonials-hr">
-                    <img class="testimonials-logo" src="./E_files/cie-logo.png">
-                </div></div></section>
-                </div></div></div></div>
-
-
-
-                <div id="front-page-5" class="front-page-5" tabindex="-1"><div class="image-section"><div class="flexible-widgets widget-area widget-full"><div class="wrap"><section id="text-2" class="widget widget_text"><div class="widget-wrap"><h3 class="widgettitle widget-title">booklet.</h3>
-                    <div class="textwidget"><p><a id="booklet-download" class="button" href="https://welcometoelement.com/wp-content/uploads/2018/07/WEBSITE-BOOKLET.pdf">download</a></p>
-                    </div>
-                </div></section>
-                </div></div></div></div>
-
-
-                <div id="front-page-6" class="front-page-6" tabindex="-1"><div class="solid-section"><div class="flexible-widgets widget-area widget-full"><div class="wrap"><section id="text-3" class="widget widget_text"><div class="widget-wrap"><h3 class="widgettitle widget-title">trusted by.</h3>
-                    <div class="textwidget"><p><img class="alignnone wp-image-124" src="./E_files/clients.png" alt="" width="600" height="344"></p>
-                    </div>
-                </div></section>
-                </div></div></div></div>
-
-
-
-                <div id="front-page-7" class="front-page-7" tabindex="-1"><div class="image-section"><div class="flexible-widgets widget-area widget-full"><div class="wrap"><section id="custom_html-3" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><h3 class="widgettitle widget-title">newsroom.</h3>
-                    <div class="textwidget custom-html-widget"><a href="https://welcometoelement.com/newsroom" class="button">See more</a></div></div></section>
-                </div></div></div></div>
-
-
-
-                <div id="front-page-8" class="front-page-8" tabindex="-1"><div class="solid-section"><div class="flexible-widgets widget-area widget-full"><div class="wrap"><section id="text-4" class="widget widget_text"><div class="widget-wrap"><h3 class="widgettitle widget-title">featured in.</h3>
-                    <div class="textwidget"><p><img class="alignnone wp-image-125" src="./E_files/publications.png" alt="" width="600" height="380"></p>
-                    </div>
-                </div></section>
-                </div></div></div></div>
-
+                {% endif %}
+                </div>
+                {% endfor %}
+                {% endif %}
 
 
             </main>

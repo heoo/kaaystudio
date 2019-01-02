@@ -35,7 +35,7 @@ class ControllerAbstract extends Controller
         }
         $this->System = $this->session->get('system');
 
-        if($this->QNToken && $this->System['AccessKey'] && $this->System['SecretKey'] && $this->System['BucketName']){
+        if(!$this->QNToken && $this->System['AccessKey'] && $this->System['SecretKey'] && $this->System['BucketName']){
             $auth = new Auth($this->System['AccessKey'], $this->System['SecretKey']);
 
             $policy = array(

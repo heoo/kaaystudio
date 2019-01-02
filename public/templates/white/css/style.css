@@ -3484,7 +3484,27 @@ p.form-submit,
 /*.front-page-3 { background-image: url(//welcometoelement.com/wp-content/uploads/2018/03/works.jpg); }*/
 /*.front-page-5 { background-image: url(//welcometoelement.com/wp-content/uploads/2018/04/BOOKLET_02.jpg); }*/
 /*.front-page-7 { background-image: url(//welcometoelement.com/wp-content/uploads/2018/03/case-studies.jpg); }*/
+.bg-at-fixed{
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+.kaay-font-page{
+	background-size: cover;
+	height: auto;
+}
+.kaay-m20{
+	margin-top: 20px;
+}
 
+.kaay-font-page .entry-content p{
+	column-count: 2;
+	column-gap: 100px;
+	-webkit-column-width: 100px; /* Chrome, Safari, Opera */
+	-moz-column-width: 100px; /* Firefox */
+	column-width: 100px;
+	text-align: justify;
+	column-fill: balance;
+}
 
 /* latin-ext */
 @font-face {
