@@ -25,7 +25,6 @@ class PostsController extends ControllerBase {
         $data = $this->getPosts($getData['cid'],$getData['rows'],($getData['page']-1)*$getData['rows']);
         $this->view->setVar('data',$data);
         $this->view->setVar('getData',$getData);
-//        echo '<pre>';var_dump($data);exit;
 
         $count = $this->getPostsCount($getData['cid']);
         $myPage=new numPage($count,intval($getData['page']),$getData['rows']);
