@@ -2,8 +2,8 @@
 return array(
     array(
         'name'=>'管理员管理',
-        'controller'=>'sellers',
-        'icons'=>'icon-users',
+        'controller'=>'admins',
+        'icons'=>'icon-user',
         'element'=>
             array(
                 'admins'=>'管理员列表|/seller/admins/list',
@@ -12,7 +12,7 @@ return array(
     array(
         'name'=>'栏目管理',
         'controller'=>'category',
-        'icons'=>'icon-press',
+        'icons'=>'icon-book',
         'element'=>
             array(
                 'category'=>'栏目列表|/seller/category/list',
@@ -21,25 +21,16 @@ return array(
     array(
         'name'=>'内容管理',
         'controller'=>'posts',
-        'icons'=>'icon-press',
+        'icons'=>'icon-list-alt',
         'element'=>
             array(
                 'posts'=>'',
             ),
     ),
     array(
-        'name'=>'Logo管理',
-        'controller'=>'logo',
-        'icons'=>'icon-press',
-        'element'=>
-            array(
-                'logo'=>'Logo管理|/seller/logo/list',
-            ),
-    ),
-    array(
         'name'=>'友链管理',
         'controller'=>'links',
-        'icons'=>'icon-press',
+        'icons'=>'icon-link',
         'element'=>
             array(
                 'links'=>'友链列表|/seller/links/list',
@@ -48,10 +39,28 @@ return array(
     array(
         'name'=>'广告管理',
         'controller'=>'banners',
-        'icons'=>'icon-press',
+        'icons'=>'icon-volume-up',
         'element'=>
             array(
                 'banners'=>'广告列表|/seller/banners/list',
+            ),
+    ),
+    array(
+        'name'=>'系统管理',
+        'controller'=>'system',
+        'icons'=>'icon-cog',
+        'element'=>
+            array(
+                'system'=>'站点设置|/seller/system/edit?code=b9cfe8f4bb',
+            ),
+    ),
+    array(
+        'name'=>'CDN设置',
+        'controller'=>'cdn',
+        'icons'=>'icon-cog',
+        'element'=>
+            array(
+                'cdn'=>'CDN设置|/seller/cdn/edit?code=b9cfe8f4bb',
             ),
     ),
 );

@@ -5,27 +5,69 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<meta name="renderer" content="webkit" />
+    <meta name="copyright" content="{{system['copyright']}}"/>
+    <meta name="keywords" content="{% if data['keyword']%}{{data['keyword']}}{% else %}{{system['seo_keywords']}}{% endif %}"/>
+    <meta name="description" content="{{system['description']}}"/>
     {{ get_title() }}
+    {{ stylesheet_link("templates/white/css/style.css") }}
+    {{ stylesheet_link("templates/white/css/icon.min.css") }}
 
-    <link rel="stylesheet" href="/templates/duo-i/css/bootstrap.css" />
-    <link rel="stylesheet" href="/templates/duo-i/css/jquery.fullPage.css">
-    <link rel="stylesheet" href="/templates/duo-i/css/index.css" />
-    <link rel="stylesheet" href="/templates/duo-i/css/style.css">
+    {{ javascript_include("templates/white/js/jquery.js") }}
+    {{ javascript_include("templates/white/js/jquery-migrate.min.js") }}
 
-    <script src="/templates/duo-i/js/vendor/jquery-2.1.3.min.js"></script>
-    <script type="application/javascript">
+    <!--[if lt IE 9]>
+    {{ javascript_include("templates/white/js/html5shiv.min.js") }}
+    <![endif]-->
+
+    <script type='text/javascript'>
         var ModuleName = "/{{ModuleName}}";
         var BASE_URL="/{{ModuleName}}/{{ControllerName}}/";
+        var $=jQuery.noConflict();
+
+        $(function () {
+            $('#genesis-mobile-nav-primary').click(function () {
+                if(!$(this).hasClass('activated')){
+                    $(this).addClass('activated')
+                }else {
+                    $(this).removeClass('activated')
+                }
+                $('#genesis-nav-primary').toggle();
+            });
+
+            var windowHeight = $( window ).height();
+            $( '.image-section' ) .css({'height': windowHeight +'px'});
+            $( '.solid-section' ) .css({'height': windowHeight +'px'});
+
+            if( $( document ).scrollTop() > 0 ){
+                $( '.site-header' ).addClass( 'dark' );
+            }
+            $( document ).on('scroll', function(){
+                if ( $( document ).scrollTop() > 0 ){
+                    $( '.site-header' ).addClass( 'dark' );
+
+                } else {
+                    $( '.site-header' ).removeClass( 'dark' );
+                }
+            });
+
+        });
     </script>
 </head>
-    <body onload="loadingimg()">
-    
+
+    {% if ControllerName == 'posts' %}
+        {% if category['type'] == 'images' %}
+            <body class="archive post-type-archive post-type-archive-works custom-header header-image header-full-width full-width-content works-archive">
+        {% else %}
+            <body class="page-template-default page custom-header header-image header-full-width full-width-content newsroom">
+        {% endif %}
+    {% elseif  ControllerName == 'details' %}
+        <body class="page-template page-template-page_about page-template-page_about-php custom-header header-image header-full-width full-width-content about">
+    {% else %}
+        <body class="home blog custom-header header-image header-full-width full-width-content front-page featured-section">
+    {% endif %}
+
     {{ content() }}
 
-    {{ partial("layouts/foot") }}
-
-    <script src="/templates/duo-i/js/vendor/jquery.fullPage.js"></script>
-    <script src="/templates/duo-i/js/vendor/bootstrap.min.js"></script>
-    <script src="/templates/duo-i/js/index.js"></script>
+   {{ partial("layouts/foot") }}
     </body>
 </html>

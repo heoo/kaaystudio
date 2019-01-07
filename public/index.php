@@ -14,9 +14,11 @@ try {
 	 * FactoryDefault依赖注入一个完整的堆栈框架
 	 */
 	$di = new Phalcon\DI\FactoryDefault();
-	
-	
-	/**
+
+    require '../vendor/autoload.php';
+
+
+    /**
 	 * 配置路由
 	 */
 	$di['router'] = require __DIR__.'/../config/routes.php';

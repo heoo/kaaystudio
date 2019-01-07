@@ -1,0 +1,21 @@
+<div class="friend-agent agileits-1">
+    {% if data %}
+    <div class="container">
+        <div class="friend-grids">
+            {% for posts in data %}
+            <div class="col-md-4 friend-grid">
+                <a href="/{{ModuleName}}/details/index?id={{posts['id']}}">
+                    <img src="{{posts['thumb']}}" alt="{{posts['name']}}" class="img-responsive" >
+                </a>
+                <h4>{{posts['name']}}</h4>
+                <p>{{posts['digest']}}</p>
+            </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    {{pages}}
+    {% else %}
+        <h4 class="text-center">暂无数据</h4>
+    {% endif %}
+</div>

@@ -1,7 +1,6 @@
 <?php
 namespace Bpai\Web\Controllers;
-use Phalcon\Tag;
-use Bpai\Models\Posts;
+use Bpai\Models\Category;
 
 /**
  * @desc 首页
@@ -12,40 +11,34 @@ class IndexController extends ControllerBase
     public function initialize()
     {
         parent::initialize();
-        \Phalcon\Tag::prependTitle($this->_TagConfig[$this->router->getControllerName()]);
+        \Phalcon\Tag::prependTitle($this->System['web_name']);
 
     }
     
     public function indexAction()
     {
-        $Models = new Posts();
-        $Models->setField(array('id')); 
-        $Models->setWhere(array('status'=>1,'language'=>$this->Language,'type'=>'posts','attachment'=>array('attachment','!=','')));
-        $Models->setOrder(array('id'=>'DESC'));
-        $res = $Models->findRec();
-        $this->view->setVar('next',$res ? $res->id : 0);
-
-        $result = $this->getPosts();
-        if($result){
-            foreach($result as $key=>$val){
-//                $val['name'] = self::strManipulation($val['name']);
-                $result[$key] = $val;
+        $data = [];
+        $models = new  Category();
+        $models->setWhere(array('status'=>1));
+        $models->setOrder(array('listorder'=>'DESC'));
+        $res = $models->listRec();
+        if($res){
+            foreach ($res->toArray() as $val){
+                $val['text'] = htmlspecialchars_decode($val['text']);
+                $val['url'] = '';
+                if( in_array($val['type'],array('posts','images'))){
+                    $val['url'] = "http://{$_SERVER['HTTP_HOST']}/{$this->router->getModuleName()}/posts/index?cid={$val['id']}";
+                }elseif($val['type'] == 'page') {
+                    $val['url'] = "http://{$_SERVER['HTTP_HOST']}/{$this->router->getModuleName()}/details/index?id={$val['val']}";
+                }elseif($val['type'] == 'url'){
+                    $val['url'] = $val['val'];
+                }
+                $data[] = $val;
             }
         }
-        $this->view->setVar('data',$result);
-    }
+//                echo '<pre>';var_dump($data);exit;
 
-    protected function strManipulation($str){
-        $string = '';
-        if($str){
-            $len = mb_strlen($str);
-            for($i = 0 ;$i < $len ; $i++){
-                $tmp = mb_substr($str,$i,1);
-                $string .= "<em>{$tmp}</em>";
-                unset($tmp);
-            }
-        }
-        return $string;
+        $this->view->setVar('data',$data);
+//        $this->view->pick('index/main');
     }
-
  }

@@ -1,0 +1,59 @@
+<div class="site-inner">
+        <div class="content-sidebar-wrap">
+
+            <main class="content" id="genesis-content">
+
+                <h2 class="screen-reader-text">{{system['web_name']}}</h2>
+
+
+
+                {% if data %}
+                {% for i,item in data %}
+                <div class="front-page kaay-font-page bg-at-fixed {% if i is true %}kaay-m20{% endif %} " tabindex="-1" {% if item['logo'] %} style="background-image: url('{{item['logo']}}');"{% endif %}>
+                {% if item['logo'] is null %}
+                    <div class="solid-section">
+                        <div class="flexible-widgets widget-area widget-full">
+                            <div class="wrap">
+                                <section class="widget featured-content featuredpage">
+                                    <div class="widget-wrap">
+                                        <h3 class="widgettitle widget-title">{{item['name']}}</h3>
+                                        <article class="post-19 page type-page status-publish entry">
+                                            <div class="entry-content">
+                                                <!--<blockquote>{{item['name']}}</blockquote>-->
+                                                {{item['text']}}
+                                                <div class="read-more-container">
+                                                    <a class="button" href="{{item['url']}}">{{item['more']}}</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="image-section">
+                        <div class="flexible-widgets widget-area widget-full">
+                            <div class="wrap">
+                                <section class="widget widget_text">
+                                    <div class="widget-wrap">
+                                        <h3 class="widgettitle widget-title">{{item['name']}}.</h3>
+                                        <div class="textwidget">
+                                            <p><a class="button" href="{{item['url']}}">{{item['more']}}</a></p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                </div>
+                {% endfor %}
+                {% endif %}
+
+
+            </main>
+
+        </div>
+
+    </div>

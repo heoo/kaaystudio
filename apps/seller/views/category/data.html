@@ -5,8 +5,8 @@
         <th>ID</th>
         <th>CODE</th>
         <th>栏目名称</th>
-        <th>项目版型</th>
         <th>栏目模型</th>
+        <th>排序</th>
         <th>状态</th>
         <th>创建人</th>
         <th>创建时间</th>
@@ -22,8 +22,8 @@
         <td>{{category['id']}}</td>
         <td>{{category['code']}}</td>
         <td>{{category['name']}}</td>
-        <td>{% if category['language']=='en' %}英文{%else%}中文{% endif %}</td>
         <td>{{ tagConfig['categoryType'][category['type']] }}</td>
+        <td>{{category['listorder']}}</td>
         <td>{% if category['status']==1 %}启用{%else%}<span style="color:red;">删除</span>{% endif %}</td>
         <td>{{category['createdby']}}</td>
         <td>{{date('Y-m-d H:i' ,category['created'])}}</td>
@@ -32,7 +32,7 @@
     </tr>
     {% endfor %}
     {% else %}
-    <tr><th colspan="11" style="text-align: center"> 暂无数据</th></tr>
+    <tr><th colspan="10" style="text-align: center"> 暂无数据</th></tr>
     {% endif %}
 
     </tbody>

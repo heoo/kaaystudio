@@ -1,0 +1,28 @@
+<div class="site-container">
+    {{partial("layouts/header")}}
+</div>
+
+<div class="site-inner">
+    <div class="content-sidebar-wrap">
+        <main >
+            <article class="page type-page status-publish entry">
+
+                <header class="entry-header"><h1 class="entry-title" itemprop="headline">{{data['name']}}</h1></header>
+                <div class="entry-content">
+                    <div class="master-slider-parent">
+                        {{data['text']}}
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+</div>
+
+{% if prev %}
+<div class="prev-post pagination-previous"><a href="/{{ModuleName}}/{{ControllerName}}/index?id={{prev['id']}}" title="{{prev['name']}}" rel="prev"></a></div>
+{% endif %}
+
+{% if next %}
+<div class="next-post pagination-next "><a href="/{{ModuleName}}/{{ControllerName}}/index?id={{next['id']}}" rel="next"></a></div>
+{% endif %}
+

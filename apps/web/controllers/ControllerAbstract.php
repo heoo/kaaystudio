@@ -3,62 +3,66 @@
 namespace Bpai\Web\Controllers;
 
 use Phalcon\Mvc\Controller;
-use Bpai\Models\Posts;
-use Bpai\Models\Category;
+use Bpai\Models\Posts,
+    Bpai\Models\Category,
+    Bpai\Models\System,
+    Bpai\Models\Banners;
+
 class ControllerAbstract extends Controller
 {
     public $_TagConfig;
     public $Language;
     public $Category;
+    public $System;
 
     protected function initialize(){
 
         $this->view->setVar('ModuleName',$this->router->getModuleName());
         $this->view->setVar('ControllerName',$this->router->getControllerName());
         $this->view->setVar('ActionName',$this->router->getActionName());
-
         $this->view->setVar('getData',$this->get());
-
-        $config = include_once __DIR__.'/../../../config/tagConfig.php';
-
- 
-        if(strpos($_SERVER['HTTP_HOST'],'en') === false){
-
-            $this->_TagConfig = $config['zh'];
-            $this->Language = 'zh';
-        }else{
-
-            $this->_TagConfig = $config['en'];
-            $this->Language = 'en';
-        }
+        $this->_TagConfig = include_once __DIR__.'/../../../config/tagConfig.php';
         $this->view->setVar('_TagConfig',$this->_TagConfig);
-         $this->view->setVar('navigation',$this->getNavigation());
+        $this->view->setVar('navigation',$this->getNavigation());
+
+        if($this->session->get('system') == false){
+            self::getSystem();
+        }
+        $this->System = $this->session->get('system');
+        $this->view->setVar('system',$this->System);
+        $this->view->setVar('links',self::getLinks());
+        $this->view->setVar('banners',self::getBanners());
+
+        $this->view->setVar('url','http://'.$_SERVER['HTTP_HOST'].$this->request->getURI());
     }
 
     public function getNavigation(){
 
-        $Navigation = array(
-            array('name'=>'Zh','url'=>"http://www.duo-i.com"),
-            array('name'=>'En','url'=>"http://en.duo-i.com"),
-        );
         $this->Category = new Category();
-        $this->Category->setField(array('id','name','type','val'));
-        $this->Category->setWhere(array('status'=>1,'isnav'=>1,'language'=>$this->Language));
+        $this->Category->setField(array('id','name','type','val','text','more'));
+        $this->Category->setWhere(array('status'=>1,'isnav'=>1));
+        $this->Category->setOrder(array('listorder'=>'DESC'));
+        $this->Category->setLimit(9);
         $Category = $this->Category->listRec();
         if($Category){
             foreach($Category as $val){
                 $url = '';
-                if($val['type'] == 'posts'){
+                if( in_array($val['type'],array('posts','images'))){
                     $url = "http://{$_SERVER['HTTP_HOST']}/{$this->router->getModuleName()}/posts/index?cid={$val['id']}";
                 }elseif($val['type'] == 'page') {
-                    $url = "http://{$_SERVER['HTTP_HOST']}/{$this->router->getModuleName()}/posts/details?id={$val['val']}";
+                    $url = "http://{$_SERVER['HTTP_HOST']}/{$this->router->getModuleName()}/details/index?id={$val['val']}";
+                }elseif($val['type'] == 'url'){
+                    $url = $val['val'];
                 }
-                $tmp[] = array('name'=>$val['name'],'url'=>$url);
+                $Navigation[] = array('name'=>$val['name'],'url'=>$url);
             }
-
-            $Navigation = array_merge($tmp,$Navigation);
         }
         return $Navigation;
+    }
+
+    protected function getSystem(){
+        $Models = new System();
+        $this->session->set('system',$Models->findRec()->toArray());
     }
 
     /**
@@ -188,41 +192,84 @@ class ControllerAbstract extends Controller
         return $number;
     }
 
-    public function getPosts($cid =''){
+    public function getPosts($cid=0,$rows=0,$start=0){
 
         $arr = array();
         $Models = new Posts();
-        $where = array('status'=>1,'language'=>$this->Language,'type'=>'posts','attachment'=>array('attachment','!=',''));
+        $where = array('status'=>1);
         if($cid){
             $where['cid'] = $cid;
         }
+        $rows = $rows ? $rows : 10;
         $Models->setWhere($where);
-        $Models->setOrder(array('id'=>'DESC'));
-        $Models->setLimit(50);
+        $Models->setOrder(array('id'=>'ASC'));
+        $Models->setLimit($rows,$start);
         $data = $Models->listRec();
         if($data){
-            foreach($data as $val){
-                if($val->attachment){
-                    $len = strpos($val->attachment,',');
-                    $thumb = $len ? substr($val->attachment,0,$len) : $val->attachment;
-                    $arr[] = array('name'=>$val->name,'thumb'=>$thumb,'id'=>$val->id);
-                }
-            }
+            $arr = $data->toArray();
         }
         return $arr;
     }
 
+    public function getPostsCount($cid =''){
+
+        $count = 0;
+        $Models = new Posts();
+        $where = array('status'=>1,'type'=>'posts');
+        if($cid){
+            $where['cid'] = $cid;
+        }
+        $Models->setWhere($where);
+        $count = $Models->countRec();
+        return $count;
+    }
+
+    public function setPostsHits($id =''){
+        if($id){
+            $Models = new Posts();
+            $where = array('id'=>$id);
+            $Models->setWhere($where);
+            $result = $Models->findRec();
+            if($result){
+                $result->saveRec(array('hits'=>$result->hits+1));
+            }
+        }
+    }
     protected function getLinks(){
         $result = array();
         $Models = new \Bpai\Models\Links();
         $Models->setWhere(array('status'=>1));
         $Models->setField(array('name','logo','siteurl','type'));
         $Models->setOrder(array('listorder'=>'DESC','id'=>'DESC'));
+        return $Models->listRec()->toArray();
+    }
+
+    protected function getBanners(){
+        $banners = array();
+        $Models = new Banners();
+        $location = $this->router->getControllerName();
+        $location = $location ? $location : 'index';
+        $Models->setField(array('id','code','siteurl','name','logo'));
+        $Models->setWhere(array('location'=>$location,'status'=>1));
+        $Models->setOrder(array('listorder'=>'DESC'));
         $data = $Models->listRec();
         if($data){
-            $result = $data->toArray();
+            $banners = $data->toArray();
         }
-        return $result;
+        return $banners;
+    }
+    protected function getCategory($cid){
+        $data = array();
+        if($cid){
+            $this->Category = new Category();
+            $this->Category->setWhere(array('id'=>$cid));
+            $this->Category->setField(array('id','name','type'));
+            $result = $this->Category->findRec();
+            if($result){
+                $data = $result->toArray();
+            }
+        }
+        return $data;
     }
 
 }

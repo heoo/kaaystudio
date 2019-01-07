@@ -1,8 +1,6 @@
 <?php
 namespace Bpai\Seller\Controllers;
 use Phalcon\Tag;
-//use Imagine\Image\Box;
-//use Imagine\Imagick\Imagine;
 
 /**
  * @Created by PhpStorm.
@@ -11,7 +9,6 @@ use Phalcon\Tag;
 class ControllerBase extends ControllerAbstract
 {
     protected $Controller;
-    protected $Imagine;
 
     protected function initialize()
     {
@@ -20,7 +17,6 @@ class ControllerBase extends ControllerAbstract
         $this->view->setTemplateAfter('main');
 
         $this->Controller = $this->router->getControllerName();
-
     }
 
     /**
@@ -46,14 +42,10 @@ class ControllerBase extends ControllerAbstract
             $where['type'] = $getData['type'];
         }
 
-        if($getData['language']){
-
-            $where['language'] = $getData['language'];
-        }
-
         if($getData['ctype']){
 
             $ctype = explode('|',$getData['ctype']);
+            $getData['module'] = $ctype[1];
             $where['cid'] = $ctype[0];
         }
 
@@ -82,7 +74,6 @@ class ControllerBase extends ControllerAbstract
             }
             $result['total'] = $count;
         }
-
         $this->view->setVar("getData",$getData);
         $this->view->setVar('data',$result);
         $this->view->setVar('pageStr',$this->getNewPages($result['total'],$getData['page'],$getData['rows']));
@@ -102,25 +93,16 @@ class ControllerBase extends ControllerAbstract
             $postData['status'] = 1;
             $postData['created'] = $postData['updated']  = time();
             $postData['createdby'] = $postData['updatedby'] = $this->user['username'];
-
-            $cid = explode('|',$postData['ctype']);
-            unset($postData['ctype']);
-            $postData['language'] = $postData['language'] ? $postData['language'] : 'zh';
+            $postData['text'] = htmlspecialchars($postData['text']);
 
             if( $this->Controller  == 'posts'){
+                $cid = explode('|',$postData['ctype']);
+                unset($postData['ctype']);
                 $postData['cid'] = $cid[0];
                 $postData['type'] = $cid[1];
-                $postData['attachment'] = $this->trimString($postData['attachment'],',');
-                $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
-            }elseif( in_array($this->Controller,array('links','banners')) && $postData['logo']){
-
-                $postData['logo'] = ltrim($postData['logo'],',');
-                $position = strpos($postData['logo'] , ',');
-                if($position){
-
-                    $postData['logo'] = substr($postData['logo'] , 0 , $position);
-                }
-            } 
+//                $postData['attachment'] = $this->trimString($postData['attachment'],',');
+//                $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
+            }
             $res = $this->Models->saveRec($postData);
             if($res){
 
@@ -137,6 +119,12 @@ class ControllerBase extends ControllerAbstract
                 echo json_encode(array('errorNo'=>00001,'errorMsg'=>'添加失败'));exit;
             }
         }
+        $type = '';
+        $typeArr = explode('|',$this->request->getURI());
+        if($typeArr){
+            $type = $typeArr[1];
+        }
+        $this->view->setVar('type',$type);
     }
 
     /**
@@ -150,31 +138,19 @@ class ControllerBase extends ControllerAbstract
             $postData = $this->post();
             $postData['updated'] = time();
             $postData['updatedby'] = $this->user['username'];
+            $postData['text'] = htmlspecialchars($postData['text']);
 
-
-            $cid = explode('|',$postData['cid']);
-            unset($postData['cid']);
-            $postData['cid'] = $cid[0];
-            $postData['type'] = $cid[1];
-
-            $postData['language'] = $postData['language'] ? $postData['language'] : 'zh';
             if( $this->Controller  == 'posts'){
 
-                $postData['attachment'] = $this->trimString($postData['attachment'],',');
-                $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
-            }elseif( in_array($this->Controller,array('links','banners')) && $postData['logo']){
-
-                $postData['logo'] = ltrim($postData['logo'],',');
-                $position = strpos($postData['logo'] , ',');
-                if($position){
-
-                    $postData['logo'] = substr($postData['logo'] , 0 , $position);
-                }
+                $cid = explode('|',$postData['cid']);
+                unset($postData['cid']);
+                $postData['cid'] = $cid[0];
+                $postData['type'] = $cid[1];
+//                $postData['attachment'] = $this->trimString($postData['attachment'],',');
+//                $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
             }
-
             $this->Models->setWhere(array('code'=>$postData['code']));
             $res = $this->Models->saveRec($postData);
-
             if($res){
                 /* 单页模型 更新分类val 值 */
                 if($this->Controller == 'posts' && $cid[1] != 'posts'){
@@ -197,9 +173,16 @@ class ControllerBase extends ControllerAbstract
                 $images = explode(',',$result->attachment);
                 $this->view->setVar('images',$images);
             }
-
+            $result->text = htmlspecialchars_decode($result->text);
             $this->view->setVar('data',$result);
             $this->view->setVar('page',$getData['page']);
+
+            $type = '';
+            $typeArr = explode('|',$this->request->getURI());
+            if($typeArr){
+                $type = $typeArr[1];
+            }
+            $this->view->setVar('type',$type);
         }
     }
 
@@ -241,7 +224,7 @@ class ControllerBase extends ControllerAbstract
 
             $thumb = substr($attachment,0,strpos($attachment,','));
             $thumb = $thumb ? $thumb : $attachment;
-            $newname = str_replace('.','thumb.',$thumb);
+            $newname =  $thumb;
 //            $this->Imagine->open(__DIR__.'/../../../public/'.$thumb)->resize(new Box($size[$class][0], $size[$class][1]))->save(__DIR__.'/../../../public/'.$newname, array('flatten' => false));
         }
         return $newname;

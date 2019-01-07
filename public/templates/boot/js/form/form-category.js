@@ -16,7 +16,7 @@ var FormCategoryValidation = function () {
                 ignore: "",
                 rules: {
                     name: {
-                        maxlength : 8,
+                        maxlength : 30,
                         required: true
                     }
                 },

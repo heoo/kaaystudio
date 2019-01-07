@@ -1,7 +1,7 @@
 <?php
 
 namespace Bpai\Seller\Controllers;
-
+use Qiniu\Storage\UploadManager;
 /**
  * @desc 文件上传处理
  * */
@@ -34,13 +34,25 @@ class UploadsController extends ControllerBase
         header("Pragma: no-cache");
 
         $res = $this->uploads->upload('file', $_POST);
-
         $isFlash = false;
         if(strpos($res,'flv') || strpos($res,'mp4')){
             $isFlash = true;
         }
+        if($this->QNToken){
+            // 构建 UploadManager 对象
+            $uploadMgr = new UploadManager();
+
+            $fileName = $this->uploads->getFileName();
+            $tmpName = 'http://'.$_SERVER['SERVER_NAME'].$res;
+
+            list($Qret, $error) = $uploadMgr->put($this->QNToken,$fileName,file_get_contents($tmpName));
+            if(!$error){
+                unlink(__DIR__.'/../../../public'.$res);
+                $res = 'http://pjvj8fgws.bkt.clouddn.com/'.$fileName;
+            }else{
+                echo ($error);exit;
+            }
+        }
         die('{"status":0,"Succenss":true, "path": "'.$res.'","isFlash":"'.$isFlash.'"}');
     }
-
-
 }

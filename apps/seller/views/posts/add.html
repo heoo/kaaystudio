@@ -1,7 +1,8 @@
+
 {{ stylesheet_link("plugins/upload/css/webuploader.css") }}
 {{ javascript_include("plugins/upload/dist/webuploader.js") }}
 {{ stylesheet_link("plugins/upload/css/multi-file-upload.css") }}
-{{ javascript_include("plugins/upload/multi-file-upload.js") }}
+{{ javascript_include("plugins/upload/file-upload.js") }}
 
 {{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
 {{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
@@ -9,12 +10,28 @@
 {{ javascript_include("templates/boot/js/messages_zh.js") }}
 {{ javascript_include("templates/boot/js/cancel.js") }}
 
+{% if type != 'images' %}
+    {{ stylesheet_link("plugins/editor/css/wangEditor.css") }}
+    {{ javascript_include("plugins/editor/js/wangEditor.js") }}
+    {{ javascript_include("plugins/editor/plupload/plupload.full.min.js") }}
+    {{ javascript_include("plugins/editor/plupload/i18n/zh_CN.js") }}
+    {{ javascript_include("plugins/editor/qiniu.js") }}
+    {{ javascript_include("plugins/editor/uploads.js") }}
+{% endif %}
+
 <script>
     $(function(){
         FormPostsValidation.init();
+        {% if type != 'images' %}
+        // 生成编辑器
+        var editor = new wangEditor('editor');
+        editor.config.customUpload = true;
+        editor.config.customUploadInit = uploadInit;
+        editor.create();
+        {% endif %}
     });
 </script>
-
+<input type="hidden" id="token" value="{{token}}">
 
 <div class="row-fluid">
     <div class="span12">
@@ -34,14 +51,14 @@
                         </div>
 
                         <div class="control-group">
-                            <label for="name" class="control-label">项目名称</label>
+                            <label for="name" class="control-label">文章标题</label>
                             <div class="controls">
-                                <input type="text" placeholder="项目名称" class="m-wrap span5" name="name">
+                                <input type="text" placeholder="文章标题" class="m-wrap span5" name="name">
                             </div>
                         </div>
 
                         <div class="control-group">
-                            <label for="keyword" class="control-label">项目关键字</label>
+                            <label for="keyword" class="control-label">关键字</label>
                             <div class="controls">
                                 <input type="text" placeholder="项目关键字" class="m-wrap span5" name="keyword">
                                 <span style="color: #b94a48;" >多个以英文逗号【,】隔开</span>
@@ -50,7 +67,7 @@
 
                         <div class="control-group">
                             <!-- Textarea -->
-                            <label for="digest" class="control-label">项目摘要</label>
+                            <label for="digest" class="control-label">摘要</label>
                             <div class="controls">
                                 <div class="text">
                                     <textarea class="span5 m-wrap" rows="3" name="digest"></textarea>
@@ -58,31 +75,9 @@
                             </div>
                         </div>
 
-                        <div class="control-group">
-                            <label for="class" class="control-label">图片排版</label>
-                            <div class="controls">
-                                <label class="radio type" data-val="2">
-                                    <div class="radio"><span class=""><input type="radio" value="default" name="class" checked="checked"></span></div>
-                                    默认(700*453)
-                                </label>
-                                <label class="radio type" data-val="1">
-                                    <div class="radio"><span class=""><input type="radio" value="horizontal" name="class"></span></div>
-                                    水平(1200*389)
-                                </label>
-                                <label class="radio type" data-val="1">
-                                    <div class="radio"><span class=""><input type="radio" value="vertical" name="class"></span></div>
-                                    垂直(700*907)
-                                </label>
-                                <label class="radio type" data-val="1">
-                                    <div class="radio"><span class=""><input type="radio" value="large" name="class"></span></div>
-                                    放大(1200*777)
-                                </label>
-                            </div>
-                        </div>
 
                         <div class="control-group">
-                            <label for="attachment" class="control-label">项目图片
-                            </label>
+                            <label for="attachment" class="control-label">缩略图</label>
                             <!-- File Upload -->
                             <div class="controls">
                                 <div id="wrapper" style="width: 595px;">
@@ -106,44 +101,39 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <input type="hidden" id="multi-thumb" name="attachment">
+                                       <input type="hidden" id="thumb" name="thumb">
                                    </div>
                                 </div>
                                 <span style="color: #b94a48;" >附件格式【jpg,jpeg,png,gif,flv】</span>
                             </div>
                         </div>
 
+                        {% if type != 'images' %}
                         <div class="control-group">
-                            <!-- Textarea -->
-                            <label for="text" class="control-label">项目简介</label>
+                            <label for="text" class="control-label">文章内容</label>
                             <div class="controls">
-                                <div class="text">
-                                    <textarea class="span5 m-wrap" rows="3" name="text"></textarea>
-                                </div>
+                                <textarea class="text" name="text" style="height: 500px;" id="editor"></textarea>
                             </div>
                         </div>
-
-
+                        {% else %}
                         <div class="control-group">
-                            <label for="designer" class="control-label" >项目设计者</label>
+                            <label for="class" class="control-label">图片排版</label>
                             <div class="controls">
-                                <input type="text" placeholder="项目设计者" class="m-wrap span5" name="designer">
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label for="language" class="control-label">项目版型</label>
-                            <div class="controls">
-                                <label class="radio type" data-val="2">
-                                    <div class="radio"><span class=""><input type="radio" value="en" name="language"></span></div>
-                                    英文版
+                                <label class="radio type" data-val="default">
+                                    <div class="radio"><span class=""><input type="radio" value="default" name="class" checked="checked"></span></div>
+                                    默认(600*330)
                                 </label>
-                                <label class="radio type" data-val="1">
-                                    <div class="radio"><span class=""><input type="radio" value="zh" name="language"></span></div>
-                                    中文版
+                                <label class="radio type" data-val="wide">
+                                    <div class="radio"><span class=""><input type="radio" value="wide" name="class"></span></div>
+                                    水平(1250*auto)
+                                </label>
+                                <label class="radio type" data-val="portrait">
+                                    <div class="radio"><span class=""><input type="radio" value="portrait" name="class"></span></div>
+                                    垂直(600*710)
                                 </label>
                             </div>
                         </div>
+                        {% endif %}
 
                         <div class="control-group">
                             <label for="status" class="control-label">状态</label>
@@ -164,7 +154,6 @@
                             <button class="btn" type="button" onclick="mycancel()">取消</button>
                             <input type="hidden" id="actions" value="add" >
                             <input type="hidden" name="ctype" value="{{ctype}}" >
-                            <input type="hidden" id="thumb" name="thumb" value="" >
                             <span for="digits" class="message alert-error"></span>
                         </div>
                     </fieldset>

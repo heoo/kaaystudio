@@ -3,6 +3,7 @@ namespace Bpai\Seller\Controllers;
 use Phalcon\Tag,
     Bpai\Models\Posts,
     Bpai\Models\Category;
+use Qiniu\Auth;
 /**
  * @Created by PhpStorm.
  * @Date: 16-6-15
@@ -13,6 +14,8 @@ class PostsController extends ControllerBase
 {
     protected $Models;
     protected $Category;
+    protected $AK;
+    protected $SK;
 
     public function initialize()
     {

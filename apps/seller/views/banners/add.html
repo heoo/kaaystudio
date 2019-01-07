@@ -1,9 +1,7 @@
-
-
 {{ stylesheet_link("plugins/upload/css/webuploader.css") }}
 {{ javascript_include("plugins/upload/dist/webuploader.js") }}
 {{ stylesheet_link("plugins/upload/css/multi-file-upload.css") }}
-{{ javascript_include("plugins/upload/multi-file-upload.js") }}
+{{ javascript_include("plugins/upload/file-upload.js") }}
 
 {{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
 {{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
@@ -81,7 +79,7 @@
                             <!-- Text input-->
                             <label class="control-label" for="listorder">广告排序</label>
                             <div class="controls">
-                                <input class="input-xlarge span5 m-wrap" placeholder="广告排序(从大到小),默认0" name="listorder" type="text">
+                                <input class="input-xlarge span5 m-wrap" placeholder="广告排序(从大到小),默认0" name="listorder" type="text" value="0">
                                 <p class="help-block"></p>
                             </div>
                         </div>
@@ -110,7 +108,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" id="multi-thumb" name="logo">
+                                        <input type="hidden" id="thumb" name="logo">
                                     </div>
                                 </div>
                                 <span style="color: #b94a48;" >附件格式【jpg,jpeg,png,gif】</span>

@@ -1,0 +1,63 @@
+
+{{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
+{{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
+{{ javascript_include("templates/boot/js/form/form-system.js") }}
+{{ javascript_include("templates/boot/js/messages_zh.js") }}
+
+<script>
+    $(function(){
+        FormSystemValidation.init();
+    });
+</script>
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box light-grey">
+            <div class="portlet-body">
+
+                <form class="form-horizontal" method="POST" action="#" id="form-system" novalidate>
+                    <fieldset>
+                        <div class="alert alert-error hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证失败，请检查.
+                        </div>
+                        <div class="alert alert-success hide">
+                            <button class="close" data-dismiss="alert"></button>
+                            表单验证成功！
+                        </div>
+
+                        <div class="control-group">
+                            <label for="AccessKey" class="control-label">AccessKey</label>
+                            <div class="controls">
+                                <input type="text" placeholder="AccessKey" class="m-wrap span5" name="AccessKey" value="{{data.AccessKey}}">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="SecretKey" class="control-label">SecretKey</label>
+                            <div class="controls">
+                                <input type="text" placeholder="SecretKey" class="m-wrap span5" name="SecretKey" value="{{data.SecretKey}}">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="BucketName" class="control-label">BucketName</label>
+                            <div class="controls">
+                                <input type="text" placeholder="BucketName" class="m-wrap span5" name="BucketName" value="{{data.BucketName}}">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn green" type="submit"><i class="icon-ok"></i> 保存</button>
+                            <button class="btn" type="button" onclick="javascript:window.location.href='/{{ModuleName}}'">取消</button>
+                            <input type="hidden" id="actions" value="edit" >
+                            <input type="hidden" name="code" value="{{data.code}}" >
+                            <span for="digits" class="message alert-error"></span>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>

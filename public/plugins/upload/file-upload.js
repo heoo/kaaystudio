@@ -148,7 +148,7 @@
             swf: '/js/upload/dist/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: '/api/uploads/images',
+            server: '/seller/uploads/images',
             compress :{
                 width: 2000,
                 height: 1600
@@ -464,7 +464,7 @@
                 case 'finish':
                     stats = uploader.getStats();
                     if ( stats.successNum ) {
-                        $.messager.alert('success','封面设置成功');
+                        // $.messager('success','封面设置成功');
                         //alert( '上传成功' );
                     } else {
                         // 没有成功的图片，重设
@@ -481,8 +481,9 @@
         //上传成功
         uploader.on('uploadSuccess', function (file, response) {
             if (response.Succenss) {
-                $('#product-src').attr('src',response.path);
-                $('#product-thumb').val(response.path);
+                $('#thumb').val(response.path);
+                // $('#product-src').attr('src',response.path);
+                // $('#product-thumb').val(response.path);
                 //return;
             }
             //$.messager.alert('错误','文件上传失败','error');

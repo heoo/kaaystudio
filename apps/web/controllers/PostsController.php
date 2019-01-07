@@ -2,6 +2,7 @@
 namespace Bpai\Web\Controllers;
 use Phalcon\Tag;
 use Bpai\Models\Posts;
+use Bpai\Plugins\numPage;
 class PostsController extends ControllerBase {
 
     public $Models;
@@ -12,76 +13,28 @@ class PostsController extends ControllerBase {
 	}
 	
 	public function indexAction() {
+        $getData = $this->get();
+        $getData['page'] =  $getData['page'] ?  $getData['page'] : 1;
+        $getData['rows'] = $getData['rows'] ? $getData['rows'] : 12;
 
-        Tag::prependTitle('列表');
+        if($getData['cid']){
+            $category = self::getCategory($getData['cid']);
+            $this->view->setVar('category',$category);
+            Tag::setTitle($category['name']);
+        }
+        $data = $this->getPosts($getData['cid'],$getData['rows'],($getData['page']-1)*$getData['rows']);
+        $this->view->setVar('data',$data);
+        $this->view->setVar('getData',$getData);
 
-        if($this->isMobile()){
- 
-            $this->Models->setWhere(array('language'=>$this->Language,'status'=>1,'attachment'=>array('attachment','!=',''),'cid'=>intval($this->get('cid'))));
-            $this->Models->setOrder(array('id'=>'DESC'));
-            $res = $this->Models->findRec();
-            if($res){
+        $count = $this->getPostsCount($getData['cid']);
+        $myPage=new numPage($count,intval($getData['page']),$getData['rows']);
+        $pageStr= $myPage->GetPagerContent();
+        $this->view->setVar('pages',$pageStr);
+        $this->view->setVar('countPages',ceil($count/$getData['rows']));
 
-                Tag::prependTitle($res->name.'-');
-                if($res->attachment){
-
-                    $attachment = explode(',',$res->attachment);
-                }
-
-                $this->view->setVar('data',$res);
-                $this->view->setVar('attachment',$attachment);
-
-                $this->view->setVar('count',count($attachment));
-                $this->view->setVar('next',$this->getNearId($res->id));
-
-                $this->view->setVar('previous',$this->getNearId($res->id,'previous'));
-
-                $this->view->pick('posts/details-wap');
-
-            }else{
-
-                $this->response->redirect("/{$this->router->getModuleName()}/error",true);
-            }
-
-        }else{
-
-            $this->view->setVar('data',$this->getPosts($this->get('cid')));
-            $this->view->pick('index/index');
+        if($category['type'] == 'images'){
+            $this->view->pick('posts/images');
         }
 	}
 
-    public function detailsAction(){
-
-        $this->Models->setWhere(array('id'=>$this->get('id'),'language'=>$this->Language,'status'=>1,'attachment'=>array('attachment','!=','')));
-        $res = $this->Models->findRec();
-        if($res){
-
-            Tag::prependTitle($res->name.'-');
-            if($res->attachment){
-
-                $attachment = explode(',',$res->attachment);
-            }
-
-            $this->view->setVar('data',$res);
-            $this->view->setVar('attachment',$attachment);
-
-            $this->view->setVar('count',count($attachment));
-            $this->view->setVar('next',$this->getNearId($res->id));
-
-            $this->view->setVar('previous',$this->getNearId($res->id,'previous'));
-
-            if($this->isMobile()){
-                $this->view->pick('posts/details-wap');
-            }
-        }else{
-
-            $this->response->redirect("/{$this->router->getModuleName()}/error",true);
-        }
-    }
-
-    public function iframeAction(){
-        $this->view->setTemplateAfter('null');
-
-    }
-	
 }

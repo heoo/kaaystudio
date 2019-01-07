@@ -3,11 +3,16 @@ namespace Bpai\Seller\Controllers;
 
 use Phalcon\Exception;
 use Phalcon\Mvc\Controller;
+use Qiniu\Auth;
+use Bpai\Models\System;
+
 
 class ControllerAbstract extends Controller
 {
     protected $user;
     protected $tagConfig;
+    protected $QNToken;
+    protected $System;
 
     protected function initialize(){
         $this->user = $this->session->get('admins');
@@ -23,7 +28,23 @@ class ControllerAbstract extends Controller
 
         $this->tagConfig = include __DIR__ . "/../../../config/tagConfig.php";
         $this->view->setVar('tagConfig',$this->tagConfig);
+        $this->QNToken = $this->session->get('QNToken')['token'];
 
+        if($this->session->get('system') == false){
+            self::getSystem();
+        }
+        $this->System = $this->session->get('system');
+
+        if( empty($this->QNToken) || $this->session->get('QNToken')['deadline']+3600 < time() && $this->System['AccessKey'] && $this->System['SecretKey'] && $this->System['BucketName']){
+            $auth = new Auth($this->System['AccessKey'], $this->System['SecretKey']);
+            $policy = array(
+                'returnBody' => '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)"}',
+                'callbackBodyType' => 'application/json'
+            );
+            $this->QNToken = $auth->uploadToken($this->System['BucketName'], null, 3600, $policy, true);
+            $this->session->set('QNToken',array('token'=>$this->QNToken,'deadline'=>time()));
+        }
+        $this->view->setVar("token",$this->QNToken);
     }
 
     /**
@@ -51,9 +72,9 @@ class ControllerAbstract extends Controller
                     }
                     if($elementKey != 'posts') {
                         if ($roleCode == '7b8312f30b') {
-                            $liHtml .= '<li ' . $class . '><a href="' . $urlArr[1] . '"' . $class . ' >' . $urlArr[0] . '</a></li>';
+                            $liHtml .= "<li {$class}><a href='{$urlArr[1]}' {$class} >{$urlArr[0]}</a></li>";
                         } else if (is_array($aclsNav) && in_array($elementKey, $aclsNav)) {
-                            $liHtml .= '<li ' . $class . '><a href="' . $urlArr[1] . ' ">' . $urlArr[0] . '</a></li>';
+                            $liHtml .= "<li {$class}><a href='{$urlArr[1]}' {$class} >{$urlArr[0]}</a></li>";
                         }
                     }
                     if($elementKey == 'posts'){
@@ -77,14 +98,14 @@ class ControllerAbstract extends Controller
 
                 if($this->router->getControllerName() == $navVal['controller'] )
                 {
-                    $class = ' class="active"';
+                    $class = 'class="active"';
                 }
-                $divHtml .= ' <li '.$class.' data-key="'.$navVal['controller'].'-'.$this->router->getControllerName();
-                $divHtml .= '" class="'.$open.'" ><a href="javascript:;">
-                              <i class="icon-sitemap"></i>
-                              <span class="title">'.$navVal['name'].'</span>
-                              <span class="arrow '.$open.'"></span>
-                              </a> <ul class="sub-menu" '.$display.'>'.$liHtml.'</ul></li>';
+                $divHtml .= "<li {$class} data-key='{$navVal['controller']}-{$this->router->getControllerName()}'";
+                $divHtml .= "class='{$open}' ><a href='javascript:;'>
+                              <i class='{$navVal['icons']}'></i>
+                              <span class='title'>{$navVal['name']}</span>
+                              <span class='arrow {$open}'></span>
+                              </a> <ul class='sub-menu {$display}'>{$liHtml}</ul></li>";
             }
         }
 
@@ -118,7 +139,7 @@ class ControllerAbstract extends Controller
         }
     }
 
-    function trimString( $String , $key){
+    public function trimString( $String , $key){
         $tmp = '';
         if($String){
             $arr = explode($key,$String);
@@ -134,16 +155,28 @@ class ControllerAbstract extends Controller
         return $String;
     }
 
+
+    protected function getSystem(){
+        $Models = new System();
+        $this->session->set('system',$Models->findRec()->toArray());
+    }
+
+
     public function getCoreMenus()
     {
         $string = '';
         $Obj = new \Bpai\Models\Category();
         $Obj->setField(array('name','id','type'));
-        $Obj->setOrder(array('id'=>'DESC'));
+        $Obj->setOrder(array('listorder'=>'DESC'));
         $res = $Obj->listRec();
         if($res){
             foreach($res as $val){
-                $string .= "<li><a href='/{$this->router->getModuleName()}/posts/list?ctype={$val->id}|{$val->type}'>{$val->name}</a></li>";
+                $ctype = "{$val->id}|{$val->type}";
+                $class = '';
+                if($this->get('ctype') == $ctype){
+                    $class = 'active';
+                }
+                $string .= "<li class='{$class}'><a href='/{$this->router->getModuleName()}/posts/list?ctype={$ctype}'>{$val->name}</a></li>";
             }
         }
         return $string;

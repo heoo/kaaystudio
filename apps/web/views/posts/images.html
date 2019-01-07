@@ -1,0 +1,54 @@
+<div class="site-container">
+    {{partial("layouts/header")}}
+</div>
+
+<div class="site-inner">
+
+    <div class="content-sidebar-wrap" id="masonry">
+
+
+
+
+
+
+{% if data %}
+        {% for posts in data %}
+        <div data-rel="{{posts['id']}}" class="single-work {{posts['class']}} {% if loop.first %}firstWork{% endif %} {% if loop.last %}lastWork{% endif %}">
+            <a href="{{posts['thumb']}}">
+                <img src="{{posts['thumb']}}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="{{posts['name']}}l" width="{{posts['attachment']}}" >
+                <div class="work-title">{{posts['name']}}</div>
+                <div class="work-description"></div>
+                <div class="work-author">{{posts['digest']}}</div>
+            </a>
+        </div>
+        {% endfor %}
+{% else %}
+    <h4 class="text-center">暂无数据</h4>
+{% endif %}
+
+        {{pages}}
+
+    <div id="preload" style="display: none;">
+        {% if data %}
+            {% for images in data %}
+                <img src="{{images['thumb']}}">
+            {% endfor %}
+        {% endif %}
+    </div>
+
+
+    <div class="modal-wrapper">
+        <div class="modal-inner"></div>
+        <div class="modal-nav prev">&nbsp;</div>
+        <div class="modal-nav next">&nbsp;</div>
+    </div>
+    <main class="content" id="genesis-content">
+        <div class="archive-description cpt-archive-description">
+            <h1 class="archive-title">{{category['name']}}</h1>
+        </div>
+    </main>
+
+    </div>
+</div>
+
+{{ javascript_include("templates/white/js/images.js") }}

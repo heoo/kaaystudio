@@ -71,7 +71,7 @@
 
 #uploader .filelist {
     list-style: none;
-    margin: 0;
+    margin: 10px 0px 0px 0px;
     padding: 0;
 }
 
@@ -122,7 +122,7 @@
     left: 0;
     height: 8px;
     overflow: hidden;
-    z-index: 50;
+    /*z-index: 50;*/
 }
 #uploader .filelist li p.progress span {
     display: none;
@@ -195,6 +195,7 @@
 
 #uploader .filelist li img {
     width: 100%;
+    height: 100%;
 }
 
 #uploader .filelist li p.error {

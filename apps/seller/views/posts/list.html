@@ -14,11 +14,6 @@
 
                 where +='status='+status+'&';
             }
-            var language = $("select[name='language']").val();
-            if(language){
-
-                where +='language='+language+'&';
-            }
             var ctype = $("#ctype").val(); 
             if(ctype){
 
@@ -44,36 +39,35 @@
         </button>
     </div>
     <div class="btn-group">
-        <button id="edit" class="btn green">编辑 <i class="icon-edit"></i>
-        </button>
+        <button id="edit" class="btn green">编辑 <i class="icon-edit"></i></button>
     </div>
     <div class="btn-group">
-        <button id="delete" class="btn red">删除 <i class="icon-remove"></i>
-        </button>
+        <button id="delete" class="btn red">删除 <i class="icon-trash"></i></button>
     </div>
     <!--- 隐藏传值 -->
     <input type="hidden" name="page" value="{{getData['page']}}">
     <input type="hidden" id="ctype" value="{{getData['ctype']}}">
+    {% if getData['module'] == 'posts' %}
     <!--- 搜索表单 -->
     <div class="btn-group">
 
         <div class="btn-group">
-            <input type="text" name="name" value="{{getData['name']}}" style='margin-right:3px;' class='span6' placeholder="请输入项目名称"/>
+            <input type="text" name="name" value="{{getData['name']}}" style='margin-right:3px;' class='span6' placeholder="请输入文章标题"/>
 
-            <select name="language" style='margin-right:3px;' class='span4'>
-                <option value="">项目版型</option>
-                <option {% if getData['language']=='en' %} selected {% endif %} value="en">英文</option>
-                <option {% if getData['language']=='zh' %} selected {% endif %} value="zh">中文</option>
-            </select>
             <select name="status" style='margin-right:3px;' class='span4'>
                 <option value="">状态</option>
                 <option {% if getData['status']=='0' %} selected {% endif %} value="0">删除</option>
                 <option {% if getData['status']==1 %} selected {% endif %} value="1">启用</option>
             </select>
-            <button type="submit" class="btn yellow list-search" style="margin-left:5px;">搜索<i class="icon-search"/></i></button>
+
+            <div class="btn-group">
+                <button class="btn yellow list-search">搜索<i class="icon-search"></i></button>
+            </div>
         </div>
 
     </div>
+    {% endif %}
+
 </div>
 
     {{ partial("posts/data") }}
