@@ -166,6 +166,7 @@ class ControllerAbstract extends Controller
     {
         $string = '';
         $Obj = new \Bpai\Models\Category();
+        $Obj->setWhere(array(array('type','!=','url')));
         $Obj->setField(array('name','id','type'));
         $Obj->setOrder(array('listorder'=>'DESC'));
         $res = $Obj->listRec();
