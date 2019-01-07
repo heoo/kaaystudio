@@ -8,3 +8,4 @@ cache/seller/*
 cache/web/*
 composer.lock
 public/uploads/*
+kaay.sql
