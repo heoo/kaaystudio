@@ -28,22 +28,21 @@ class ControllerAbstract extends Controller
 
         $this->tagConfig = include __DIR__ . "/../../../config/tagConfig.php";
         $this->view->setVar('tagConfig',$this->tagConfig);
-        $this->QNToken = $this->session->get('QNToken');
+        $this->QNToken = $this->session->get('QNToken')['token'];
 
-        if($this->session->get('system') == true){
+        if($this->session->get('system') == false){
             self::getSystem();
         }
         $this->System = $this->session->get('system');
 
-        if(!$this->QNToken && $this->System['AccessKey'] && $this->System['SecretKey'] && $this->System['BucketName']){
+        if( empty($this->QNToken) || $this->session->get('QNToken')['deadline']+3600 < time() && $this->System['AccessKey'] && $this->System['SecretKey'] && $this->System['BucketName']){
             $auth = new Auth($this->System['AccessKey'], $this->System['SecretKey']);
-
             $policy = array(
                 'returnBody' => '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)"}',
                 'callbackBodyType' => 'application/json'
             );
             $this->QNToken = $auth->uploadToken($this->System['BucketName'], null, 3600, $policy, true);
-            $this->session->set('QNToken',$this->QNToken);
+            $this->session->set('QNToken',array('token'=>$this->QNToken,'deadline'=>time()));
         }
         $this->view->setVar("token",$this->QNToken);
     }

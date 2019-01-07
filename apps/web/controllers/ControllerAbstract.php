@@ -192,7 +192,7 @@ class ControllerAbstract extends Controller
         return $number;
     }
 
-    public function getPosts($cid=0,$order='id',$rows=0,$start=0){
+    public function getPosts($cid=0,$rows=0,$start=0){
 
         $arr = array();
         $Models = new Posts();
@@ -202,7 +202,7 @@ class ControllerAbstract extends Controller
         }
         $rows = $rows ? $rows : 10;
         $Models->setWhere($where);
-        $Models->setOrder(array($order=>'DESC'));
+        $Models->setOrder(array('id'=>'ASC'));
         $Models->setLimit($rows,$start);
         $data = $Models->listRec();
         if($data){

@@ -49,6 +49,8 @@ class UploadsController extends ControllerBase
             if(!$error){
                 unlink(__DIR__.'/../../../public'.$res);
                 $res = 'http://pjvj8fgws.bkt.clouddn.com/'.$fileName;
+            }else{
+                echo ($error);exit;
             }
         }
         die('{"status":0,"Succenss":true, "path": "'.$res.'","isFlash":"'.$isFlash.'"}');

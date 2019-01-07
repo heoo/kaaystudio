@@ -4,6 +4,8 @@ jQuery(".works-archive .site-inner a").click(function(){
         var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         $currentImg = jQuery(this);
 
+        console.log(jQuery(this).attr('href'))
+
         jQuery( window ).height();
         jQuery(".modal-wrapper").show();
         jQuery(".modal-wrapper").css('line-height', jQuery( window ).height() + 'px');
@@ -49,6 +51,10 @@ function modal_next() {
     else {
         $currentImg = $currentImg.parent().next().children();
     }
+    console.log($currentImg.attr('href'))
+    if($currentImg.attr('href') == undefined){
+        return
+    }
     jQuery(".modal-inner img").attr('src', $currentImg.attr('href'));
     jQuery('.modal-title p.modal-description').text($currentImg.children('.work-description').text());
     jQuery('.modal-title p.modal-title-top').text($currentImg.children('.work-title').text());
@@ -65,6 +71,10 @@ function modal_prev(){
     }
     else {
         $currentImg = $currentImg.parent().prev().children();
+    }
+    console.log($currentImg.attr('href'))
+    if($currentImg.attr('href') == undefined){
+        return
     }
     jQuery(".modal-inner img").attr('src', $currentImg.attr('href'));
     jQuery('.modal-title p.modal-description').text($currentImg.children('.work-description').text());

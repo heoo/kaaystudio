@@ -115,6 +115,24 @@
                                 <textarea class="text" name="text" style="height: 500px;" id="editor"></textarea>
                             </div>
                         </div>
+                        {% else %}
+                        <div class="control-group">
+                            <label for="class" class="control-label">图片排版</label>
+                            <div class="controls">
+                                <label class="radio type" data-val="default">
+                                    <div class="radio"><span class=""><input type="radio" value="default" name="class" checked="checked"></span></div>
+                                    默认(600*330)
+                                </label>
+                                <label class="radio type" data-val="wide">
+                                    <div class="radio"><span class=""><input type="radio" value="wide" name="class"></span></div>
+                                    水平(1250*auto)
+                                </label>
+                                <label class="radio type" data-val="portrait">
+                                    <div class="radio"><span class=""><input type="radio" value="portrait" name="class"></span></div>
+                                    垂直(600*710)
+                                </label>
+                            </div>
+                        </div>
                         {% endif %}
 
                         <div class="control-group">
