@@ -2,7 +2,8 @@
 use Phalcon\Http\Response\Cookies;
 
 //error_reporting(E_ALL ^E_WARNING ^ E_NOTICE);
-error_reporting(E_ALL);
+error_reporting(0);
+//error_reporting(E_ALL);
 //$debug = new \Phalcon\Debug();
 //$debug->listen();
 try {
