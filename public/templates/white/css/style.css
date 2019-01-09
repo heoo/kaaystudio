@@ -417,7 +417,7 @@ h4 {
 .solid-section .widget-title {
 	border-width: 0;
     font-size: 52px;
-    font-size: 4.2rem;
+    font-size: 3.8rem;
     font-weight: 900;
     padding-bottom: 0;
     margin-bottom: 50px;
@@ -588,7 +588,7 @@ input[type="submit"],
 	color: #000;
 	cursor: pointer;
 	font-size: 18px;
-	font-size: 1.8rem;
+	font-size: 1.3rem;
 	font-weight: 400;
 	letter-spacing: 2px;
 	padding: 10px 15px 12px;
