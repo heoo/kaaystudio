@@ -34,7 +34,12 @@ class ControllerAbstract extends Controller
         $this->view->setVar('links',self::getLinks());
         $this->view->setVar('banners',self::getBanners());
 
-        $this->view->setVar('url','http://'.$this->request->getHttpHost().$this->request->getURI());
+        $url = $this->request->getHttpHost().$this->request->getURI();
+        $this->view->setVar('url',"http://{$url}");
+
+        $LanguageUrl = self::checkLanguage() ? str_replace('en.','',$url): "en.{$url}"  ;
+        $this->view->setVar('LanguageUrl',"http://{$LanguageUrl}");
+
     }
 
     public function getNavigation(){
