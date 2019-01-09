@@ -33,15 +33,14 @@ function checksubmit(){
 	var contents = $("textarea[name='contents']").val()
 	if( name!='' && email!='' && contents!=''){
 		if(checkmail()){
-			Alert('邮件发送中。。。');
 			$.post(BASE_URL+'send',{name : name,email :	email,messages:	contents},
 				function(msg,b){
-				console.log(msg)
+				console.log('msg-----'+msg)
 					console.log(b)
-					if(b == 'success'){
+					if(msg === ''){
 						$("#success").load('success.html');
 					}else{
-						$('#success').load('error.html');
+						Alert(msg)
 					}
 				}
 			);

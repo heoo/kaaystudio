@@ -2,7 +2,8 @@
 namespace Bpai\Web\Controllers;
 use Phalcon\Tag;
 use Bpai\Models\Posts;
-use Bpai\Plugins\smtp;
+use PHPMailer\PHPMailer\PHPMailer;
+
 class DetailsController extends ControllerBase {
 
     public $Models;
@@ -58,6 +59,26 @@ class DetailsController extends ControllerBase {
         if($this->post()){
             $postData = $this->post();
 
+            $mail = new PHPMailer;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.qq.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = '408648033@qq.com';
+            $mail->Password = 'pnqpraaqmdhobjic';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+            $mail->CharSet = 'UTF-8';
+            $mail->FromName = $this->System['web_name'];
+            $mail->setFrom($mail->Username);
+            $mail->addAddress($postData['email']);
+
+            $mail->Subject = trim($postData['name']); //邮件的主题
+            $mail->Body    = trim($postData['messages']);
+            if(!$mail->send()) {
+                return $mail->ErrorInfo;
+            } else {
+                return '';
+            }
         }else{
             $this->response->redirect("/",true);
         }

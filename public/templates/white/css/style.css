@@ -3515,9 +3515,17 @@ p.form-submit,
 }
 .kaay-form-div{
 	float: left;
-	width: calc(50% - 50px);
-	margin-right: 50px;
+	/*width: calc(50% - 50px);*/
+}
+.kaay-first{
+	margin-right: 10px;
 	margin-left: 0;
+	width: calc(65% - 10px) !important;
+}
+ .kaay-right{
+	/*margin-right: 50px;*/
+	margin-left: 0;
+	width: calc(35% - 10px);
 }
 .kaay-form input ,textarea{
 	width: 90%;
