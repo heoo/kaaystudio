@@ -59,21 +59,30 @@ class DetailsController extends ControllerBase {
         if($this->post()){
             $postData = $this->post();
 
+            $name = trim($postData['name']);
+            $email = trim($postData['email']);
+            $contents = trim($postData['messages']);
+
             $mail = new PHPMailer;
             $mail->isSMTP();
             $mail->Host = 'smtp.qq.com';
             $mail->SMTPAuth = true;
             $mail->Username = '408648033@qq.com';
-            $mail->Password = 'pnqpraaqmdhobjic';
+            $mail->Password = '';
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
             $mail->CharSet = 'UTF-8';
+            $mail->From = $this->System['web_name'];
             $mail->FromName = $this->System['web_name'];
             $mail->setFrom($mail->Username);
             $mail->addAddress($postData['email']);
-
-            $mail->Subject = trim($postData['name']); //邮件的主题
-            $mail->Body    = trim($postData['messages']);
+            $messages = "\n
+                        Name:{$name} \n
+                        Email:{$email} \n
+                        Contents:{$contents}
+            ";
+            $mail->Subject = $name; //邮件的主题
+            $mail->Body    = $messages;
             if(!$mail->send()) {
                 return $mail->ErrorInfo;
             } else {

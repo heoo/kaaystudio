@@ -36,9 +36,9 @@ function checksubmit(){
 			$.post(BASE_URL+'send',{name : name,email :	email,messages:	contents},
 				function(msg,b){
 				console.log('msg-----'+msg)
-					console.log(b)
 					if(msg === ''){
-						$("#success").load('success.html');
+						Alert('success')
+						window.location.href='/'
 					}else{
 						Alert(msg)
 					}

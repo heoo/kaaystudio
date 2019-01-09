@@ -67,7 +67,7 @@
     txt.innerHTML = str;  
     document.getElementById("alertmsgDiv").appendChild(txt);  
     //设置关闭时间  
-    window.setTimeout("closewin()",20000000);
+    window.setTimeout("closewin()",1000);
 }  
 function closewin() {  
     document.body.removeChild(document.getElementById("alertbgDiv"));  
