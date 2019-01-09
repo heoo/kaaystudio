@@ -417,7 +417,7 @@ h4 {
 .solid-section .widget-title {
 	border-width: 0;
     font-size: 52px;
-    font-size: 5.2rem;
+    font-size: 4.2rem;
     font-weight: 900;
     padding-bottom: 0;
     margin-bottom: 50px;
@@ -1336,7 +1336,7 @@ img.alignright,
 	/*float: left;*/
 	padding: 13px 0;
 	margin: 0 auto;
-	width: 120px;
+	width: 100%;
 }
 
 
@@ -1349,6 +1349,7 @@ img.alignright,
 	margin-bottom: 0;
 	text-transform: uppercase;
 	margin: 12px 0 8px;
+	/*padding-top: 1em;*/
 }
 
 .site-title a,
@@ -1364,9 +1365,9 @@ img.alignright,
 
 .header-image .site-title > a {
 	background-size: contain !important;
-	background-position: 100% 10%;
+	background-position: 50% 10%;
 	display: block;
-	height: 30px;
+	height: 2em;
 	text-indent: -9999px;
 }
 
@@ -1434,7 +1435,7 @@ img.alignright,
 	color: #000;
 	display: inline-block;
 	font-size: 60px;
-	font-size: 6rem;
+	font-size: 5rem;
 	font-weight: 900;
 	letter-spacing: 1px;
 	padding: 10px 15px;
@@ -3326,7 +3327,14 @@ p.form-submit,
 
 	.front-page-4 .testimonials-slider blockquote {
     	padding: 0 80px;
-}
+	}
+	.kaay-form-div{
+		clear: both;
+		width: 100% !important;
+	}
+	.kaay-first{
+		width: 100% !important;
+	}
 
 }
 
@@ -3504,6 +3512,51 @@ p.form-submit,
 	column-width: 100px;
 	text-align: justify;
 	column-fill: balance;
+}
+.kaay-form-div{
+	float: left;
+	/*width: calc(50% - 50px);*/
+}
+.kaay-first{
+	margin-right: 10px;
+	margin-left: 0;
+	width: calc(65% - 10px) !important;
+}
+ .kaay-right{
+	/*margin-right: 50px;*/
+	margin-left: 0;
+	width: calc(35% - 10px);
+}
+.kaay-form input ,textarea{
+	width: 90%;
+	padding: 0;
+	margin-bottom: 20px;
+}
+.kaay-wrap{
+	max-width: 90%;
+	margin: 0 auto;
+	height: 4em;
+}
+.kaay-wrap .kaay-logo{
+	text-align: center;
+	margin-left: 40%;
+}
+.kaay-wrap .kaay-logo img{
+	width: 12em;
+	height: 4em;
+	display: inline-block;
+}
+.kaay-nav{
+	float: right;
+	padding-top: 1em;
+}
+.kaay-ul li{
+	padding: 0.5em 0.2em;
+	display: inline-block;
+}
+.kaay-ul li a img{
+	width: 2em;
+	height: 2em;
 }
 
 /* latin-ext */

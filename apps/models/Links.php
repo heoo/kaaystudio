@@ -9,6 +9,7 @@ class Links extends \Catchtech\Extensions\Model\BaseModel
     protected $code;
     protected $key;
     protected $name;
+    protected $language;
     protected $logo;
     protected $siteurl;
     protected $listorder;
@@ -19,6 +20,23 @@ class Links extends \Catchtech\Extensions\Model\BaseModel
     protected $createdby;
     protected $updated;
     protected $updatedby;
+
+    /**
+     * @return mixed
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param mixed $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+    }
+
 
     /**
      * @return mixed

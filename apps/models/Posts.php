@@ -11,10 +11,13 @@ class Posts extends \Catchtech\Extensions\Model\BaseModel
     protected $keyword;
     protected $cid;
     protected $name;
+    protected $en_name;
     protected $class;
     protected $thumb;
     protected $digest;
+    protected $en_digest;
     protected $text;
+    protected $en_text;
     protected $attachment;
     protected $designer;
     protected $hits;
@@ -24,6 +27,55 @@ class Posts extends \Catchtech\Extensions\Model\BaseModel
     protected $created;
     protected $createdby;
     protected $updated;
+
+    /**
+     * @return mixed
+     */
+    public function getEnName()
+    {
+        return $this->en_name;
+    }
+
+    /**
+     * @param mixed $en_name
+     */
+    public function setEnName($en_name)
+    {
+        $this->en_name = $en_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnDigest()
+    {
+        return $this->en_digest;
+    }
+
+    /**
+     * @param mixed $en_digest
+     */
+    public function setEnDigest($en_digest)
+    {
+        $this->en_digest = $en_digest;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnText()
+    {
+        return $this->en_text;
+    }
+
+    /**
+     * @param mixed $en_text
+     */
+    public function setEnText($en_text)
+    {
+        $this->en_text = $en_text;
+    }
+
 
     /**
      * @return mixed

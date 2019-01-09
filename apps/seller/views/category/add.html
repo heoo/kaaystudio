@@ -3,28 +3,15 @@
 {{ stylesheet_link("plugins/upload/css/multi-file-upload.css") }}
 {{ javascript_include("plugins/upload/file-upload.js") }}
 
-{{ stylesheet_link("plugins/editor/css/wangEditor.css") }}
-{{ javascript_include("plugins/editor/js/wangEditor.js") }}
-{{ javascript_include("plugins/editor/plupload/plupload.full.min.js") }}
-{{ javascript_include("plugins/editor/plupload/i18n/zh_CN.js") }}
-{{ javascript_include("plugins/editor/qiniu.js") }}
-{{ javascript_include("plugins/editor/uploads.js") }}
 
 <!-- 表单验证 -->
 {{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
 {{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
 {{ javascript_include("templates/boot/js/messages_zh.js") }}
 {{ javascript_include("templates/boot/js/form/form-category.js") }}
-{{ javascript_include("templates/boot/js/cancel.js") }}
  <script>
     $(function(){
         FormCategoryValidation.init();
-
-        // 生成编辑器
-        var editor = new wangEditor('editor');
-        editor.config.customUpload = true;
-        editor.config.customUploadInit = uploadInit;
-        editor.create();
     });
 </script>
 
@@ -65,6 +52,15 @@
                             <label class="control-label" for="name">栏目名称</label>
                             <div class="controls">
                                 <input class="input-xlarge span3 m-wrap" name="name" type="text" required>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Text input-->
+                            <label class="control-label" for="en_name">英文名称</label>
+                            <div class="controls">
+                                <input class="input-xlarge span3 m-wrap" name="en_name" type="text" required>
                                 <p class="help-block"></p>
                             </div>
                         </div>
@@ -110,10 +106,24 @@
                             </div>
                         </div>
 
+
                         <div class="control-group">
+                            <!-- Textarea -->
                             <label for="text" class="control-label">栏目简介</label>
                             <div class="controls">
-                                <textarea class="text" name="text" style="height: 500px;" id="editor"></textarea>
+                                <div class="text">
+                                    <textarea class="span5 m-wrap" rows="4" name="text"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Textarea -->
+                            <label for="en_text" class="control-label">英文简介</label>
+                            <div class="controls">
+                                <div class="text">
+                                    <textarea class="span5 m-wrap" rows="4" name="en_text"></textarea>
+                                </div>
                             </div>
                         </div>
 
@@ -165,8 +175,8 @@
                         </div>
 
                         <div class="form-actions">
-                            <button class="btn green" type="submit"><i class="icon-ok"></i> 保存</button>
-                            <button class="btn" type="button" onclick="mycancel()">取消</button>
+                            <button class="btn green" type="submit"><i class="am-icon-check"></i>保存</button>
+                            <button class="btn" type="button" onclick="window.location.href=BASE_URL+'list';">取消</button>
                             <input type="hidden" id="actions" value="add" >
                             <span for="digits" class="message alert-error"></span>
                         </div>
