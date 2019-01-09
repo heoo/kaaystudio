@@ -23,5 +23,20 @@ return array(
         'index'=>'首页',
         'posts'=>'栏目页',
         'details'=>'内容页'
+    ),
+    'Icons'=>array(
+        'am-icon-qq',
+        'am-icon-weibo',
+        'am-icon-weixin',
+        'am-icon-tencent-weibo',
+        'am-icon-twitter',
+        'am-icon-facebook',
+        'am-icon-facebook-square',
+        'am-icon-twitter',
+        'am-icon-twitter-square',
+        'am-icon-google-plus-square',
+        'am-icon-youtube',
+        'am-icon-youtube-square',
+        'am-icon-instagram'
     )
 );

@@ -35,7 +35,6 @@ class ControllerAbstract extends Controller
         $this->view->setVar('banners',self::getBanners());
 
         $this->view->setVar('url','http://'.$this->request->getHttpHost().$this->request->getURI());
-        $this->_Language = self::checkLanguage();
     }
 
     public function getNavigation(){
@@ -56,7 +55,7 @@ class ControllerAbstract extends Controller
                 }elseif($val->type == 'url'){
                     $url = $val->val;
                 }
-                if($this->_Language)
+                if(self::checkLanguage())
                     $val->name = $val->en_name;
                 if($val->name)
                     $Navigation[] = array('name'=>$val->name,'url'=>$url);
@@ -244,7 +243,7 @@ class ControllerAbstract extends Controller
     }
     protected function getLinks(){
         $result = array();
-        $language = $this->_Language ? 'en' : 'zh';
+        $language = self::checkLanguage() ? 'en' : 'zh';
         $Models = new \Bpai\Models\Links();
         $Models->setWhere(array('status'=>1,'language'=>$language));
         $Models->setField(array('name','logo','siteurl','type'));

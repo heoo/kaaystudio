@@ -19,7 +19,7 @@ class DetailsController extends ControllerBase {
             $data = $result->toArray();
         }
 
-        if($this->_Language){
+        if($this->checkLanguage()){
             $data['name'] = $data['en_name'];
             $data['text'] = $data['en_text'];
             $data['digest'] = $data['en_digest'];
@@ -67,7 +67,7 @@ class DetailsController extends ControllerBase {
             $mail->isSMTP();
             $mail->Host = 'smtp.qq.com';
             $mail->SMTPAuth = true;
-            $mail->Username = '408648033@qq.com';
+            $mail->Username = '';
             $mail->Password = '';
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;

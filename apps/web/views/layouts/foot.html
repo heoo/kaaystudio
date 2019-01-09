@@ -5,7 +5,7 @@
         <li class="menu-item"><a itemprop="url" href="/">首页.</a></li>
         {% if navigation %}
             {% for nav in navigation %}
-                <li class="menu-item"><a href="{{nav['url']}}" itemprop="url">{{nav['name']}}.</a></li>
+                <li class="menu-item"><a href="{{nav['url']}}">{{nav['name']}}.</a></li>
             {% endfor %}
         {% endif %}
     </ul>
@@ -22,9 +22,9 @@
                         <div class="contact-details">
                             <p class="social-media">
                                 {% for link in links %}
-                                <a target="_blank" href="{{link['siteurl']}}">
-                                    <i class="fab"><img src="{{link['logo']}}"></i>
-                                </a>
+                                    <a target="_blank" href="{{link['siteurl']}}">
+                                        <span class="{{link['logo']}}"></span>
+                                    </a>
                                 {% endfor %}
                             </p>
                             <p class="p8"><a href="mailto:{{system['email']}}">{{system['email']}}</a>

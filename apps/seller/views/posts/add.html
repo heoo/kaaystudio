@@ -10,6 +10,7 @@
 {{ javascript_include("templates/boot/js/messages_zh.js") }}
 {{ javascript_include("templates/boot/js/cancel.js") }}
 
+
 {% if type != 'images' %}
     {{ stylesheet_link("plugins/editor/css/wangEditor.css") }}
     {{ javascript_include("plugins/editor/js/wangEditor.js") }}
@@ -179,7 +180,7 @@
                         </div>
 
                         <div class="form-actions">
-                            <button class="btn green" type="submit"><i class="icon-ok"></i> 保存</button>
+                            <button class="btn green" type="submit"><i class="am-icon-check"></i> 保存</button>
                             <button class="btn" type="button" onclick="mycancel()">取消</button>
                             <input type="hidden" id="actions" value="add" >
                             <input type="hidden" name="ctype" value="{{ctype}}" >

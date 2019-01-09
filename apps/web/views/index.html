@@ -9,8 +9,10 @@
     <meta name="keywords" content="{% if data['keyword']%}{{data['keyword']}}{% else %}{{system['seo_keywords']}}{% endif %}"/>
     <meta name="description" content="{{system['description']}}"/>
     {{ get_title() }}
+    {{ stylesheet_link("templates/white/css/all.css") }}
+    {{ stylesheet_link("templates/white/css/amazeui.min.css") }}
+
     {{ stylesheet_link("templates/white/css/style.css") }}
-    {{ stylesheet_link("templates/white/css/icon.min.css") }}
 
     {{ javascript_include("templates/white/js/jquery.js") }}
     {{ javascript_include("templates/white/js/jquery-migrate.min.js") }}

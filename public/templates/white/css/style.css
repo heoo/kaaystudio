@@ -3532,6 +3532,32 @@ p.form-submit,
 	padding: 0;
 	margin-bottom: 20px;
 }
+.kaay-wrap{
+	max-width: 90%;
+	margin: 0 auto;
+	height: 4em;
+}
+.kaay-wrap .kaay-logo{
+	text-align: center;
+	margin-left: 40%;
+}
+.kaay-wrap .kaay-logo img{
+	width: 12em;
+	height: 4em;
+	display: inline-block;
+}
+.kaay-nav{
+	float: right;
+	padding-top: 1em;
+}
+.kaay-ul li{
+	padding: 0.5em 0.2em;
+	display: inline-block;
+}
+.kaay-ul li a img{
+	width: 2em;
+	height: 2em;
+}
 
 /* latin-ext */
 @font-face {

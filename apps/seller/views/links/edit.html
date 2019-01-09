@@ -1,16 +1,7 @@
-{{ javascript_include("plugins/upload/edit.js") }}
-
-{{ stylesheet_link("plugins/upload/css/webuploader.css") }}
-{{ javascript_include("plugins/upload/dist/webuploader.js") }}
-{{ stylesheet_link("plugins/upload/css/multi-file-upload.css") }}
-{{ javascript_include("plugins/upload/file-upload.js") }}
-
 {{ stylesheet_link("templates/boot/css/bootstrapValidator.min.css") }}
 {{ javascript_include("templates/boot/js/jquery.validate.min.js") }}
 {{ javascript_include("templates/boot/js/form/form-links.js") }}
 {{ javascript_include("templates/boot/js/messages_zh.js") }}
-{{ javascript_include("templates/boot/js/cancel.js") }}
-
 
  <script>
     $(function(){
@@ -101,48 +92,21 @@
                         </div>
 
 
-
                         <div class="control-group">
-                            <label for="logo" class="control-label">网站Logo</label>
-                            <!-- File Upload -->
+                            <label for="logo" class="control-label">Icons</label>
                             <div class="controls">
-                                <div id="wrapper" style="width: 595px;">
-                                    <div id="container">
-                                        <!--头部，相册选择和格式选择-->
-                                        <div id="uploader">
-                                            <div class="queueList">
-                                                {% if data.logo %}
-                                                <ul class='filelist' style='border-bottom: 1px solid #ccc; margin-bottom: 5px;'>
-                                                    <li class="state-complete">
-                                                        <p class="imgWrap"><img src="{{data.logo}}"></p>
-                                                        <p class="progress"><span style="display: none; width: 0px;"></span></p>
-                                                        <span class="success"></span>
-                                                        <div class="file-panel" style="height: 0px;">
-                                                            <span class="cancel" data-rel="{{data.logo}}" title="删除">删除</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                {% endif %}
+                                {% for k,icons in tagConfig['Icons'] %}
+                                <label class="radio">
+                                    <div class="radio">
+                                        <span class="">
+                                            <input type="radio" value="{{icons}}" name="logo" {% if icons==data.logo%}checked{% endif %}>
 
-                                                <div id="dndArea">
-                                                    <div id="files-uploads"></div>
-                                                </div>
-                                            </div>
-                                            <div class="statusBar" style="display:block;">
-                                                <div class="progress">
-                                                    <span class="text">0%</span>
-                                                    <span class="percentage"></span>
-                                                </div>
-                                                <div class="info"></div>
-                                                <div class="btns">
-                                                    <div id="files-uploads-continue"></div><div class="uploadBtn">开始上传</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" id="thumb" name="logo" value="{{data.logo}}">
+                                        </span>
                                     </div>
-                                </div>
-                                <span style="color: #b94a48;" >附件格式【jpg,jpeg,png,gif】</span>
+                                    <span class="{{icons}} am-icon-md"></span>
+                                </label>
+                                {% if k is true and k%6 ==0 %}<br />{% endif %}
+                                {% endfor %}
                             </div>
                         </div>
 
@@ -161,8 +125,8 @@
                         </div>
 
                         <div class="form-actions">
-                            <button class="btn green" type="submit"><i class="icon-ok"></i> 保存</button>
-                            <button class="btn" type="button" onclick="mycancel()">取消</button>
+                            <button class="btn green" type="submit"><i class="am-icon-check"></i> 保存</button>
+                            <button class="btn" type="button" onclick="window.location.href=BASE_URL+'list';">取消</button>
                             <input type="hidden" id="actions" value="edit" >
                             <input type="hidden" name="code" value="{{data.code}}" >
                             <span for="digits" class="message alert-error"></span>
