@@ -94,6 +94,9 @@ class ControllerBase extends ControllerAbstract
             $postData['created'] = $postData['updated']  = time();
             $postData['createdby'] = $postData['updatedby'] = $this->user['username'];
             $postData['text'] = htmlspecialchars($postData['text']);
+            if($postData['en_text'])
+                $postData['en_text'] = htmlspecialchars($postData['en_text']);
+
 
             if( $this->Controller  == 'posts'){
                 $cid = explode('|',$postData['ctype']);
@@ -139,6 +142,8 @@ class ControllerBase extends ControllerAbstract
             $postData['updated'] = time();
             $postData['updatedby'] = $this->user['username'];
             $postData['text'] = htmlspecialchars($postData['text']);
+            if($postData['en_text'])
+                $postData['en_text'] = htmlspecialchars($postData['en_text']);
 
             if( $this->Controller  == 'posts'){
 

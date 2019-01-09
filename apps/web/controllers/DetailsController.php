@@ -2,6 +2,7 @@
 namespace Bpai\Web\Controllers;
 use Phalcon\Tag;
 use Bpai\Models\Posts;
+use Bpai\Plugins\smtp;
 class DetailsController extends ControllerBase {
 
     public $Models;
@@ -15,6 +16,12 @@ class DetailsController extends ControllerBase {
         $result = $this->Models->findRec();
         if($result){
             $data = $result->toArray();
+        }
+
+        if($this->_Language){
+            $data['name'] = $data['en_name'];
+            $data['text'] = $data['en_text'];
+            $data['digest'] = $data['en_digest'];
         }
         Tag::setTitle($data['name']);
 
@@ -40,6 +47,20 @@ class DetailsController extends ControllerBase {
         $this->Models->setWhere(array('status'=>1,'cid'=>$data['cid'],array('id','>',$data['id'])));
         $nextRes = $this->Models->findRec();
         $this->view->setVar('next',$nextRes);
+
+        if( $data['id']== '21'){
+            $this->view->pick('details/contact');
+        }
 	}
+
+	public function sendAction()
+    {
+        if($this->post()){
+            $postData = $this->post();
+
+        }else{
+            $this->response->redirect("/",true);
+        }
+    }
 
 }

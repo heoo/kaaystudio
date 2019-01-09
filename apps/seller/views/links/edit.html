@@ -35,6 +35,21 @@
                             表单验证成功！
                         </div>
 
+                        <div class="control-group">
+                            <label for="language" class="control-label">栏目版型</label>
+                            <div class="controls">
+                                <label class="radio type" data-val="2">
+                                    <div class="radio"><span class=""><input type="radio" value="en" name="language"{% if  data.language=='en'%} checked{% endif %}></span></div>
+                                    英文版
+                                </label>
+                                <label class="radio type" data-val="1">
+                                    <div class="radio"><span class="">
+                                        <input type="radio" value="zh" name="language"{% if data.language=='zh' %} checked{% endif %}></span></div>
+                                    中文版
+                                </label>
+                            </div>
+                        </div>
+
 
                         <div class="control-group">
                             <label for="type" class="control-label">网站类型</label>

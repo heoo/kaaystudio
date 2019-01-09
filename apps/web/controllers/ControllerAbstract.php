@@ -14,6 +14,7 @@ class ControllerAbstract extends Controller
     public $Language;
     public $Category;
     public $System;
+    public $_Language;
 
     protected function initialize(){
 
@@ -33,13 +34,14 @@ class ControllerAbstract extends Controller
         $this->view->setVar('links',self::getLinks());
         $this->view->setVar('banners',self::getBanners());
 
-        $this->view->setVar('url','http://'.$_SERVER['HTTP_HOST'].$this->request->getURI());
+        $this->view->setVar('url','http://'.$this->request->getHttpHost().$this->request->getURI());
+        $this->_Language = self::checkLanguage();
     }
 
     public function getNavigation(){
 
         $this->Category = new Category();
-        $this->Category->setField(array('id','name','type','val','text','more'));
+        $this->Category->setField(array('id','name','en_name','type','val','text','en_text','more'));
         $this->Category->setWhere(array('status'=>1,'isnav'=>1));
         $this->Category->setOrder(array('listorder'=>'DESC'));
         $this->Category->setLimit(9);
@@ -47,14 +49,17 @@ class ControllerAbstract extends Controller
         if($Category){
             foreach($Category as $val){
                 $url = '';
-                if( in_array($val['type'],array('posts','images'))){
-                    $url = "http://{$_SERVER['HTTP_HOST']}/{$this->router->getModuleName()}/posts/index?cid={$val['id']}";
-                }elseif($val['type'] == 'page') {
-                    $url = "http://{$_SERVER['HTTP_HOST']}/{$this->router->getModuleName()}/details/index?id={$val['val']}";
-                }elseif($val['type'] == 'url'){
-                    $url = $val['val'];
+                if( in_array($val->type,array('posts','images'))){
+                    $url = "http://{$this->request->getHttpHost()}/{$this->router->getModuleName()}/posts/index?cid={$val->id}";
+                }elseif($val->type == 'page') {
+                    $url = "http://{$this->request->getHttpHost()}/{$this->router->getModuleName()}/details/index?id={$val->val}";
+                }elseif($val->type == 'url'){
+                    $url = $val->val;
                 }
-                $Navigation[] = array('name'=>$val['name'],'url'=>$url);
+                if($this->_Language)
+                    $val->name = $val->en_name;
+                if($val->name)
+                    $Navigation[] = array('name'=>$val->name,'url'=>$url);
             }
         }
         return $Navigation;
@@ -74,6 +79,10 @@ class ControllerAbstract extends Controller
         return $this->request->get($name, $filters, $defaultValue);
     }
 
+
+    protected function post($name=null, $filters=null, $defaultValue=null){
+        return $this->request->getPost($name, $filters, $defaultValue);
+    }
     /**
      * 查看是否是手机访问
      * @return boolean
@@ -157,8 +166,6 @@ class ControllerAbstract extends Controller
         }
     }
 
-
-
     //previous、next
     public function getNearId($id ,$type = 'next'){
         $number = 0;
@@ -167,7 +174,7 @@ class ControllerAbstract extends Controller
 
             $Models = new Posts();
             $Models->setField(array('id'));
-            $where['language'] = $this->Language;
+//            $where['language'] = $this->Language;
             $where['status'] = 1;
             $where['type'] = 'posts';
             $where['attachment'] = array('attachment','!=','');
@@ -237,8 +244,9 @@ class ControllerAbstract extends Controller
     }
     protected function getLinks(){
         $result = array();
+        $language = $this->_Language ? 'en' : 'zh';
         $Models = new \Bpai\Models\Links();
-        $Models->setWhere(array('status'=>1));
+        $Models->setWhere(array('status'=>1,'language'=>$language));
         $Models->setField(array('name','logo','siteurl','type'));
         $Models->setOrder(array('listorder'=>'DESC','id'=>'DESC'));
         return $Models->listRec()->toArray();
@@ -272,4 +280,11 @@ class ControllerAbstract extends Controller
         return $data;
     }
 
+    protected function checkLanguage(){
+        $language = false;
+        if(strpos($this->request->getHttpHost(),'en') !== false){
+            $language = true;
+        }
+        return $language;
+    }
 }

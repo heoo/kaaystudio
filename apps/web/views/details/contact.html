@@ -1,0 +1,65 @@
+<div class="site-container">
+    {{partial("layouts/header")}}
+</div>
+
+<div class="site-inner">
+    <div class="content-sidebar-wrap">
+        <main class="content" id="genesis-content">
+            <article class="post page type-page status-publish entry">
+
+                <header class="entry-header">
+                    <p class="entry-meta">
+                        <time class="entry-time" itemprop="datePublished" datetime="">{{data['time']}}</time>
+                    </p>
+                    <h1 class="entry-title">{{data['name']}}</h1>
+                </header>
+                <div class="entry-content">
+
+                    <div class="kaay-form-div kaay-first">
+                        <form class="form-horizontal kaay-form" method="post" onsubmit="return false;" action="#">
+                            <div class="control-group">
+                                <!-- Text input-->
+                                <label class="control-label" for="name">Name</label>
+                                <div class="controls">
+                                    <input type="text" placeholder="" name="name" class="input-xlarge">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <!-- Search input-->
+                                <label class="control-label">Email</label>
+                                <div class="controls">
+                                    <input type="text" placeholder="" name="email" onblur="checkmail();" class="input-xlarge search-query">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <!-- Textarea -->
+                                <label class="control-label">Contents</label>
+                                <div class="controls">
+                                    <div class="textarea">
+                                        <textarea rows="6" name="contents"> </textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <!-- Button -->
+                                <div class="controls">
+                                    <button class="btn btn-success" onclick="checksubmit();">Send</button>
+                                </div>
+                            </div>
+                    </form>
+                    </div>
+                    <div class="kaay-form-div kaay-right">
+                        {{data['text']}}
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+</div>
+{{ javascript_include("templates/white/js/register.js") }}
+{{ javascript_include("templates/white/js/alert.js") }}
+
+

@@ -3327,7 +3327,14 @@ p.form-submit,
 
 	.front-page-4 .testimonials-slider blockquote {
     	padding: 0 80px;
-}
+	}
+	.kaay-form-div{
+		clear: both;
+		width: 100% !important;
+	}
+	.kaay-first{
+		width: 100% !important;
+	}
 
 }
 
@@ -3505,6 +3512,17 @@ p.form-submit,
 	column-width: 100px;
 	text-align: justify;
 	column-fill: balance;
+}
+.kaay-form-div{
+	float: left;
+	width: calc(50% - 50px);
+	margin-right: 50px;
+	margin-left: 0;
+}
+.kaay-form input ,textarea{
+	width: 90%;
+	padding: 0;
+	margin-bottom: 20px;
 }
 
 /* latin-ext */

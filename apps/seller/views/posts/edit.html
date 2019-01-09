@@ -32,6 +32,12 @@
         editor.config.customUpload = true;
         editor.config.customUploadInit = uploadInit;
         editor.create();
+
+        // 生成编辑器
+        var eneditor = new wangEditor('eneditor');
+        eneditor.config.customUpload = true;
+        eneditor.config.customUploadInit = uploadInit;
+        eneditor.create();
         {% endif %}
     });
 </script>
@@ -77,6 +83,13 @@
                         </div>
 
                         <div class="control-group">
+                            <label for="en_name" class="control-label">英文标题</label>
+                            <div class="controls">
+                                <input type="text" placeholder="英文标题" class="m-wrap span5" name="en_name" value="{{data.en_name}}">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
                             <label for="keyword" class="control-label">关键字</label>
                             <div class="controls">
                                 <input type="text" placeholder="关键字" class="m-wrap span5" name="keyword" value="{{data.keyword}}">
@@ -90,6 +103,16 @@
                             <div class="controls">
                                 <div class="text">
                                     <textarea class="span5 m-wrap" rows="3" name="digest">{{data.digest}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Textarea -->
+                            <label for="en_digest" class="control-label">英文摘要</label>
+                            <div class="controls">
+                                <div class="text">
+                                    <textarea class="span5 m-wrap" rows="3" name="en_digest">{{data.en_digest}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -145,7 +168,13 @@
                         <div class="control-group">
                             <label for="text" class="control-label">文章内容</label>
                             <div class="controls">
-                                <textarea class="text" name="text" style="height: 500px;" id="editor">{{data.text}}</textarea>
+                                <textarea class="span5 m-wrap" name="text" style="height: 300px;" id="editor">{{data.text}}</textarea>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="en_text" class="control-label">英文内容</label>
+                            <div class="controls">
+                                <textarea class="span5 m-wrap" name="en_text" style="height: 300px;" id="eneditor">{{data.en_text}}</textarea>
                             </div>
                         </div>
                         {% else %}

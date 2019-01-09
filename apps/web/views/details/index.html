@@ -4,10 +4,15 @@
 
 <div class="site-inner">
     <div class="content-sidebar-wrap">
-        <main >
-            <article class="page type-page status-publish entry">
+        <main class="content" id="genesis-content">
+            <article class="post page type-page status-publish entry">
 
-                <header class="entry-header"><h1 class="entry-title" itemprop="headline">{{data['name']}}</h1></header>
+                <header class="entry-header">
+                    <p class="entry-meta">
+                        <time class="entry-time" itemprop="datePublished" datetime="">Sie 07 2018</time>
+                    </p>
+                    <h1 class="entry-title">{{data['name']}}</h1>
+                </header>
                 <div class="entry-content">
                     <div class="master-slider-parent">
                         {{data['text']}}
@@ -25,4 +30,3 @@
 {% if next %}
 <div class="next-post pagination-next "><a href="/{{ModuleName}}/{{ControllerName}}/index?id={{next['id']}}" rel="next"></a></div>
 {% endif %}
-
