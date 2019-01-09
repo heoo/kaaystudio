@@ -1388,6 +1388,7 @@ img.alignright,
 .kaay-nav{
 	float: right;
 	padding-top: 1em;
+	padding-right: 2em;
 }
 .kaay-ul li{
 	padding: 0.5em 0.2em;
