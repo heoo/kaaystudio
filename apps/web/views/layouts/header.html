@@ -27,9 +27,10 @@
         <nav class="nav-primary genesis-responsive-menu" aria-label="Main" id="genesis-nav-primary">
             <div class="wrap">
                 <ul id="menu-main-menu" class="menu genesis-nav-menu menu-primary" style="touch-action: auto;">
+                    <li class="menu-item"><a href="{{LanguageUrl}}"><span>{{LanguageName}}.</span></a></li>
                     {% if navigation %}
                         {% for nav in navigation %}
-                            <li class="menu-item"><a href="{{nav['url']}}"><span itemprop="name">{{nav['name']}}.</span></a></li>
+                            <li class="menu-item"><a href="{{nav['url']}}"><span>{{nav['name']}}.</span></a></li>
                         {% endfor %}
                     {% endif %}
                 </ul>

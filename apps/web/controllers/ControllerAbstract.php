@@ -14,7 +14,6 @@ class ControllerAbstract extends Controller
     public $Language;
     public $Category;
     public $System;
-    public $_Language;
 
     protected function initialize(){
 
@@ -37,9 +36,12 @@ class ControllerAbstract extends Controller
         $url = $this->request->getHttpHost().$this->request->getURI();
         $this->view->setVar('url',"http://{$url}");
 
-        $LanguageUrl = self::checkLanguage() ? str_replace('en.','',$url): "en.{$url}"  ;
+        $Language = self::checkLanguage();
+        $LanguageUrl = $Language ? str_replace('en.','',$url): "en.{$url}"  ;
         $this->view->setVar('LanguageUrl',"http://{$LanguageUrl}");
-
+        $LanguageName = $Language ? 'home' : '首页';
+        $this->view->setVar('LanguageName',$LanguageName);
+        unset($LanguageUrl,$LanguageName);
     }
 
     public function getNavigation(){
