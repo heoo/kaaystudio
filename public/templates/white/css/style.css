@@ -1384,7 +1384,7 @@ img.alignright,
 	width: 6em;
 	height: 1.5em;
 	display: inline-block;
-	/*margin-top: 0.5em;*/
+	margin-top: 0.5em;
 }
 .kaay-nav{
 	float: right;
@@ -2945,7 +2945,7 @@ p.form-submit,
 	.kaay-wrap .kaay-logo img{
 		width: 6em;
 		height: 1.8em;
-		/*padding-top: 0.2em;*/
+		margin-top: 0;
 	}
 	.kaay-nav{
 		padding-top: 0em;
