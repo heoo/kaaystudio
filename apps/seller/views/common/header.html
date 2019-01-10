@@ -18,11 +18,11 @@
         <li class="dropdown user">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span class="username">{{session.get('admins')['username']}}</span>
-                <i class="icon-angle-down"></i>
+                <i class="am-icon-angle-down"></i>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="/{{ModuleName}}/admins/reset?code={{session.get('admins')['code']}}"><i class="icon-repeat"></i>修改密码</a></li>
-                <li><a href="/{{ModuleName}}/login/logout"><i class="icon-signout"></i>退出</a></li>
+                <li><a href="/{{ModuleName}}/admins/reset?code={{session.get('admins')['code']}}"><i class="am-icon-repeat"></i>修改密码</a></li>
+                <li><a href="/{{ModuleName}}/login/logout"><i class="am-icon-sign-out"></i>退出</a></li>
             </ul>
         </li>
         <!-- END USER LOGIN DROPDOWN -->

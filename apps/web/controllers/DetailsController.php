@@ -65,9 +65,9 @@ class DetailsController extends ControllerBase {
 
             $mail = new PHPMailer;
             $mail->isSMTP();
-            $mail->Host = 'smtp.qq.com';
+            $mail->Host = 'smtp.163.com';
             $mail->SMTPAuth = true;
-            $mail->Username = '';
+            $mail->Username = 'kaaystudio_aa@163.com';
             $mail->Password = '';
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
@@ -75,7 +75,7 @@ class DetailsController extends ControllerBase {
             $mail->From = $this->System['web_name'];
             $mail->FromName = $this->System['web_name'];
             $mail->setFrom($mail->Username);
-            $mail->addAddress($postData['email']);
+            $mail->addAddress($this->System['email']);
             $messages = "\n
                         Name:{$name} \n
                         Email:{$email} \n
