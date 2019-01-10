@@ -1374,7 +1374,7 @@ img.alignright,
 .kaay-wrap{
 	max-width: 100%;
 	margin: 0 auto;
-	height: 2em;
+	height: 2.5em;
 }
 .kaay-wrap .kaay-logo{
 	text-align: center;
@@ -1382,8 +1382,9 @@ img.alignright,
 }
 .kaay-wrap .kaay-logo img{
 	width: 6em;
-	height: 2em;
+	height: 1.5em;
 	display: inline-block;
+	/*margin-top: 0.5em;*/
 }
 .kaay-nav{
 	float: right;
@@ -2944,7 +2945,7 @@ p.form-submit,
 	.kaay-wrap .kaay-logo img{
 		width: 6em;
 		height: 1.8em;
-		padding-top: 0.2em;
+		/*padding-top: 0.2em;*/
 	}
 	.kaay-nav{
 		padding-top: 0em;
@@ -3089,7 +3090,7 @@ p.form-submit,
 	.kaay-wrap{
 		max-width: none;
 		width: 100%;
-		height: 1.9em;
+		height: 1.8em;
 		/*padding-top: 0.3em;*/
 		padding: 0px;
 	}
