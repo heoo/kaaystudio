@@ -60,13 +60,10 @@
 
 <script type="text/javascript">
     //按下回车键执行登录
-    $(function(){
-        document.onkeydown = function(e){
-            var ev = document.all ? window.event : e;
-            if(ev.keyCode==13) {
-                submitForm();
-            }
-
+    $(window).keydown(function (e) {
+        console.log(e.keyCode)
+        if(e.keyCode==13) {
+            submitForm();
         }
     });
 
