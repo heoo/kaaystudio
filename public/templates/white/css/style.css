@@ -1374,21 +1374,21 @@ img.alignright,
 .kaay-wrap{
 	max-width: 100%;
 	margin: 0 auto;
-	height: 4em;
+	height: 2em;
 }
 .kaay-wrap .kaay-logo{
 	text-align: center;
 	margin-left: 40%;
 }
 .kaay-wrap .kaay-logo img{
-	width: 12em;
-	height: 4em;
+	width: 6em;
+	height: 2em;
 	display: inline-block;
 }
 .kaay-nav{
 	float: right;
-	padding-top: 1em;
-	padding-right: 4.7em;
+	/*padding-top: 1em;*/
+	padding-right: 1.5em;
 }
 .kaay-ul li{
 	padding: 0.5em 0.2em;
@@ -2943,7 +2943,8 @@ p.form-submit,
 	}
 	.kaay-wrap .kaay-logo img{
 		width: 6em;
-		height: 2em;
+		height: 1.8em;
+		padding-top: 0.2em;
 	}
 	.kaay-nav{
 		padding-top: 0em;
@@ -3088,7 +3089,7 @@ p.form-submit,
 	.kaay-wrap{
 		max-width: none;
 		width: 100%;
-		height: 2em;
+		height: 1.9em;
 		/*padding-top: 0.3em;*/
 		padding: 0px;
 	}
