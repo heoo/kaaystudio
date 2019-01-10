@@ -33,7 +33,7 @@ class IndexController extends ControllerBase
 
         $posts['count'] = $this->Posts->countRec();
 
-        $this->Posts->setField(array('code','name','hits'));
+        $this->Posts->setField(array('id','name','hits'));
         $this->Posts->setWhere(array('status'=>1));
         $this->Posts->setOrder(array('hits'=>'DESC'));
         $posts['hits']  = $this->Posts->findRec();
