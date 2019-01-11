@@ -1377,14 +1377,19 @@ img.alignright,
 	height: 2.5em;
 }
 .kaay-wrap .kaay-logo{
-	text-align: center;
-	margin-left: 45%;
+	/*text-align: center;*/
+	/*margin-left: 46%;*/
+	float: left;
+	position: relative;
+	left: 50%;
 }
 .kaay-wrap .kaay-logo img{
 	width: 6em;
 	height: 1.5em;
 	display: inline-block;
 	margin-top: 0.5em;
+	position: relative;
+	left: -50%;
 }
 .kaay-nav{
 	float: right;
@@ -2948,7 +2953,7 @@ p.form-submit,
 		max-width: none;
 	}
 	.kaay-wrap .kaay-logo{
-		margin-left: 30%;
+		/*margin-left: 30%;*/
 		/*height: 2em;*/
 	}
 	.kaay-wrap .kaay-logo img{
