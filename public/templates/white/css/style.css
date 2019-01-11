@@ -1406,7 +1406,7 @@ img.alignright,
 	height: 1.7em;
 	width: 1.7em;
 	background-size: contain;
-	top: 1.1em !important;
+	top: 1.2em !important;
 }
 
 .site-description {
@@ -3159,6 +3159,10 @@ p.form-submit,
 	.menu-toggle.activated::before {
 		/*margin-right: 10px;*/
 		text-rendering: auto;
+	}
+
+	.kaay-button{
+		top: 1.1em !important;
 	}
 
 	.sub-menu-toggle {
