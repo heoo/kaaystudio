@@ -8,11 +8,13 @@ class Category extends \Catchtech\Extensions\Model\BaseModel
     protected $code;
     protected $key;
     protected $name;
+    protected $en_name;
     protected $language;
     protected $type;
     protected $logo;
     protected $listorder;
     protected $text;
+    protected $en_text;
     protected $val;
     protected $more;
     protected $isnav;
@@ -22,6 +24,39 @@ class Category extends \Catchtech\Extensions\Model\BaseModel
     protected $createdby;
     protected $updated;
     protected $updatedby;
+
+    /**
+     * @return mixed
+     */
+    public function getEnName()
+    {
+        return $this->en_name;
+    }
+
+    /**
+     * @param mixed $en_name
+     */
+    public function setEnName($en_name)
+    {
+        $this->en_name = $en_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnText()
+    {
+        return $this->en_text;
+    }
+
+    /**
+     * @param mixed $en_text
+     */
+    public function setEnText($en_text)
+    {
+        $this->en_text = $en_text;
+    }
+
 
     /**
      * @return mixed
