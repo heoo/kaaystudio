@@ -41,7 +41,9 @@ class ControllerAbstract extends Controller
         $this->view->setVar('LanguageUrl',"http://{$LanguageUrl}");
         $LanguageName = $Language ? 'home' : '首页';
         $this->view->setVar('LanguageName',$LanguageName);
-        unset($LanguageUrl,$LanguageName);
+        $LanguageImg = $Language ? 'CN.png' : 'EN.png';
+        $this->view->setVar('LanguageImg',$LanguageImg);
+        unset($LanguageUrl,$LanguageName,$LanguageImg);
     }
 
     public function getNavigation(){

@@ -5150,7 +5150,9 @@ a.am-close:hover {
 }
 
 .am-icon-bars:before,.am-icon-navicon:before,.am-icon-reorder:before {
-    content: "\f0c9"
+    content: "\f0c9";
+    height: 20px;
+    width: 20px;
 }
 
 .am-icon-list-ul:before {
