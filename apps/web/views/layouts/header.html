@@ -14,16 +14,12 @@
                         </li>
                     {% endfor %}
                 {% endif %}
-
-                <li>
-                    <a href="{{LanguageUrl}}">
-                        <span class="am-icon-language"></span>
-                    </a>
-                </li>
             </ul>
         </nav>
 
-    <button class="menu-toggle am-icon-bars" id="genesis-mobile-nav-primary"></button>
+        <button class="menu-toggle am-icon-bars" id="genesis-mobile-nav-primary"></button>
+        <button class="menu-toggle kaay-button" style="background-image: url('templates/white/images/{{LanguageImg}}');" onclick="window.location.href='{{LanguageUrl}}'"></button>
+
         <nav class="nav-primary genesis-responsive-menu" aria-label="Main" id="genesis-nav-primary">
             <div class="wrap">
                 <ul id="menu-main-menu" class="menu genesis-nav-menu menu-primary" style="touch-action: auto;">
