@@ -54,13 +54,13 @@ return array(
                 'system'=>'站点设置|/seller/system/edit?code=b9cfe8f4bb',
             ),
     ),
-//    array(
-//        'name'=>'CDN设置',
-//        'controller'=>'cdn',
-//        'icons'=>'am-icon-cloud',
-//        'element'=>
-//            array(
-//                'cdn'=>'CDN设置|/seller/cdn/edit?code=b9cfe8f4bb',
-//            ),
-//    ),
+    array(
+        'name'=>'CDN设置',
+        'controller'=>'cdn',
+        'icons'=>'am-icon-cloud',
+        'element'=>
+            array(
+                'cdn'=>'CDN设置|/seller/cdn/edit?code=b9cfe8f4bb',
+            ),
+    ),
 );
