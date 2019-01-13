@@ -150,10 +150,7 @@
             chunkSize: 512 * 1024,
             server: '/seller/uploads/images',
             //sendAsBinary:true,
-            compress :{
-                width: 2000,
-                height: 1600
-            },
+            compress :false,
             // runtimeOrder: 'flash',
 
             // accept: {

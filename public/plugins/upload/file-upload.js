@@ -149,11 +149,8 @@
             chunked: false,
             chunkSize: 512 * 1024,
             server: '/seller/uploads/images',
-            compress :{
-                width: 2000,
-                height: 1600
-            },
-            // runtimeOrder: 'flash',
+            compress : false,
+            // // runtimeOrder: 'flash',
 
             // accept: {
             //     title: 'Images',
