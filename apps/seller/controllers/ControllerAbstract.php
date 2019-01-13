@@ -35,7 +35,7 @@ class ControllerAbstract extends Controller
         }
         $this->System = $this->session->get('system');
 
-        if( empty($this->QNToken) || $this->session->get('QNToken')['deadline']+3600 < time() && $this->System['AccessKey'] && $this->System['SecretKey'] && $this->System['BucketName']){
+        if( !empty($this->QNToken) || $this->session->get('QNToken')['deadline']+3600 < time() && $this->System['AccessKey'] && $this->System['SecretKey'] && $this->System['BucketName']){
             $auth = new Auth($this->System['AccessKey'], $this->System['SecretKey']);
             $policy = array(
                 'returnBody' => '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)"}',

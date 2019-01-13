@@ -1,4 +1,5 @@
 jQuery(".works-archive .site-inner a").click(function(){
+    $('.kaay-nav').toggle();
     event.preventDefault();
     if (jQuery(window).width() >= 480 && jQuery(window).height() >= 480) {
         var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -25,6 +26,7 @@ jQuery(".works-archive .site-inner a").click(function(){
     }
 });
 function hideModal() {
+    $('.kaay-nav').toggle();
     jQuery(".modal-wrapper img").remove();
     jQuery(".modal-title-top").remove();
     jQuery(".modal-middle").remove();
