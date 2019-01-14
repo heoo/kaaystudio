@@ -1,6 +1,5 @@
 <?php
 use Phalcon\Http\Response\Cookies;
-
 //error_reporting(E_ALL ^E_WARNING ^ E_NOTICE);
 error_reporting(0);
 //error_reporting(E_ALL);
