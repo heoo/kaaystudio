@@ -48,7 +48,7 @@ class UploadsController extends ControllerBase
             list($Qret, $error) = $uploadMgr->put($this->QNToken,$fileName,file_get_contents($tmpName));
             if(!$error){
                 unlink(__DIR__.'/../../../public'.$res);
-                $res = 'http://pjvj8fgws.bkt.clouddn.com/'.$fileName;
+                $res = $this->tagConfig['QiniuHost'].$fileName;
             }else{
                 echo ($error);exit;
             }

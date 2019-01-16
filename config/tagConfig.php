@@ -2,6 +2,7 @@
 return array(
     'adminName'=>'内容管理系统',
     'webName'=>'KaayStudio',
+    'QiniuHost'=>'http://plf4ebg8o.bkt.clouddn.com/',
 //    'domain'=>'http://'.$_SERVER['SERVER_NAME'],
 //    'image_host'=>'http://'.$_SERVER['SERVER_NAME'],
     'categoryType'=>array(

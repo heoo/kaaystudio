@@ -22,6 +22,9 @@ class PostsController extends ControllerBase {
             $this->view->setVar('category',$category);
             Tag::setTitle($category['name']);
         }
+        if($category['type'] == 'images'){
+            $getData['rows'] = 10000;
+        }
         $data = $this->getPosts($getData['cid'],$getData['rows'],($getData['page']-1)*$getData['rows']);
         $this->view->setVar('data',$data);
         $this->view->setVar('getData',$getData);

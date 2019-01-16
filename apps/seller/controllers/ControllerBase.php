@@ -103,8 +103,7 @@ class ControllerBase extends ControllerAbstract
                 unset($postData['ctype']);
                 $postData['cid'] = $cid[0];
                 $postData['type'] = $cid[1];
-//                $postData['attachment'] = $this->trimString($postData['attachment'],',');
-//                $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
+                $postData['attachment'] = self::getThumb($postData['thumb'],$postData['class']);
             }
             $res = $this->Models->saveRec($postData);
             if($res){
@@ -151,8 +150,7 @@ class ControllerBase extends ControllerAbstract
                 unset($postData['cid']);
                 $postData['cid'] = $cid[0];
                 $postData['type'] = $cid[1];
-//                $postData['attachment'] = $this->trimString($postData['attachment'],',');
-//                $postData['thumb'] = self::getThumb($postData['attachment'],$postData['class']);
+                $postData['attachment'] = self::getThumb($postData['thumb'],$postData['class']);
             }
             $this->Models->setWhere(array('code'=>$postData['code']));
             $res = $this->Models->saveRec($postData);
@@ -216,23 +214,40 @@ class ControllerBase extends ControllerAbstract
         }
     }
 
-    private function getThumb($attachment,$class='default'){
-        $newname = '';
+    private function getThumb($thumb,$class='default'){
+        $attachment = '';
         $size = [
-            'default'=>[700,453],
-            'large'=>[1200,777],
-            'vertical'=>[700,907],
-            'horizontal'=>[1200,389],
+            'default'=>[600,300],
+            'wide'=>[1250,710],
+            'portrait'=>[600,710]
         ];
-        if($attachment){
-//            $this->Imagine = new Imagine();
+        if($thumb){
+            if($this->QNToken){
+                $attachment = $thumb."?imageView2/1/w/{$size[$class][0]}/h/{$size[$class][1]}/q/100";
+            }else{
 
-            $thumb = substr($attachment,0,strpos($attachment,','));
-            $thumb = $thumb ? $thumb : $attachment;
-            $newname =  $thumb;
-//            $this->Imagine->open(__DIR__.'/../../../public/'.$thumb)->resize(new Box($size[$class][0], $size[$class][1]))->save(__DIR__.'/../../../public/'.$newname, array('flatten' => false));
+                $path = __DIR__."/../../../public/";
+                $sourceFile = $path.$thumb;
+                $attachment = str_replace('.',"-{$size[$class][0]}X{$size[$class][1]}.",$thumb);
+                $image = new \Phalcon\Image\Adapter\GD($sourceFile);
+
+                $width = $image->getWidth();
+                $height = $image->getHeight();
+
+                $offsetX = $offsetY = 0;
+                $offsetX = ($width - $size[$class][0]) / 2;
+                switch ($class){
+                    case 'wide' :
+                        $image->crop($size[$class][0],$height,$offsetX);
+                        break;
+                    default :
+                        $offsetY = ($height - $size[$class][1]) / 2;
+                        $image->crop($size[$class][0],$size[$class][1],$offsetX,$offsetY);
+                }
+                $image->save($path.$attachment);
+            }
         }
-        return $newname;
+        return $attachment;
     }
 
 
