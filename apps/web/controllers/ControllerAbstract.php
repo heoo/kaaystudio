@@ -230,7 +230,7 @@ class ControllerAbstract extends Controller
 
         $count = 0;
         $Models = new Posts();
-        $where = array('status'=>1,'type'=>'posts');
+        $where = array('status'=>1);
         if($cid){
             $where['cid'] = $cid;
         }

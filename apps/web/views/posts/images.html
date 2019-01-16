@@ -15,7 +15,7 @@
         {% for posts in data %}
         <div data-rel="{{posts['id']}}" class="single-work {{posts['class']}} {% if loop.first %}firstWork{% endif %} {% if loop.last %}lastWork{% endif %}">
             <a href="{{posts['thumb']}}">
-                <img src="{{posts['thumb']}}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="{{posts['name']}}l" width="{{posts['attachment']}}" >
+                <img src="{{posts['attachment']}}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="{{posts['name']}}l" >
                 <div class="work-title">{{posts['name']}}</div>
                 <div class="work-description"></div>
                 <div class="work-author">{{posts['digest']}}</div>
@@ -26,9 +26,6 @@
     <h4 class="text-center">暂无数据</h4>
 {% endif %}
 
-        {% if countPages %}
-        {{pages}}
-        {% endif %}
 
     <div id="preload" style="display: none;">
         {% if data %}
