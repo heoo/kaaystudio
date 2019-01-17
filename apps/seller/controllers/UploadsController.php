@@ -32,8 +32,14 @@ class UploadsController extends ControllerBase
         header("Cache-Control: no-store, no-cache, must-revalidate");
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
+        $type = $this->get('source') ? $this->get('source') : '';
 
-        $res = $this->uploads->upload('file', $_POST);
+        if($type =='editor'){
+            $res = $this->uploads->upload('wangEditorH5File', $_POST);
+        }else{
+            $res = $this->uploads->upload('file', $_POST);
+        }
+
         $isFlash = false;
         if(strpos($res,'flv') || strpos($res,'mp4')){
             $isFlash = true;
@@ -53,6 +59,10 @@ class UploadsController extends ControllerBase
                 echo ($error);exit;
             }
         }
-        die('{"status":0,"Succenss":true, "path": "'.$res.'","isFlash":"'.$isFlash.'"}');
+        if($type =='editor'){
+            die($res);
+        }else{
+            die('{"status":0,"Succenss":true, "path": "'.$res.'","isFlash":"'.$isFlash.'"}');
+        }
     }
 }

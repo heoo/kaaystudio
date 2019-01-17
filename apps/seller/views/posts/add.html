@@ -23,17 +23,27 @@
 <script>
     $(function(){
         FormPostsValidation.init();
+
+        var token = '{{token}}'
         {% if type != 'images' %}
         // 生成编辑器
         var editor = new wangEditor('editor');
-        editor.config.customUpload = true;
-        editor.config.customUploadInit = uploadInit;
+        if(token){
+            editor.config.customUpload = true;
+            editor.config.customUploadInit = uploadInit;
+        }else {
+            editor.config.uploadImgUrl = '/seller/uploads/images?source=editor';
+        }
         editor.create();
 
         // 生成编辑器
         var eneditor = new wangEditor('eneditor');
-        eneditor.config.customUpload = true;
-        eneditor.config.customUploadInit = uploadInit;
+        if(token){
+            eneditor.config.customUpload = true;
+            eneditor.config.customUploadInit = uploadInit;
+        }else {
+            editor.config.uploadImgUrl = '/seller/uploads/images?source=editor';
+        }
         eneditor.create();
         {% endif %}
     });
