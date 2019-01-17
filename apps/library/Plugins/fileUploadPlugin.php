@@ -50,7 +50,6 @@ class fileUploadPlugin
      * @param $fileField    上传文件的表单名称
      */
     function upload($fileField, $info){
-
 		//判断是否为分块上传
 		$this->checkChunk($info);
 

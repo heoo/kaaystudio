@@ -1,3 +1,4 @@
+{{ javascript_include("plugins/upload/edit.js") }}
 
 {{ stylesheet_link("plugins/upload/css/webuploader.css") }}
 {{ javascript_include("plugins/upload/dist/webuploader.js") }}
@@ -10,45 +11,15 @@
 {{ javascript_include("templates/boot/js/messages_zh.js") }}
 {{ javascript_include("templates/boot/js/cancel.js") }}
 
-
 {% if type != 'images' %}
-    {{ stylesheet_link("plugins/editor/css/wangEditor.css") }}
-    {{ javascript_include("plugins/editor/js/wangEditor.js") }}
-    {{ javascript_include("plugins/editor/plupload/plupload.full.min.js") }}
-    {{ javascript_include("plugins/editor/plupload/i18n/zh_CN.js") }}
-    {{ javascript_include("plugins/editor/qiniu.js") }}
-    {{ javascript_include("plugins/editor/uploads.js") }}
+    {{ partial("posts/uploads") }}
 {% endif %}
 
 <script>
-    $(function(){
+    $(function() {
         FormPostsValidation.init();
-
-        var token = '{{token}}'
-        {% if type != 'images' %}
-        // 生成编辑器
-        var editor = new wangEditor('editor');
-        if(token){
-            editor.config.customUpload = true;
-            editor.config.customUploadInit = uploadInit;
-        }else {
-            editor.config.uploadImgUrl = '/seller/uploads/images?source=editor';
-        }
-        editor.create();
-
-        // 生成编辑器
-        var eneditor = new wangEditor('eneditor');
-        if(token){
-            eneditor.config.customUpload = true;
-            eneditor.config.customUploadInit = uploadInit;
-        }else {
-            editor.config.uploadImgUrl = '/seller/uploads/images?source=editor';
-        }
-        eneditor.create();
-        {% endif %}
     });
 </script>
-<input type="hidden" id="token" value="{{token}}">
 
 <div class="row-fluid">
     <div class="span12">
@@ -146,13 +117,13 @@
                         <div class="control-group">
                             <label for="text" class="control-label">文章内容</label>
                             <div class="controls">
-                                <textarea class="span5 m-wrap" name="text" style="height: 300px;" id="editor"></textarea>
+                                <div class="span7 m-wrap" name="text" style="height: 300px;" id="editor"></div>
                             </div>
                         </div>
                         <div class="control-group">
                             <label for="en_text" class="control-label">英文内容</label>
                             <div class="controls">
-                                <textarea class="span5 m-wrap" name="en_text" style="height: 300px;" id="eneditor"></textarea>
+                                <div class="span7 m-wrap" name="en_text" style="height: 300px;" id="eneditor"></div>
                             </div>
                         </div>
                         {% else %}

@@ -1,0 +1,14 @@
+{{ javascript_include("plugins/editor/wangEditor.js") }}
+<script>
+    $(function(){
+        var E = window.wangEditor
+
+        var editor = new E('#editor')
+        editor.customConfig.uploadImgServer = '/{{ModuleName}}/uploads/images?source=editor'
+        editor.create();
+
+        var eneditor1 = new E('#eneditor')
+        eneditor1.customConfig.uploadImgServer = '/{{ModuleName}}/uploads/images?source=editor'
+        eneditor1.create();
+    });
+</script>

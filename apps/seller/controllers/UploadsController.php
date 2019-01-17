@@ -32,10 +32,16 @@ class UploadsController extends ControllerBase
         header("Cache-Control: no-store, no-cache, must-revalidate");
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
-        $type = $this->get('source') ? $this->get('source') : '';
 
+        $type = $this->get('source') ? $this->get('source') : '';
         if($type =='editor'){
-            $res = $this->uploads->upload('wangEditorH5File', $_POST);
+            if($_FILES){
+                foreach ($_FILES as $value){
+                    unset($_FILES);
+                    $_FILES['name'] = $value;
+                }
+            }
+            $res = $this->uploads->upload('name', $_FILES);
         }else{
             $res = $this->uploads->upload('file', $_POST);
         }
@@ -44,6 +50,7 @@ class UploadsController extends ControllerBase
         if(strpos($res,'flv') || strpos($res,'mp4')){
             $isFlash = true;
         }
+
         if($this->QNToken){
             // 构建 UploadManager 对象
             $uploadMgr = new UploadManager();
@@ -60,7 +67,7 @@ class UploadsController extends ControllerBase
             }
         }
         if($type =='editor'){
-            die($res);
+            die(json_encode(array('errno'=>0,'data'=>array($res),'isFlash'=>$isFlash)));
         }else{
             die('{"status":0,"Succenss":true, "path": "'.$res.'","isFlash":"'.$isFlash.'"}');
         }
