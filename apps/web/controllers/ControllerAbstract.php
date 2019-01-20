@@ -51,7 +51,7 @@ class ControllerAbstract extends Controller
         $this->Category = new Category();
         $this->Category->setField(array('id','name','en_name','type','val','text','en_text','more'));
         $this->Category->setWhere(array('status'=>1,'isnav'=>1));
-        $this->Category->setOrder(array('listorder'=>'DESC'));
+        $this->Category->setOrder(array('listorder'=>'ASC'));
         $this->Category->setLimit(9);
         $Category = $this->Category->listRec();
         if($Category){
