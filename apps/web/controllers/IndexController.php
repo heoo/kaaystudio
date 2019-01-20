@@ -20,7 +20,7 @@ class IndexController extends ControllerBase
         $data = [];
         $models = new  Category();
         $models->setWhere(array('status'=>1));
-        $models->setOrder(array('listorder'=>'DESC'));
+        $models->setOrder(array('listorder'=>'ASC'));
         $res = $models->listRec();
         if($res){
             foreach ($res->toArray() as $val){
