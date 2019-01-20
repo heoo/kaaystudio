@@ -8,8 +8,8 @@
         var editorVal = $("input[name='text']")
         editor.customConfig.onchange = function (html) {
             editorVal.val(html);
-            console.log(html)
         }
+        editor.customConfig.debug = true
         editor.create();
         editor.txt.html('{{data.text}}')
 
@@ -18,8 +18,8 @@
         var eneditor1Val = $("input[name='en_text']")
         eneditor1.customConfig.onchange = function (html) {
             eneditor1Val.val(html);
-            console.log(html)
         }
+        eneditor1.customConfig.debug = true
         eneditor1.create();
         eneditor1.txt.html('{{data.en_text}}')
     });
