@@ -117,13 +117,13 @@
                         <div class="control-group">
                             <label for="text" class="control-label">文章内容</label>
                             <div class="controls">
-                                <div class="span7 m-wrap" name="text" style="height: 300px;" id="editor"></div>
+                                <div class="span7 m-wrap" style="height: 300px;" id="editor"></div>
                             </div>
                         </div>
-                        <div class="control-group">
+                        <div class="control-group" style="padding-top: 20px;">
                             <label for="en_text" class="control-label">英文内容</label>
                             <div class="controls">
-                                <div class="span7 m-wrap" name="en_text" style="height: 300px;" id="eneditor"></div>
+                                <div class="span7 m-wrap" style="height: 300px;" id="eneditor"></div>
                             </div>
                         </div>
                         {% else %}
@@ -165,6 +165,8 @@
                             <button class="btn" type="button" onclick="mycancel()">取消</button>
                             <input type="hidden" id="actions" value="add" >
                             <input type="hidden" name="ctype" value="{{ctype}}" >
+                            <input type="hidden" name="text" value="">
+                            <input type="hidden" name="en_text" value="">
                             <span for="digits" class="message alert-error"></span>
                         </div>
                     </fieldset>
