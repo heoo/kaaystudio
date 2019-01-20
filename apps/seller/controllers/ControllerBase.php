@@ -152,6 +152,8 @@ class ControllerBase extends ControllerAbstract
                 $postData['type'] = $cid[1];
                 $postData['attachment'] = self::getThumb($postData['thumb'],$postData['class']);
             }
+//            echo '<pre>';
+//            var_dump($postData);exit;
             $this->Models->setWhere(array('code'=>$postData['code']));
             $res = $this->Models->saveRec($postData);
             if($res){
@@ -177,6 +179,7 @@ class ControllerBase extends ControllerAbstract
                 $this->view->setVar('images',$images);
             }
             $result->text = htmlspecialchars_decode($result->text);
+            $result->en_text = htmlspecialchars_decode($result->en_text);
             $this->view->setVar('data',$result);
             $this->view->setVar('page',$getData['page']);
 

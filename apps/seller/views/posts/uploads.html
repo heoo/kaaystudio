@@ -5,10 +5,22 @@
 
         var editor = new E('#editor')
         editor.customConfig.uploadImgServer = '/{{ModuleName}}/uploads/images?source=editor'
+        var editorVal = $("input[name='text']")
+        editor.customConfig.onchange = function (html) {
+            editorVal.val(html);
+            console.log(html)
+        }
         editor.create();
+        editor.txt.html('{{data.text}}')
 
         var eneditor1 = new E('#eneditor')
         eneditor1.customConfig.uploadImgServer = '/{{ModuleName}}/uploads/images?source=editor'
+        var eneditor1Val = $("input[name='en_text']")
+        eneditor1.customConfig.onchange = function (html) {
+            eneditor1Val.val(html);
+            console.log(html)
+        }
         eneditor1.create();
+        eneditor1.txt.html('{{data.en_text}}')
     });
 </script>
