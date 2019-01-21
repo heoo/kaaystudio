@@ -11,7 +11,6 @@
         }
         editor.customConfig.debug = true
         editor.create();
-        editor.txt.html('{{data.text}}')
 
         var eneditor1 = new E('#eneditor')
         eneditor1.customConfig.uploadImgServer = '/{{ModuleName}}/uploads/images?source=editor'
@@ -21,6 +20,6 @@
         }
         eneditor1.customConfig.debug = true
         eneditor1.create();
-        eneditor1.txt.html('{{data.en_text}}')
     });
+
 </script>
