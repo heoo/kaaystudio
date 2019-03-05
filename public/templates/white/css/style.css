@@ -2229,7 +2229,7 @@ img.alignright,
 }
 
 .single-post .entry-content p {
-	margin: 0 0 100px;
+	margin: 0 0 20px;
 }
 @media only screen and (max-width: 800px) {
 	.single-post .entry-content, .page-template-page_terms-php .entry-content {
