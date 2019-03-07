@@ -2194,11 +2194,12 @@ img.alignright,
 }
 
 .newsroom .entry-content h4 {
-	font-weight: 900;
-	margin-bottom: 20px;
+	/*font-weight: 900;*/
+	/*margin-bottom: 10px;*/
 	font-size: 16px;
 	text-align: center;
-	margin-top: 20px;
+	margin: 10px 0;
+	font-family: 'studio';
 }
 
 .newsroom .entry-content p {
