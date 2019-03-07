@@ -12,7 +12,36 @@
 {{ javascript_include("templates/boot/js/cancel.js") }}
 
 {% if type != 'images' %}
-    {{ partial("posts/uploads") }}
+{{ javascript_include("plugins/editor/wangEditor.js") }}
+<script>
+    $(function(){
+        var E = window.wangEditor
+
+        var editor = new E('#editor')
+        editor.customConfig.uploadImgServer = '/{{ModuleName}}/uploads/images?source=editor'
+        var text = $('#text')
+        editor.customConfig.onchange = function (html) {
+            text.val(html)
+        }
+        editor.create()
+        {% if data.text %}
+            text.val(editor.txt.html('{{data.text}}'))
+        {% endif %}
+
+
+        var enEditor = new E('#eneditor')
+        enEditor.customConfig.uploadImgServer = '/{{ModuleName}}/uploads/images?source=editor'
+        var enText = $('#entext')
+        enEditor.customConfig.onchange = function (html) {
+            enText.val(html)
+        }
+        enEditor.create()
+        {% if data.text %}
+            enText.val(enEditor.txt.html('{{data.en_text}}'))
+        {% endif %}
+    });
+
+</script>
 {% endif %}
 
 <script>
@@ -144,14 +173,15 @@
                         <div class="control-group">
                             <label for="text" class="control-label">文章内容</label>
                             <div class="controls">
-                                <textarea name="val" id="editor">{{data.text}}</textarea>
-                                <!--<div class="span7 m-wrap" style="height: 300px;" id="editor">{{data.text}}</div>-->
+                                <div class="span7 m-wrap" style="height: 300px;" id="editor"></div>
+                                <textarea id="text" name="text" style="display: none;"></textarea>
                             </div>
                         </div>
                         <div class="control-group" style="padding-top: 20px;">
                             <label for="en_text" class="control-label">英文内容</label>
                             <div class="controls">
-                                <div class="span7 m-wrap" style="height: 300px;" id="eneditor">{{data.en_text}}</div>
+                                <div class="span7 m-wrap" style="height: 300px;" id="eneditor"></div>
+                                <textarea id="entext" name="en_text" style="display: none;"></textarea>
                             </div>
                         </div>
                         {% else %}
@@ -196,8 +226,6 @@
                             <input type="hidden" name="id" value="{{data.id}}" >
                             <input type="hidden" name="ctype" value="{{ctype}}">
                             <input type="hidden" name="page" value="{{page}}">
-                            <input type="hidden" name="text" value='{{data.text}}'>
-                            <input type="hidden" name="en_text" value='{{data.en_text}}'>
                             <span for="digits" class="message alert-error"></span>
                         </div>
                     </fieldset>
