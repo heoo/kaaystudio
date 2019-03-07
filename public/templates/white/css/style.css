@@ -3433,7 +3433,7 @@ p.form-submit,
 		font-size: 4rem;
 	}
 	.contact .footer-widgets .contact-details {
-		padding-top: 10px;	
+		padding-top: 10px;
 		margin-top: 0;
 	}
 
@@ -3445,7 +3445,7 @@ p.form-submit,
 	.contact-details p a {
 		font-size: 12px!important;
 	}
-	
+
 	.footer-widgets i {
 		font-size: 20px;
 	}
@@ -3455,7 +3455,7 @@ p.form-submit,
 
 	.terms-menu {
 		margin-bottom: 0;
-		
+
 		margin-top: 70px;
 	}
 	.terms-menu p {
@@ -3644,16 +3644,17 @@ p.form-submit,
 	font-weight: normal;
 }
 .contact-right-div > div {
-	font-size: 17px;
+	font-size: 16px;
 	font-family: 'studio';
+	width: 120%;
 }
 @media only screen and (max-width: 800px) {
 	.kaay-first , .kaay-right{
 		width: 100%;
 	}
 	.contact-right-div > div{
-		font-size: 13px;
-		width: 112%;
+		font-size: 12px;
+		/*width: 112%;*/
 	}
 }
 

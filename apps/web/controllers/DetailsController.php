@@ -49,7 +49,7 @@ class DetailsController extends ControllerBase {
         $nextRes = $this->Models->findRec();
         $this->view->setVar('next',$nextRes);
 
-        if( $data['id']== '1'){
+        if( $data['id']== '26'){
             $this->view->pick('details/contact');
         }
 	}
