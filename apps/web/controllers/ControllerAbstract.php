@@ -37,6 +37,9 @@ class ControllerAbstract extends Controller
         $this->view->setVar('url',"http://{$url}");
 
         $Language = self::checkLanguage();
+        if(strpos($url,'www') !== false){
+            $url = str_replace('www.','',$url);
+        }
         $LanguageUrl = $Language ? str_replace('en.','',$url): "en.{$url}"  ;
         $this->view->setVar('LanguageUrl',"http://{$LanguageUrl}");
         $LanguageName = $Language ? 'home' : '首页';

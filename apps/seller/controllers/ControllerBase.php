@@ -106,6 +106,7 @@ class ControllerBase extends ControllerAbstract
                 $postData['attachment'] = self::getThumb($postData['thumb'],$postData['class']);
             }
             $res = $this->Models->saveRec($postData);
+
             if($res){
 
                 /* 单页模型 更新分类val 值 */
@@ -140,6 +141,7 @@ class ControllerBase extends ControllerAbstract
             $postData = $this->post();
             $postData['updated'] = time();
             $postData['updatedby'] = $this->user['username'];
+
             $postData['text'] = htmlspecialchars($postData['text']);
             if($postData['en_text'])
                 $postData['en_text'] = htmlspecialchars($postData['en_text']);

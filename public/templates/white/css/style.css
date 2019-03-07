@@ -1075,10 +1075,10 @@ td {
 
 .entry-title {
 	font-size: 52px;
-	font-size: 5.2rem;
-	font-weight: 900;
+	font-size: 3.2rem;
+	font-weight: 600;
 	text-transform: lowercase;
-	margin-bottom: 90px;
+	margin-bottom: 40px;
 }
 
 .sidebar .entry-title {
@@ -1382,6 +1382,7 @@ img.alignright,
 	float: left;
 	position: relative;
 	left: 50%;
+	/*z-index: 10;*/
 }
 .kaay-wrap .kaay-logo img{
 	width: 6em;
@@ -1463,7 +1464,8 @@ img.alignright,
 ---------------------------------------------------------------------------------------------------- */
 
 .genesis-nav-menu {
-	line-height: 1;
+	/*line-height: 1px;*/
+	line-height: 0.7em;
 }
 
 .genesis-nav-menu .menu-item {
@@ -1477,11 +1479,26 @@ img.alignright,
 .genesis-nav-menu a {
 	color: #000;
 	display: inline-block;
+	font-size: 30px;
+	/*font-size: 5rem;*/
+	/*font-weight: bold;*/
+	letter-spacing: 1px;
+	padding: 10px 15px;
+	font-family: 'studio';
+}
+
+.footer-nav-menu{
+	line-height: 1rem;
+}
+.footer-nav-menu a{
+	color: #000;
+	display: inline-block;
 	font-size: 60px;
 	font-size: 5rem;
 	font-weight: 900;
 	letter-spacing: 1px;
 	padding: 10px 15px;
+	font-family: "Lato", sans-serif;
 }
 
 .close-button {
@@ -1609,7 +1626,7 @@ img.alignright,
     width: 100vw;
     height: 100vh;
     background-color: #fff;
-    z-index: 9999;
+    z-index: 6;
     padding: 15%;
     color: #000;
     top:0;
@@ -1741,9 +1758,9 @@ img.alignright,
 .front-page-3,
 .front-page-5,
 .front-page-7 {
-	background-attachment: fixed;
+	/*background-attachment: fixed;*/
 	background-color: #fff;
-	background-position: center;
+	/*background-position: center;*/
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size:    cover;
@@ -2245,6 +2262,9 @@ img.alignright,
 	.site-header button.close-this-page {
 		padding: 6px;
 		margin-right: 10px;
+	}
+	.kaay-first{
+		width: 100%;
 	}
 }
 
@@ -3360,7 +3380,7 @@ p.form-submit,
 		display: none;
 	}
 	.genesis-nav-menu a {
-		font-size: 36px;
+		font-size: 24px;
 		padding: 10px;
 		width: 100%;
 	}
@@ -3400,6 +3420,7 @@ p.form-submit,
 	}
 	.kaay-first{
 		width: 100% !important;
+		padding-bottom: 20px;
 	}
 
 }
@@ -3520,7 +3541,7 @@ p.form-submit,
 
     .entry-title {
     	font-size: 30px;
-    	font-size: 3rem;
+    	font-size: 2rem;
     	padding: 0 45px;
     }
 
@@ -3553,7 +3574,7 @@ p.form-submit,
 	}
 	.single-post .entry-title, .page-template-page_terms-php .entry-title {
 		font-size: 30px;
-    	font-size: 3rem;
+    	font-size: 2rem;
     	padding: inherit 55px;
 	}
 }
@@ -3571,11 +3592,18 @@ p.form-submit,
 	background-repeat: no-repeat;
 }
 .kaay-font-page{
-	background-size: cover;
 	height: auto;
+	background-size:cover;
+	-moz-background-size:cover;
+	-webkit-background-size:cover;
+	-o-background-size:cover;
 }
 .kaay-m20{
 	margin-top: 20px;
+}
+
+.kaay-m40{
+	margin-top: 40px;
 }
 
 .kaay-font-page .entry-content p{
@@ -3594,19 +3622,46 @@ p.form-submit,
 .kaay-first{
 	margin-right: 10px;
 	margin-left: 0;
-	width: calc(65% - 10px) !important;
+	width: calc(55% - 10px);
 }
  .kaay-right{
 	/*margin-right: 50px;*/
 	margin-left: 0;
-	width: calc(35% - 10px);
+	width: calc(45% - 10px);
 }
 .kaay-form input ,textarea{
 	width: 90%;
 	padding: 0;
 	margin-bottom: 20px;
 }
+.btn-success{
+	display: block;
+	margin: 0 auto;
+}
+.contact-title{
+	font-family: 'studio';
+	font-size: 33px;
+	font-weight: normal;
+}
+.contact-right-div > div {
+	font-size: 17px;
+	font-family: 'studio';
+}
+@media only screen and (max-width: 800px) {
+	.kaay-first , .kaay-right{
+		width: 100%;
+	}
+	.contact-right-div > div{
+		font-size: 13px;
+		width: 112%;
+	}
+}
 
+@font-face{
+	font-family: 'studio';
+	font-style: normal;
+	src: url(../fonts/FZLTCXHJW.TTF);
+}
 /* latin-ext */
 @font-face {
 	font-family: 'Lato';

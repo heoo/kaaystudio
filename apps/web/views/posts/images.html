@@ -15,7 +15,8 @@
         {% for posts in data %}
         <div data-rel="{{posts['id']}}" class="single-work {{posts['class']}} {% if loop.first %}firstWork{% endif %} {% if loop.last %}lastWork{% endif %}">
             <a href="{{posts['thumb']}}">
-                <img src="{{posts['attachment']}}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="{{posts['name']}}l" >
+                <!--datatype="{{posts['class']}}" style=" {% if posts['class'] =='wide'%}height: 710px;width: 1250px;{% elseif posts['class'] =='portrait' %}height: 600px;width: 710px;{% else %}height: 600px;width: 300px;{% endif %}"-->
+                <img src="/templates/white/images/load.gif" data-original="{{posts['thumb']}}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="{{posts['name']}}l" >
                 <div class="work-title">{{posts['name']}}</div>
                 <div class="work-description"></div>
                 <div class="work-author">{{posts['digest']}}</div>
@@ -51,3 +52,10 @@
 </div>
 
 {{ javascript_include("templates/white/js/images.js") }}
+
+{{ javascript_include("templates/white/js/jquery.lazyload.min.js") }}
+<script>
+    jQuery(function() {
+        jQuery("img.attachment-post-thumbnail").lazyload({effect: "fadeIn"});
+    });
+</script>
