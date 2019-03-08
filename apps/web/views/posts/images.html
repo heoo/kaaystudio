@@ -4,38 +4,28 @@
 
 <div class="site-inner">
 
-    <div class="content-sidebar-wrap" id="masonry">
-
-
-
-
+    <div id="work-dir" class="content-sidebar-wrap">
 
 
 {% if data %}
         {% for posts in data %}
-        <div data-rel="{{posts['id']}}" class="single-work {{posts['class']}} {% if loop.first %}firstWork{% endif %} {% if loop.last %}lastWork{% endif %}">
+
+        <div class="project-item {{posts['class']}} {% if loop.first %}firstWork{% endif %} {% if loop.last %}lastWork{% endif %}" data-id="{{posts['id']}}" data-key="{{key}}" ratio="{{posts['ratio']}}">
             <a href="{{posts['thumb']}}">
-                <!--datatype="{{posts['class']}}" style=" {% if posts['class'] =='wide'%}height: 710px;width: 1250px;{% elseif posts['class'] =='portrait' %}height: 600px;width: 710px;{% else %}height: 600px;width: 300px;{% endif %}"-->
-                <img src="/templates/white/images/load.gif" data-original="{{posts['thumb']}}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="{{posts['name']}}l" >
-                <div class="work-title">{{posts['name']}}</div>
-                <div class="work-description"></div>
-                <div class="work-author">{{posts['digest']}}</div>
+                <div class="project-item-img" data-id="{{posts['id']}}" >
+                    <img id="img{{project['id']}}" src="{{posts['thumb']}}" >
+                </div>
+                    <div class="work-title" >{{posts['name']}}</div>
+                    <div class="work-description"></div>
+                    <div class="work-author">{{posts['digest']}}</div>
             </a>
         </div>
+
+
         {% endfor %}
 {% else %}
     <h4 class="text-center">暂无数据</h4>
 {% endif %}
-
-
-    <div id="preload" style="display: none;">
-        {% if data %}
-            {% for images in data %}
-                <img src="{{images['thumb']}}">
-            {% endfor %}
-        {% endif %}
-    </div>
-
 
     <div class="modal-wrapper">
         <div class="modal-inner"></div>
@@ -52,10 +42,18 @@
 </div>
 
 {{ javascript_include("templates/white/js/images.js") }}
-
-{{ javascript_include("templates/white/js/jquery.lazyload.min.js") }}
+{{ javascript_include("templates/white/js/jquery.masonry.min.js") }}
+{{ javascript_include("templates/white/js/imagesloaded.min.js") }}
 <script>
-    jQuery(function() {
-        jQuery("img.attachment-post-thumbnail").lazyload({effect: "fadeIn"});
-    });
+    $(function () {
+        $("#work-dir").masonry({
+            itemSelector : ".project-item",
+            isAnimated : false,
+            columnWidth: 20
+        });
+        var imgsL = new imagesLoaded($("#work-dir"));
+        imgsL.on("progress", function(){
+            $("#work-dir").masonry();
+        });
+    })
 </script>
