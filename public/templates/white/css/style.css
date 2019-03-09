@@ -1767,7 +1767,7 @@ img.alignright,
 	background-size:         cover;
 }
 
-.front-page-1 {
+.front-page-1 , .home-front-1 {
 	position: relative;
 }
 
@@ -2037,7 +2037,7 @@ img.alignright,
 --------------------------------------------- */
 .works-archive .site-inner {
 	margin-top: 50px;
-	max-width: 1250px;
+	max-width: 1500px;
 }
 
 .works-archive .site-inner .content-sidebar-wrap {
@@ -3580,10 +3580,10 @@ p.form-submit,
 	}
 }
 
-.front-page-1 { background-image: url(../images/top.jpg); }
-.front-page-3 { background-image: url(../images/works.jpg); }
-.front-page-5 { background-image: url(../images/BOOKLET_02.jpg); }
-.front-page-7 { background-image: url(../images/case-studies.jpg); }
+/*.front-page-1 { background-image: url(../images/top.jpg); }*/
+/*.front-page-3 { background-image: url(../images/works.jpg); }*/
+/*.front-page-5 { background-image: url(../images/BOOKLET_02.jpg); }*/
+/*.front-page-7 { background-image: url(../images/case-studies.jpg); }*/
 /*.front-page-1 { background-image: url(//welcometoelement.com/wp-content/uploads/2018/03/top.jpg); }*/
 /*.front-page-3 { background-image: url(//welcometoelement.com/wp-content/uploads/2018/03/works.jpg); }*/
 /*.front-page-5 { background-image: url(//welcometoelement.com/wp-content/uploads/2018/04/BOOKLET_02.jpg); }*/
