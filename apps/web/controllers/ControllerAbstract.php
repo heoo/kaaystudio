@@ -225,6 +225,15 @@ class ControllerAbstract extends Controller
         $data = $Models->listRec();
         if($data){
             $arr = $data->toArray();
+
+            if($this->checkLanguage()){
+                foreach( $arr as $key => $val){
+                    $val['name'] = $val['en_name'];
+                    $val['text'] = $val['en_text'];
+                    $val['digest'] = $val['en_digest'];
+                    $arr[$key] = $val;
+                }
+            }
         }
         return $arr;
     }
