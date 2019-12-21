@@ -42,7 +42,7 @@ class ControllerAbstract extends Controller
         }
         $LanguageUrl = $Language ? str_replace('en.','',$url): "en.{$url}"  ;
         $this->view->setVar('LanguageUrl',"http://{$LanguageUrl}");
-        $LanguageName = $Language ? 'home' : '首页';
+        $LanguageName = $Language ? 'Home' : '首页';
         $this->view->setVar('LanguageName',$LanguageName);
         $LanguageImg = $Language ? 'CN.png' : 'EN.png';
         $this->view->setVar('LanguageImg',$LanguageImg);

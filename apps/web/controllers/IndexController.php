@@ -24,6 +24,10 @@ class IndexController extends ControllerBase
         $res = $models->listRec();
         if($res){
             foreach ($res->toArray() as $val){
+                 if($this->checkLanguage()){
+                    $val['name'] = $val['en_name'];
+                    $val['text'] = $val['en_text'];
+                }
                 $val['text'] = htmlspecialchars_decode($val['text']);
                 $val['url'] = '';
                 if( in_array($val['type'],array('posts','images'))){

@@ -12,7 +12,7 @@ class fileUploadPlugin
 
     //要配置的内容
     private $path = "uploads";
-    private $allowtype = array('jpg', 'jpeg', 'gif', 'png', 'flv' ,'mp4', 'mp3');
+    private $allowtype = array('jpg', 'jpeg', 'gif', 'png', 'flv' ,'mp4', 'mp3','zip','rar','gz');
     private $maxsize = 99999999999;
     private $israndname = true;
 

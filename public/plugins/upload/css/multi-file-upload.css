@@ -22,7 +22,7 @@
     min-height: 238px;
     padding-top: 158px;
     text-align: center;
-    background: url(/img/upload/image.png) center 93px no-repeat;
+    background: url(../images/image.png) center 93px no-repeat;
     color: #cccccc;
     font-size: 18px;
     position: relative;
@@ -87,7 +87,7 @@
 #uploader .filelist li {
     width: 110px;
     height: 110px;
-    background: url(/img/upload/bg.png) no-repeat;
+    background: url(../images/bg.png) no-repeat;
     text-align: center;
     margin: 0 8px 20px 0;
     position: relative;
@@ -129,7 +129,7 @@
     overflow: hidden;
     width: 0;
     height: 100%;
-    background: #1483d8 url(/img/upload/progress.png) repeat-x;
+    background: #1483d8 url(../images/progress.png) repeat-x;
 
     -webit-transition: width 200ms linear;
     -moz-transition: width 200ms linear;

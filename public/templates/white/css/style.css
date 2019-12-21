@@ -1077,7 +1077,7 @@ td {
 	font-size: 52px;
 	font-size: 3.2rem;
 	font-weight: 600;
-	text-transform: lowercase;
+	/* text-transform: lowercase; */
 	margin-bottom: 40px;
 }
 
