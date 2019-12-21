@@ -17,6 +17,7 @@ class Category extends \Catchtech\Extensions\Model\BaseModel
     protected $en_text;
     protected $val;
     protected $more;
+    protected $en_more;
     protected $isnav;
     protected $sort;
     protected $status;
@@ -104,6 +105,22 @@ class Category extends \Catchtech\Extensions\Model\BaseModel
     public function setMore($more)
     {
         $this->more = $more;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnMore()
+    {
+        return $this->en_more;
+    }
+
+    /**
+     * @param mixed $en_more
+     */
+    public function setEnMore($en_more)
+    {
+        $this->en_more = $en_more;
     }
 
     /**
