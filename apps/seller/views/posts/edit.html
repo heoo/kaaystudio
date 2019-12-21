@@ -24,9 +24,9 @@
             text.val(html)
         }
         editor.create()
-        {% if data.text %}
-            text.val(editor.txt.html('{{data.text}}'))
-        {% endif %}
+        const textHtml = '{{ data.text }}'
+        editor.txt.html(textHtml)
+        text.val(textHtml)
 
 
         var enEditor = new E('#eneditor')
@@ -36,9 +36,9 @@
             enText.val(html)
         }
         enEditor.create()
-        {% if data.text %}
-            enText.val(enEditor.txt.html('{{data.en_text}}'))
-        {% endif %}
+        const enTextHtml = '{{ data.en_text }}'
+        enEditor.txt.html(enTextHtml)
+        enText.val(enTextHtml)
     });
 
 </script>
@@ -174,14 +174,14 @@
                             <label for="text" class="control-label">文章内容</label>
                             <div class="controls">
                                 <div class="span7 m-wrap" style="height: 300px;" id="editor"></div>
-                                <textarea id="text" name="text" style="display: none;"></textarea>
+                                <textarea id="text" name="text" style="display: none;">{{data.text}}</textarea>
                             </div>
                         </div>
                         <div class="control-group" style="padding-top: 20px;">
                             <label for="en_text" class="control-label">英文内容</label>
                             <div class="controls">
                                 <div class="span7 m-wrap" style="height: 300px;" id="eneditor"></div>
-                                <textarea id="entext" name="en_text" style="display: none;"></textarea>
+                                <textarea id="entext" name="en_text" style="display: none;">{{data.en_text}}</textarea>
                             </div>
                         </div>
                         {% else %}
