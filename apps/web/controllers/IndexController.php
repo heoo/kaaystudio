@@ -27,6 +27,7 @@ class IndexController extends ControllerBase
                  if($this->checkLanguage()){
                     $val['name'] = $val['en_name'];
                     $val['text'] = $val['en_text'];
+                    $val['more'] = $val['en_more'];
                 }
                 $val['text'] = htmlspecialchars_decode($val['text']);
                 $val['url'] = '';
