@@ -24,7 +24,8 @@
             text.val(html)
         }
         editor.create()
-        const textHtml = '{{ data.text }}'
+        const textHtml = `{{ data.text }}`
+        console.log(`textHtml---`, textHtml)
         editor.txt.html(textHtml)
         text.val(textHtml)
 
@@ -36,7 +37,8 @@
             enText.val(html)
         }
         enEditor.create()
-        const enTextHtml = '{{ data.en_text }}'
+        const enTextHtml = `{{ data.en_text }}`
+        console.log(`enTextHtml---`, enTextHtml)
         enEditor.txt.html(enTextHtml)
         enText.val(enTextHtml)
     });
