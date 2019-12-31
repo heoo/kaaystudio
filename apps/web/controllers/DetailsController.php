@@ -19,7 +19,8 @@ class DetailsController extends ControllerBase {
             $data = $result->toArray();
         }
 
-        if($this->checkLanguage()){
+        $checkLanguage = $this->checkLanguage();
+        if($checkLanguage){
             $data['name'] = $data['en_name'];
             $data['text'] = $data['en_text'];
             $data['digest'] = $data['en_digest'];
@@ -48,6 +49,8 @@ class DetailsController extends ControllerBase {
         $this->Models->setWhere(array('status'=>1,'cid'=>$data['cid'],array('id','>',$data['id'])));
         $nextRes = $this->Models->findRec();
         $this->view->setVar('next',$nextRes);
+
+        $this->view->setVar('checkLanguage',$checkLanguage);
 
         if( $data['id']== '26'){
             $this->view->pick('details/contact');

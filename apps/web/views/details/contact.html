@@ -19,7 +19,7 @@
                         <form class="form-horizontal kaay-form" method="post" onsubmit="return false;" action="#">
                             <div class="control-group">
                                 <!-- Text input-->
-                                <label class="control-label" for="name">Name</label>
+                                <label class="control-label" for="name" data-rel="{{checkLanguage}}">{% if checkLanguage %}Name{% else %}姓名{% endif%}</label>
                                 <div class="controls">
                                     <input type="text" placeholder="" name="name" class="input-xlarge">
                                 </div>
@@ -27,7 +27,7 @@
 
                             <div class="control-group">
                                 <!-- Search input-->
-                                <label class="control-label">Email</label>
+                                <label class="control-label">{% if checkLanguage %}Email{% else %}邮箱{% endif%}</label>
                                 <div class="controls">
                                     <input type="text" placeholder="" name="email" onblur="checkmail();" class="input-xlarge search-query">
                                 </div>
@@ -35,7 +35,7 @@
 
                             <div class="control-group">
                                 <!-- Textarea -->
-                                <label class="control-label">Contents</label>
+                                <label class="control-label">{% if checkLanguage %}Contents{% else %}内容{% endif%}</label>
                                 <div class="controls">
                                     <div class="textarea">
                                         <textarea rows="6" name="contents"> </textarea>
